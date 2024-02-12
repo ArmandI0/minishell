@@ -1,15 +1,14 @@
-# Titre 1
-## Titre 2
-###### Titre 66666666666
-___
+### Tasks :
 
-```c
-int main()
-{
-	return (0);
-}
-```
+Checker les differentes fonction :
 
-- liste
-- liste 2
+#####Nico :
+- exit
+- pwd
+- export
 
+####Armand :
+- echo
+- cd
+- unset
+- env
