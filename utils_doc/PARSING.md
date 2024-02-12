@@ -1,5 +1,5 @@
 # Notes pour le parsing :
-- Si le premiers arguments n'est pas une commande valide retourner une erreur
+- Prendre la commande jusqu'a un '\0' ou un operateur
 
 Synthaxe d'entree
 
@@ -16,12 +16,20 @@ Synthaxe d'entree
 	return error
 	exec arg2
 
-# Les differents elements :
+# Les differents operateurs :
 
-### "<" et ">"
-	
-	< : redirige l'argument suivant sur la stdin
-	> : redirige stdout dans l'argument suivant
+- '>'
+- '<'
+- '|'
+- ""
+- ''
+- $
+
+### Opérateurs de redirection : 
+
+	> : Redirige la sortie standard vers un fichier, écrasant le contenu existant.
+	>> : Redirige la sortie standard vers un fichier, en ajoutant à la fin du fichier.
+	< : Redirige l'entrée standard depuis un fichier.
 #
 ### " " et ' ':
 	echo salut\nds :
