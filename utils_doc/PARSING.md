@@ -38,6 +38,17 @@ Synthaxe d'entree
 
 # Les fonctions :
 
+### pwd [with no options]:
+	affiche dans la sortie standard le chemin complet du repertoire actuel.
+	nb: la racine de l'ordinateur s'écrit "/" (il n'est donc pas possible de remonter plus haut)
+
+##### Besoins de la fonction
+	- une variable environnement "PWD" contenant le chemin vers le répertoire actuel et qui sera mis à jour à chaque utilisation de "cd" ou déplacement vers un autre dossier
+	- une scde variable environnement "OLDPWD"  contenant le dernier répertoire visité -- a voir si néc
+	- utilisation de la fonction en C getcwd qui récupere le chemin du repertoire de travail courant
+
+##### Cas particuliers : 
+
 ### echo :
 
 	echo >> envoi l'argument qui le precede dans stdout
@@ -47,7 +58,7 @@ Synthaxe d'entree
 	echo sans arguments >> Doit renvoyer \n
 ____
 
-## cd :	
+### cd :	
 	cd [path] >> change de dossier
 
 
