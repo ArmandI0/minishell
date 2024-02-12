@@ -2,12 +2,12 @@
 
 Checker les differentes fonction :
 
-#####Nico :
+##### Nico :
 - exit
 - pwd
 - export
 
-####Armand :
+#### Armand :
 - echo
 - cd
 - unset
