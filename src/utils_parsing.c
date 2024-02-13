@@ -6,12 +6,14 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:58:01 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/12 17:30:09 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/13 12:08:36 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	find_end_of_command(char *str)
-{
-	
+#include "minishell.h"
 
+t_bool	is_operator(char c)
+{
+	if (c == '<'|| c == '>' || c == '|' )
+	
 }

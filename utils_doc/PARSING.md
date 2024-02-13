@@ -1,3 +1,8 @@
+# Lexer
+
+- Prendre tous les elements et split selon ' ' dans un ** et continuer jusqu'a operateur ou \0;
+
+
 # Notes pour le parsing :
 - Prendre la commande jusqu'a un '\0' ou un operateur
 
@@ -20,6 +25,7 @@ Synthaxe d'entree
 
 - '>'
 - '<'
+- '>>'
 - '|'
 - ""
 - ''

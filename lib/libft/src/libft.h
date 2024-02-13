@@ -6,19 +6,23 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:16:10 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/08 12:02:24 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/13 11:51:15 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define TRUE 1
+# define FALSE 0
 # include <unistd.h>
 # include <stdlib.h>
+
+typedef int	t_bool;
 
 typedef struct s_list
 {
 	struct s_list	*prev;
-	int				content;
+	char			**content;
 	struct s_list	*next;
 }			t_list;
 
@@ -48,7 +52,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strjoin(char *s1, char *s2, int a);
+char	*ft_strjoin(char *s1, char *s2, t_bool f);
 char	*ft_strtrim(char const *s1, char const *set);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
@@ -58,7 +62,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-t_list	*ft_lstnew(int content);
+t_list	*ft_lstnew(char **content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
@@ -66,5 +70,6 @@ void	ft_lstclear(t_list **lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 int		ft_printf(const char *str, ...);
 char	*get_next_line(int fd);
+void	free_split(char **split);
 
 #endif
