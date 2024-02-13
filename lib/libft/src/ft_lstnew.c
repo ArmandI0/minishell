@@ -6,13 +6,13 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:18:31 by aranger           #+#    #+#             */
-/*   Updated: 2023/12/27 09:57:35 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/13 11:50:34 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(int content)
+t_list	*ft_lstnew(char **content)
 {
 	struct s_list	*a;
 

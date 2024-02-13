@@ -1,38 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   utils_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/04 18:57:35 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/13 11:45:11 by aranger          ###   ########.fr       */
+/*   Created: 2024/02/12 16:58:01 by aranger           #+#    #+#             */
+/*   Updated: 2024/02/13 12:08:36 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strjoin(char *s1, char *s2, t_bool f)
+t_bool	is_operator(char c)
 {
-	size_t	size;
-	size_t	i;
-	char	*str;
-
-	i = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	size = ft_strlen(s1) + ft_strlen(s2) + 1;
-	str = malloc(sizeof(char) * size);
-	if (str == NULL)
-		return (NULL);
-	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	str[i] = '\0';
-	ft_strlcat(str, s2, size);
-	if (f == TRUE)
-		free(s1);
-	return (str);
+	if (c == '<'|| c == '>' || c == '|' )
+	
 }
