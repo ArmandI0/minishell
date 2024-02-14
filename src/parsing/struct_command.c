@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_parsing.c                                    :+:      :+:    :+:   */
+/*   struct_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 16:58:01 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/13 12:08:36 by aranger          ###   ########.fr       */
+/*   Created: 2024/02/12 15:33:07 by aranger           #+#    #+#             */
+/*   Updated: 2024/02/14 15:24:03 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
-t_bool	is_operator(char c)
+t_cmd	init_command(char **arg, char **envp)
 {
-	if (c == '<'|| c == '>' || c == '|' )
+	
 	
 }

@@ -1,20 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/13 16:14:25 by aranger          ###   ########.fr       */
+/*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
+/*   Updated: 2024/02/14 15:23:59 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int main(int argc, char **argv, char **envp)
-{
-	(void)envp;
-	list_of_command(argc, argv);
-	return (0);
-}
+#include "../../includes/minishell.h"

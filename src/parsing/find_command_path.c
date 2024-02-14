@@ -6,11 +6,11 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:11:41 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/12 15:29:49 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/14 15:23:46 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 static char		*set_command_path(char **envp, char *command);
 static char		**find_path(char **envp);

@@ -6,7 +6,7 @@
 #    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/13 16:12:06 by aranger          ###   ########.fr        #
+#    Updated: 2024/02/14 15:25:15 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,13 @@ LIBFT_A			= lib/libft/libft.a
 #-SRC-#
 
 SRCS			= 	\
-					main.c \
-					lexer.c \
+					parsing/find_command_path.c \
+					parsing/lexer.c \
+					parsing/main.c \
+					parsing/parsing.c \
+					parsing/struct_command.c \
+					parsing/test.c \
+					parsing/utils_parsing.c \
 
 SRC				= $(addprefix src/, $(SRCS))
 OBJS			= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
