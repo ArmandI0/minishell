@@ -6,7 +6,7 @@
 #    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/07 11:16:29 by aranger          ###   ########.fr        #
+#    Updated: 2024/02/13 16:12:06 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,11 +26,7 @@ LIBFT_A			= lib/libft/libft.a
 
 SRCS			= 	\
 					main.c \
-					find_command_path.c \
-					utils.c \
-					utils_free.c \
-					error.c \
-					childs.c \
+					lexer.c \
 
 SRC				= $(addprefix src/, $(SRCS))
 OBJS			= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -39,13 +35,7 @@ D_OBJS			= mkdir -p $(@D)
 #-BONUS-#
 
 SRCS_BONUS		=	\
-					childs_bonus.c \
-					error_bonus.c \
-					find_command_path_bonus.c \
-					main_bonus.c \
-					utils_bonus.c \
-					utils_free_bonus.c \
-					heredoc_bonus.c \
+
 
 SRC_BONUS		= $(addprefix src_bonus/, $(SRCS_BONUS))
 OBJS_BONUS		= $(SRC_BONUS:$(SRC_BONUS_DIR)/%.c=$(OBJ_BONUS_DIR)/%.o)
@@ -55,7 +45,7 @@ D_OBJS_BONUS	= mkdir -p $(@D)
 
 CC 				= cc
 CFLAGS 			= -Wall -Wextra -Werror -g
-NAME 			= pipex
+NAME 			= minishell
 RM 				= rm -f
 RMR				= rm -rf
 
