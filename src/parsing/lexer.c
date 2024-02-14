@@ -6,11 +6,11 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:22:23 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/13 17:46:51 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/14 15:23:53 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../includes/minishell.h"
 
 static char	*join_entry(int argc, char *argv[]);
 static void	add_token(char *entry, t_token *tab_token);
