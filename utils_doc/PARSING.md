@@ -29,7 +29,8 @@ Synthaxe d'entree
 - '|'
 - ""
 - ''
-- $
+- = -> gerer l'attribution des variables
+- $ -> remplacer les valeurs dans le parsing 
 
 ### Opérateurs de redirection : 
 
