@@ -3,18 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/13 17:47:04 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/14 16:03:12 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+# include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <sys/wait.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "../lib/libft/src/libft.h"
 
 /* typedef */
@@ -27,7 +30,7 @@ typedef	enum token
 	REDIRECTION_OPERATOR,
 	PIPE,
 	DOLLAR,
-	SPACE,
+	SPACES,
 }			t_token;
 
 /* s_command contains all options and arguments for exec */
@@ -46,6 +49,7 @@ void	list_of_command(int argc, char **argv);
 
 
 /* EXEC FUNCTION */
+int	prompt_rl(void);
 
 
 

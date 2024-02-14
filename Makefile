@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
+#    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/14 15:25:15 by aranger          ###   ########.fr        #
+#    Updated: 2024/02/14 16:12:16 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,10 @@ LIBFT_A			= lib/libft/libft.a
 #-SRC-#
 
 SRCS			= 	\
-					parsing/find_command_path.c \
 					parsing/lexer.c \
 					parsing/main.c \
 					parsing/parsing.c \
-					parsing/struct_command.c \
-					parsing/test.c \
-					parsing/utils_parsing.c \
+					exec/prompt.c \
 
 SRC				= $(addprefix src/, $(SRCS))
 OBJS			= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -63,14 +60,14 @@ $(LIBFT_A) :
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 				$(D_OBJS)
-				$(CC) $(CFLAGS)  -c -o $@ $<
+				$(CC) $(CFLAGS)  -c -o $@ $< 
 
 $(OBJ_BONUS_DIR)/%.o: $(SRC_BONUS_DIR)/%.c
 				$(D_OBJS_BONUS)
 				$(CC) $(CFLAGS)  -c -o $@ $<
 
 $(NAME): 		$(OBJS)  $(LIBFT_A) 
-				@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME)
+				@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME) -lreadline
 				
 clean:
 				@$(RMR) $(OBJ_DIR)
