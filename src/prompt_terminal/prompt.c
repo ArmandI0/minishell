@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/14 16:13:11 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/15 17:52:59 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	prompt_rl(void)
 	{
 		add_history(line);
 		//send line to parsing here
+		//send line to exec here
 		if (line != NULL)
 			free(line);
 		line = readline("minishell>");
