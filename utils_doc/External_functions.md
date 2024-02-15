@@ -94,14 +94,57 @@ librairy needed :
 Cette fonction est utilisée pour supprimer (effacer) un fichier spécifié par son nom de chemin. détruit un nom dans le système de fichiers. Si ce nom était le dernier lien sur un fichier, et si aucun processus n'a ouvert ce fichier, ce dernier est effacé, et l'espace qu'il utilisait est rendu disponible. 
 
 ## opendir
+librairy needed : 
+       #include <dirent.h>
+ouvrir un répertoire spécifié par son chemin d'accès et pour obtenir un pointeur vers sa structure de répertoire
 ## readdir
+librairy needed : 
+       #include <dirent.h>
+lire les entrées d'un répertoire ouvert avec opendir(). Elle retourne un pointeur vers une "struct dirent" qui représente la prochaine entrée dans le répertoire. Cette structure contient des informations telles que le nom de l'entrée et son type (fichier régulier, répertoire, etc.).  A chaque appel de la fonction readdir(), le pointeur de position dans le répertoire avance vers le fichier ou le dossier suivant. Renvoie NULL si a terminé.
+struct dirent :
+- d_ino : numero d'inode
+- d_name : nom
+- d_type : type (DT_REG, DT_DIR ou DT_LINK par ex)
 ## closedir
+librairy needed : 
+       #include <dirent.h>
+fermer le repertoire ouvert avec opendir
 ## strerror
+prend en parametre errno et retourne une chaine de caracetere détaillant l'erreur (mais ne l'affiche pas).
 ## isatty
+librairy needed : 
+       #include <unistd.h>
+utilisée pour vérifier si un descripteur de fichier donné correspond à un terminal interactif (TTY) ou non. Elle prend en paramètre un descripteur de fichier (généralement le résultat d'une fonction comme open() ou fileno()) et renvoie une valeur différente de zéro si le descripteur de fichier correspond à un terminal, ou zéro sinon.
 ## ttyname
+librairy needed : 
+       #include <unistd.h>
+utilisée pour obtenir le nom du terminal associé à un descripteur de fichier de type terminal (TTY). Elle prend en paramètre un descripteur de fichier de type terminal et retourne un pointeur vers une chaîne de caractères contenant le nom du terminal associé à ce descripteur, ou NULL en cas d'erreur.
 ## ttyslot
+librairy needed : 
+       #include <unistd.h>
+utilisée pour obtenir le numéro de l'entrée dans la table des terminaux (TTY) pour le terminal associé à l'utilisateur actuel dans le fichier /etc/ttys       
 ## ioctl
+librairy needed : 
+       #include <ioctl.h>
+ fonction système qui est utilisée pour effectuer diverses opérations de contrôle sur des périphériques, des fichiers ou des sockets.        
 ## getenv
+La fonction getenv() prend en paramètre le nom de la variable d'environnement que vous souhaitez récupérer et renvoie un pointeur vers la chaîne de caractères correspondant à la valeur de cette variable
 ## tcsetattr
+utilisée pour définir les attributs du terminal. Elle permet de modifier les paramètres de contrôle d'un terminal, tels que la vitesse de transmission (baud rate), les bits de données, les bits de stop, le contrôle de flux, etc.
 ## tcgetattr
+La fonction tcgetattr() en C est utilisée pour obtenir les attributs du terminal (c'est-à-dire les paramètres de contrôle du terminal) et les stocker dans une structure de données spécifique, généralement struct termios.
 ## tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
+librairy needed : 
+       #include <ncurses.h>
+       CC avec -lncurses
+    tgetent() : Cette fonction est utilisée pour initialiser une base de données terminfo et récupérer les informations de configuration pour un terminal spécifique. Elle prend en argument un pointeur vers une structure de type termcap, un nom de terminal et renvoie 1 si la configuration a été trouvée, sinon 0.
+
+    tgetflag() : Cette fonction est utilisée pour extraire des informations de configuration du terminal qui sont des drapeaux (booléens). Elle prend en argument une chaîne de caractères qui représente le nom du drapeau et renvoie 1 si le drapeau est défini, sinon 0.
+
+    tgetnum() : Cette fonction est utilisée pour extraire des informations de configuration du terminal qui sont des nombres. Elle prend en argument une chaîne de caractères qui représente le nom du nombre et renvoie la valeur numérique associée.
+
+    tgetstr() : Cette fonction est utilisée pour extraire des informations de configuration du terminal qui sont des chaînes de caractères. Elle prend en argument une chaîne de caractères qui représente le nom de la chaîne et renvoie un pointeur vers la chaîne associée.
+
+    tgoto() : Cette fonction est utilisée pour générer une séquence de contrôle pour déplacer le curseur du terminal à une position spécifiée. Elle prend en argument une séquence de contrôle de déplacement de curseur (souvent récupérée à l'aide de tgetstr()), une colonne et une ligne, et renvoie la séquence de contrôle résultante.
+
+    tputs() : Cette fonction est utilisée pour envoyer une séquence de contrôle au terminal. Elle prend en argument une séquence de contrôle de terminal (généralement récupérée à l'aide de tgetstr()) et envoie cette séquence au terminal.
