@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/14 16:04:35 by nledent          ###   ########.fr       */
+/*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
+/*   Updated: 2024/02/16 18:53:45 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int main(int argc, char **argv, char **envp)
+void	ft_echo(char *string)
 {
-	(void)envp;
-	(void)argc;
-	(void)argv;
-	prompt_rl();
-	//list_of_command(argc, argv);
-	return (0);
+	ft_putstr_fd(string, STDOUT_FILENO);
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	free(string);
 }

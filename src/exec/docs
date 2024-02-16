@@ -1,0 +1,69 @@
+1) main doit lancer minishell. 
+possibilité 1 : 0 arguments nécessaire, start directement en mode interactif avec readline
+possibilité 2 : arguments possibles, si arguments, lancer les arguments comme des scripts avec gnl qui doit executer une ligne apres l'autre. sinon -> readline;
+
+2) readline lit les prompts et envoie ligne par ligne au parsing
+
+3) parsing envoie le résultat à exec_cmds via une liste chainée de commandes dont les élementés doivent etre structurés comme suit : 
+typedef struct s_cmd_data
+{
+	t_cmd	cmd;
+	int		builtin;
+	int		append_mode;
+	int		here_doc;
+	char	*limiter;
+	char	**redir;
+}			t_cmd_data;
+
+4) exec_cmds doit interpreter chaque commande comme un bloc. 
+- a priori, si il y a deux commandes c'est qu'il y a un pipe.
+- si il y a une redirection d'output dans une commande, cette redirection a priorité sur le pipe.
+- si il y a plusieurs redirections, elle seront toutes executées mais uniqument la derniere comptera pour la commande (idem pour les <<).
+- au sein d'un bloc, si une permission n'est pas accordée pour un fichier pour une redirection par exemple, l'execution s'arrete et les redirections suivantes ne sont pas prises en compte.
+MAIS ATTENTION, CELA DEPEND DE LEUR ORDRE D ARRIVEE DANS LA LIGNE DE CMD. exemple : si chmod 000 input, pour : cat > out > out1 > out2 <input > out3, les fichiers out, out1 et out2 seront bien créés !
+
+5) le processur parent doit récupérer les codes de sortie
+- via fonction waitpid ou assimilée
+- la variable doit etre stockée pour pouvoir etre récupérée. 
+- elle sera stockée dans une variable t_shell_data sh_data.return_value
+
+cahier des charges : 
+Your shell should:
+• Display a prompt when waiting for a new command.
+• Have a working history.
+• Search and launch the right executable (based on the PATH variable or using a
+relative or an absolute path).
+• Avoid using more than one global variable to indicate a received signal. Consider
+the implications: this approach ensures that your signal handler will not access your
+main data structures.
+• Not interpret unclosed quotes or special characters which are not required by the
+subject such as \ (backslash) or ; (semicolon).
+• Handle ’ (single quote) which should prevent the shell from interpreting the meta-
+characters in the quoted sequence.
+• Handle " (double quote) which should prevent the shell from interpreting the meta-
+characters in the quoted sequence except for $ (dollar sign).
+• Implement redirections:
+	◦ < should redirect input.
+	◦ > should redirect output.
+	◦ << should be given a delimiter, then read the input until a line containing the
+	delimiter is seen. However, it doesn’t have to update the history!
+	◦ >> should redirect output in append mode.
+• Implement pipes (| character). The output of each command in the pipeline is
+connected to the input of the next command via a pipe.
+• Handle environment variables ($ followed by a sequence of characters) which
+should expand to their values.
+• Handle $? which should expand to the exit status of the most recently executed
+foreground pipeline.
+• Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.
+• In interactive mode:
+	◦ ctrl-C displays a new prompt on a new line.
+	◦ ctrl-D exits the shell.
+	◦ ctrl-\ does nothing.
+• Your shell must implement the following builtins:
+	◦ echo with option -n
+	◦ cd with only a relative or absolute path
+	◦ pwd with no options
+	◦ export with no options
+	◦ unset with no options
+	◦ env with no options or arguments
+	◦ exit with no options

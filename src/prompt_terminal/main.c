@@ -1,31 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/16 17:32:26 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/16 18:49:11 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	prompt_rl(void)
+void	print_error(int error)
 {
-	char	*line;
+	if (error == 0)
+		printf("No arguments are required");
+}
 
-	line = readline("minishell>");
-	while (1)
-	{
-		add_history(line);
-		//send line to parsing here
-		//send line to exec here
-		if (line != NULL)
-			free(line);
-		line = readline("minishell>");
-	}
-	if (line != NULL)
-		free(line);
+static int	check_args(int argc)
+{
+	if (argc == 1)
+		return (0);
+	else
+		return (1);
+}
+
+static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
+{
+	sh_data->ac = ac;
+	sh_data->av = av;
+	sh_data->envp = envp;
+}
+
+int main(int argc, char **argv, char **envp)
+{
+	t_sh_data	sh_data;
+
+	init_shell_data(argc, argv, envp, &sh_data);
+	if (check_args == 0)
+		prompt_rl(&sh_data);
+	else
+		print_error(0);
+	//list_of_command(argc, argv);
+	return (0);
 }
