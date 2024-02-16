@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/16 19:06:49 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/16 19:42:46 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ typedef struct s_redir
 {
 	char			*file_path;
 	int				in_out;
+	int				appd_mode_heredoc;
+	char			*limiter;
 	struct s_redir	*next;
 }			t_redir;
 
@@ -65,9 +67,6 @@ typedef struct s_list_cmd
 	struct s_list_cmd	*previous;
 	t_cmd				cmd;
 	int					builtin;
-	int					append_mode;
-	int					here_doc;
-	char				*limiter;
 	t_redir				*redir;
 	struct s_list_cmd	*next;
 }			t_list_cmd;
