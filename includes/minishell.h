@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/16 19:42:46 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/17 22:20:58 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,27 @@ typedef	enum token
 	SPACES,
 }			t_token;
 
+typedef	enum builtin
+{
+	BT_ECHO,
+	BT_CD,
+	BT_PWD,
+	BT_EXPORT,
+	BT_UNSET,
+	BT_ENV,
+	BT_EXIT,
+}			t_builtin;
+
+/* s_env_var liste pour stocker variables d'environnement */
+/* exported : 0 = oui ; 1 = non */
+typedef struct s_env_var
+{
+	char				*name;
+	char				*value;
+	int					exported;
+	struct s_env_var	*next;
+}			t_env_var;
+
 /* s_shell_data contains global data for the actual minishell processus */
 typedef struct s_shell_data
 {
@@ -52,11 +73,13 @@ typedef struct s_command
 }			t_cmd;
 
 /* s_redir contains all redirections for one command in the right order */
+/* in_out : 0 = in ; 1 = out - */
+/* app_mod_hdoc : 0 = oui ; 1 = non - hd ou append selon si c'est in ou out*/
 typedef struct s_redir
 {
 	char			*file_path;
 	int				in_out;
-	int				appd_mode_heredoc;
+	int				app_mod_hdoc;
 	char			*limiter;
 	struct s_redir	*next;
 }			t_redir;
@@ -64,7 +87,7 @@ typedef struct s_redir
 /* s_cmd_data contains all data required for redirections and execution of one cmd */
 typedef struct s_list_cmd
 {
-	struct s_list_cmd	*previous;
+	int					id;
 	t_cmd				cmd;
 	int					builtin;
 	t_redir				*redir;
@@ -76,7 +99,7 @@ typedef struct s_list_cmd
 void	list_of_command(int argc, char **argv);
 
 /* BUILTINS FUNCTIONS */
-void	ft_echo(char *string);
+void	bt_echo(char *string);
 
 /* EXEC FUNCTION */
 

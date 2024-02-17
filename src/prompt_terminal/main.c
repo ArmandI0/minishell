@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/16 18:49:11 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/17 21:06:05 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ int main(int argc, char **argv, char **envp)
 	t_sh_data	sh_data;
 
 	init_shell_data(argc, argv, envp, &sh_data);
-	if (check_args == 0)
+	init_signals(&sh_data);
+	if (check_args == 0) //a verifier selon que mode script ou non
 		prompt_rl(&sh_data);
 	else
 		print_error(0);
-	//list_of_command(argc, argv);
 	return (0);
 }

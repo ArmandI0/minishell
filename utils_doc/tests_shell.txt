@@ -1,0 +1,17 @@
+/** SHELL GLOBAL **/
+- 
+
+/** FONCTIONS BUILTINS **/
+- PWD 
+	*verifier que fonctionne avec des longs chemins (> long que le buffer)
+
+- EXIT
+	*vérifier que peut prendre un argument et que renvoie 0 si pas d'argument
+
+- EXPORT
+	*vérifier que la variable est bien accessible dans un bash enfant et s'affiche
+dans l'environnement.
+	*vérifier que sans arguments affiche la liste des var déclarées dans l'ordre AB
+
+- ENV
+	*vérifier que n'affiche que les variables exportées
