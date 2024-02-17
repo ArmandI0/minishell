@@ -34,7 +34,12 @@ Synthaxe d'entree
 
 ### Opérateurs de redirection : 
 
-	> : Redirige la sortie standard vers un fichier, écrasant le contenu existant.
+	> : Redirige la sortie standard vers un fichier, écrasant le contenu existant. 
+	Cas specifique :
+
+	cat file1 > file2 > file3
+	cat file 1 dans file2 et file3
+
 	>> : Redirige la sortie standard vers un fichier, en ajoutant à la fin du fichier.
 	< : Redirige l'entrée standard depuis un fichier.
 #

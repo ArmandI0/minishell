@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/14 16:03:12 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/15 16:30:20 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 /* typedef */
 
-typedef	enum token
+typedef	enum e_token
 {
 	CHARACTER,
 	SINGLE_QUOTE,
@@ -34,6 +34,9 @@ typedef	enum token
 }			t_token;
 
 /* s_command contains all options and arguments for exec */
+
+
+
 typedef struct s_command
 {
 	char	*name;
