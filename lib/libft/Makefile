@@ -56,6 +56,7 @@ SRCS		= \
 			ft_lstlast.c \
 			ft_lstnew.c \
 			ft_lstsize.c \
+			ft_fstrjoin.c \
 			ft_printf/ft_print_adress.c \
 			ft_printf/ft_print_others.c \
 			ft_printf/ft_print_unsigned.c \

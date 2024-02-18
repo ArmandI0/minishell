@@ -65,7 +65,7 @@ Synthaxe d'entree
 	terminer l'exécution d'un script Bash ou d'un shell interactif. 
 
 ##### Caractéristiques de la fonction
-	- peut prendre une argument ex : exit [n]
+	- peut prendre un argument ex : exit [n]
 	- si plus d'un argument donné : affiche exit: too many arguments
 	- si reçoit un argument, sort avec ce nombre comme code d'erreur. sinon avec 0
 	- Si une valeur en dehors de 0-255 est spécifiée, elle sera automatiquement réduite à un entier de 8 bits. (unsigned char)

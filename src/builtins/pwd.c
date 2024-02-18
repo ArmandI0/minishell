@@ -6,41 +6,43 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/16 19:12:29 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/18 17:15:37 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	exit_pwd(char *pwd)
+static void	print_pwd(char *pwd, int *r_value)
 {
-	free (pwd);
-	exit(1);
+	ft_putstr_fd(pwd, STDOUT_FILENO);
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	*r_value = 0;
 }
 
-/*attention ajouter les variables qu'il faut free*/
-void	ft_pwd(void) 
+int	ft_pwd(void) 
 {
 	char	*pwd;
 	int		size;
+	int		r_value;
 
 	size = 500;
+	r_value = -1;
 	while (1)
 	{
 		pwd = malloc(sizeof(char) * size);
 		if (pwd == NULL)
-			exit(1); //vois si rajouter free
+			return (-1);
 		if (getcwd(pwd, sizeof(pwd)) != NULL)
 		{
-			ft_putstr_fd(pwd, STDOUT_FILENO);
-			ft_putchar_fd('\n', STDOUT_FILENO);
-			free(pwd);
+			print_pwd(pwd, &r_value);
 			break;
 		}
 		else if (errno == ERANGE)
 			size +=500;
 		else
-			exit_pwd(pwd);
+			break;
 		free(pwd);
 	}
+	free(pwd);
+	return (r_value);
 }

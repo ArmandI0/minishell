@@ -71,5 +71,6 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 int		ft_printf(const char *str, ...);
 char	*get_next_line(int fd);
 void	free_split(char **split);
+char	*ft_fstrjoin(char const *s1, char const *s2);
 
 #endif

@@ -21,9 +21,14 @@ typedef struct s_list_cmd
 - au sein d'un bloc, si une permission n'est pas accordée pour un fichier pour une redirection par exemple, l'execution s'arrete et les redirections suivantes ne sont pas prises en compte.
 MAIS ATTENTION, CELA DEPEND DE LEUR ORDRE D ARRIVEE DANS LA LIGNE DE CMD. exemple : si chmod 000 input, pour : cat > out > out1 > out2 <input > out3, les fichiers out, out1 et out2 seront bien créés !
 - il ne faut pas de waitpids, il faut que les commandes soient executées en //
-- il faut que les commandes attendent lorsqu'un here doc est déclenchés. donc peut etre un waitpid uniquement pour ce cas ci 
 
-5) le processur parent doit récupérer les codes de sortie
+5) here_document
+- les here documents sont tous déclenchés avant l'execution des commandes et leur contenu est stocké temporairement
+- les variables peuvent etre insérées dans un here_document (à implémenter ????)
+- il faut considérer les here_docs chacun comme une commande qui envoie dans un pipe à la commande suivante. Donc au moment du parsing il faut traiter les here docs a part. Par contre toutes 
+les autres redirection d'un bloc (entre deux | ), doivent bien être associée à la commande retrouvée dans ce bloc. 
+
+6) le processur parent doit récupérer les codes de sortie
 - via fonction waitpid ou assimilée
 - la variable doit etre stockée pour pouvoir etre récupérée. 
 - elle sera stockée dans une variable t_shell_data sh_data.return_value

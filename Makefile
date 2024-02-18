@@ -6,7 +6,7 @@
 #    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/18 16:26:06 by nledent          ###   ########.fr        #
+#    Updated: 2024/02/18 16:57:51 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,15 @@ LIBFT_A			= lib/libft/libft.a
 #-SRC-#
 
 SRCS			= 	\
+					prompt_terminal/main.c \
+					prompt_terminal/prompt.c \
 					parsing/lexer.c \
 					parsing/main.c \
 					parsing/parsing.c \
-					prompt_terminal/prompt.c \
-					prompt_terminal/main.c \
 					exec/free_functions.c \
+					exec/exit_functions.c \
+					exec/exec.c \
+					exec/pipes.c \
 
 SRC				= $(addprefix src/, $(SRCS))
 OBJS			= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

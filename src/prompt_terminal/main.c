@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/17 21:06:05 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/18 17:25:25 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
 int main(int argc, char **argv, char **envp)
 {
 	t_sh_data	sh_data;
+	int			r_value;
 
+	r_value = 1;
 	init_shell_data(argc, argv, envp, &sh_data);
 	init_signals(&sh_data);
 	if (check_args == 0) //a verifier selon que mode script ou non
-		prompt_rl(&sh_data);
+		r_value = prompt_rl(&sh_data);
 	else
 		print_error(0);
-	return (0);
+	return (r_value);
 }
