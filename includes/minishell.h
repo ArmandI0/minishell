@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/17 22:20:58 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/18 16:30:28 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef	enum token
 
 typedef	enum builtin
 {
+	BT_NO,
 	BT_ECHO,
 	BT_CD,
 	BT_PWD,
@@ -61,7 +62,7 @@ typedef struct s_shell_data
 	int		return_value;
 	int 	ac;
 	char	**av;
-	char	**envp
+	char	**envp;
 }			t_sh_data;
 
 /* s_command contains all options and arguments for exec */
@@ -70,6 +71,7 @@ typedef struct s_command
 	char	*name;
 	char	*path;
 	char	**args;
+	int		argc;
 }			t_cmd;
 
 /* s_redir contains all redirections for one command in the right order */
@@ -85,11 +87,12 @@ typedef struct s_redir
 }			t_redir;
 
 /* s_cmd_data contains all data required for redirections and execution of one cmd */
+/* builtin : 0 = oui ; 1 = non - */
 typedef struct s_list_cmd
 {
 	int					id;
 	t_cmd				cmd;
-	int					builtin;
+	t_builtin			builtin;
 	t_redir				*redir;
 	struct s_list_cmd	*next;
 }			t_list_cmd;
@@ -99,12 +102,15 @@ typedef struct s_list_cmd
 void	list_of_command(int argc, char **argv);
 
 /* BUILTINS FUNCTIONS */
-void	bt_echo(char *string);
+void	bt_echo(t_cmd *echo_cmd);
 
 /* EXEC FUNCTION */
 
+/* FREE FUNCTIONS*/
+void	free_tabchar(char **tabchar);
+void	free_cmd(t_cmd *cmd);
 
 /* PROMPT TERMINAL FUNCTIONS */
-int	prompt_rl(argc, argv, envp);
+int	prompt_rl(t_sh_data *sh_data);
 
 #endif

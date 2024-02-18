@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/18 16:06:33 by nledent          ###   ########.fr       */
+/*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
+/*   Updated: 2024/02/18 16:26:39 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	prompt_rl(t_sh_data *sh_data)
+void	free_tabchar(char **tabchar)
 {
-	char	*line;
+	int	i;
 
-	(void)sh_data;
-	line = readline("minishell>");
-	while (1)
+	i = 0;
+	if (tabchar != NULL)
 	{
-		add_history(line);
-		//send line to parsing here
-		//send line to exec here
-		if (line != NULL)
-			free(line);
-		line = readline("minishell>");
+		while (tabchar[i] != NULL)
+		{
+			free(tabchar[i]);
+			i++;
+		}
+		free(tabchar);
 	}
-	if (line != NULL)
-		free(line);
+}
+
+void free_cmd(t_cmd *cmd)
+{
+	free(cmd->name);
+	free(cmd->path);
+	free_tabchar(cmd->args);
 }

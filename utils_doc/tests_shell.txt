@@ -2,6 +2,10 @@
 - 
 
 /** FONCTIONS BUILTINS **/
+- ECHO
+	*verifier avec -n, sans -n, avec arguments et sans arguments et combinaisons
+	*gérer echo -n -n ? (ne fait rien)
+
 - PWD 
 	*verifier que fonctionne avec des longs chemins (> long que le buffer)
 
