@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/21 17:53:12 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/21 21:34:08 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ static t_list_cmd	*init_cmd(t_list_cmd *el1, char *limiter)
 		el_new->redir->in_out=0;
 		el_new->redir->app_mod_hdoc=1;
 	}
+	else
+		el_new->redir = NULL;
 	el_new->cmd.args = NULL;
 	el_new->cmd.name = NULL;
 	el_new->cmd.path = NULL;
@@ -120,6 +122,8 @@ int main(void)
 	el1=init_cmd(el1, "000");
 	el2=init_cmd(el1, NULL);
 	el3=init_cmd(el1, "123");
+	(void)el2;
+	(void)el3;
 	launch_hdocs(el1);
 	next_cmd = el1;
 	while (next_cmd != NULL)
