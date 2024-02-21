@@ -27,6 +27,7 @@ MAIS ATTENTION, CELA DEPEND DE LEUR ORDRE D ARRIVEE DANS LA LIGNE DE CMD. exempl
 - les variables peuvent etre insérées dans un here_document (à implémenter ????)
 - il faut considérer les here_docs chacun comme une commande qui envoie dans un pipe à la commande suivante. Donc au moment du parsing il faut traiter les here docs a part. Par contre toutes 
 les autres redirection d'un bloc (entre deux | ), doivent bien être associée à la commande retrouvée dans ce bloc. 
+- attention aux trucs style <Makefile cat|<<123 ""|cat ou <Makefile cat|<<123 |cat
 
 6) le processur parent doit récupérer les codes de sortie
 - via fonction waitpid ou assimilée

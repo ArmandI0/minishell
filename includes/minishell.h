@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/18 21:05:09 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/21 14:04:47 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,11 @@ typedef struct s_env_var
 /* s_shell_data contains global data for the actual minishell processus */
 typedef struct s_shell_data
 {
-	int		return_value;
-	int 	ac;
-	char	**av;
-	char	**envp;
+	int			return_value;
+	int 		ac;
+	t_env_var	*env_var1;
+	char		**av;
+	char		**envp;
 }			t_sh_data;
 
 /* s_command contains all options and arguments for exec */
@@ -82,7 +83,8 @@ typedef struct s_redir
 {
 	char			*file_path;
 	int				in_out;
-	int				app_mod;
+	int				app_mod_hdoc;
+	char			*lim_hdoc;
 	struct s_redir	*next;
 }			t_redir;
 
@@ -92,8 +94,6 @@ typedef struct s_redir
 typedef struct s_list_cmd
 {
 	int					id;
-	char				*limiter;
-	char				*hdoc;
 	t_cmd				cmd;
 	t_builtin			builtin;
 	t_redir				*redir;
@@ -108,7 +108,7 @@ void	bt_echo(t_cmd *echo_cmd);
 
 /* EXEC FUNCTION */
 int		exec_cmds_loop(t_sh_data *sh_data ,t_list_cmd *list_cmds);
-void	launch_hdocs(t_list_cmd *list_cmds);
+void	launch_hdocs(t_list_cmd *cmds);
 
 /* FREE FUNCTIONS*/
 void	free_tabchar(char **tabchar);
