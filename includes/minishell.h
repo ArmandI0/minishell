@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/21 14:04:47 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/22 15:47:01 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 # include "../lib/libft/src/libft.h"
 
 /* typedef */
+typedef	enum mn_errors
+{
+	ER_EXECVE,
+	ER_CMD_N_FOUND,
+}			t_errors;
 
 typedef	enum token
 {
@@ -56,15 +61,6 @@ typedef struct s_env_var
 	struct s_env_var	*next;
 }			t_env_var;
 
-/* s_shell_data contains global data for the actual minishell processus */
-typedef struct s_shell_data
-{
-	int			return_value;
-	int 		ac;
-	t_env_var	*env_var1;
-	char		**av;
-	char		**envp;
-}			t_sh_data;
 
 /* s_command contains all options and arguments for exec */
 typedef struct s_command
@@ -100,6 +96,18 @@ typedef struct s_list_cmd
 	struct s_list_cmd	*next;
 }			t_list_cmd;
 
+/* s_shell_data contains global data for the actual minishell processus */
+typedef struct s_shell_data
+{
+	int			return_value;
+	int 		ac;
+	t_env_var	*env_var1;
+	char		**av;
+	char		**envp;
+	t_list_cmd	*cmd_bloc1;
+	t_env_var	*env_var1;
+}			t_sh_data;
+
 /* PARSING FUNCTIONS */
 void	list_of_command(int argc, char **argv);
 
@@ -113,8 +121,13 @@ void	launch_hdocs(t_list_cmd *cmds);
 /* FREE FUNCTIONS*/
 void	free_tabchar(char **tabchar);
 void	free_cmd(t_cmd *cmd);
+void	free_redir(t_redir *redir);
+void	free_list_cmd(t_list_cmd *cmd_data);
 
 /* PROMPT TERMINAL FUNCTIONS */
 int		prompt_rl(t_sh_data *sh_data);
+
+/* UTILS FONCTIONS*/
+void	print_error(t_errors error, t_list_cmd *cmd_data);
 
 #endif

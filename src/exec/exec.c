@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/21 14:04:31 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/22 17:54:15 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,38 +29,36 @@
 	ft_free_split(pip->cmds);
 	ft_free_split(args);
 }
-
-static void	pipes_trsf(t_pipex *pip, int pipe1[2], int pipe2[2])
+*/
+static void	pipes_trsf(int id, int p_out[2], int p_in[2])
 {
-	if (pip->cmd_nb > 0)
-		close_pipes(pipe1);
-	pipe1[0] = pipe2[0];
-	pipe1[1] = pipe2[1];
+	if (id > 0)
+		close_pipes(p_in);
+	p_in[0] = p_out[0];
+	p_in[1] = p_out[1];
 }
 
-static void	child_management(t_pipex *pip, int p1[2], int p2[2], char *hdoc)
+static int	child_management(t_sh_data *sh_data, int p_out[2],
+							int p_in[2], t_list_cmd	*bloc_data)
 {
 	int	i;
 
-	if (ft_strncmp(pip->argv[1], "here_doc", 9) == 0)
-		i = pip->cmd_nb - 1;
-	else
-		i = pip->cmd_nb;
-	pipes_management(p1, p2, pip);
-	if (pip->cmd_nb > 0)
-		close_pipes(p1);
-	close_pipes(p2);
-	if (ft_strncmp(pip->argv[1], "here_doc", 9) == 0 && pip->cmd_nb == 0)
-		put_here_doc(hdoc, STDOUT_FILENO, pip);
-	else if (pip->cmds[i][0] != 0)
-		exec_cmd(pip);
-	else if (pip->cmds[i][0] == 0)
-		ft_putstr_fd("Error command not found\n", 2);
-	else
+	i = bloc_data->id;
+	pipes_management(p_out, p_in, bloc_data);
+	if (bloc_data->id > 0)
+		close_pipes(p_in);
+	close_pipes(p_out);
+	if (bloc_data->cmd.name != NULL && bloc_data->cmd.name[0] != 0)
+	{
+		exec_cmd(bloc_data);
 		perror("Error execve");
-	ft_free_split(pip->cmds);
-	exit(1);
-} */
+	}
+	else if (bloc_data->cmd.name != NULL && bloc_data->cmd.name[0] == 0)
+		print_error(ER_CMD_N_FOUND, bloc_data);
+	free_list_cmd(sh_data->cmd_bloc1);
+	free_env_var(sh_data->env_var1);
+	exit (1);
+}
 
 static void	wait_all_sons(t_list_cmd *list_cmds)
 {

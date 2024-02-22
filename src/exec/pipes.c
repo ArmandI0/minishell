@@ -6,12 +6,13 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/18 21:43:11 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/22 17:52:56 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-/* 
+
+
 void	close_pipes(int pipe_x[2])
 {
 	close(pipe_x[0]);
@@ -40,7 +41,7 @@ static void	init_input(t_pipex *p, int pipe1[2], int pipe2[2])
 	}
 }
 
-static void	init_output(t_pipex *p, int pipe1[2], int pipe2[2])
+static void	init_output(t_sh_data *p, int p_out[2], int p_in[2])
 {
 	int		output;
 	char	*path;
@@ -67,18 +68,43 @@ static void	init_output(t_pipex *p, int pipe1[2], int pipe2[2])
 	}
 }
 
-void	pipes_management(int pipe1[2], int pipe2[2], t_pipex *p)
+static int	redirections(t_list_cmd *bloc_data)
 {
-	if (p->cmd_nb == 0 && ft_strncmp(p->argv[1], "here_doc", 9) != 0)
-		init_input(p, pipe1, pipe2);
-	else if (p->cmd_nb == 0 && ft_strncmp(p->argv[1], "here_doc", 9) == 0)
-		dup2(pipe2[1], STDOUT_FILENO);
-	else if (p->cmd_nb == (p->tot_cmds - 1))
-		init_output(p, pipe1, pipe2);
+	int		r_redir;
+	t_redir	*next;
+
+	r_redir = -1;
+	next = bloc_data->redir;
+	while (next != NULL)
+	{
+		if (next->in_out == 0)
+			init_input();
+		else if (next->in_out == 1)
+			init_output();
+		next = next->next
+	}
+	return (r_redir);
+}
+
+void	pipes_management(int p_out[2], int p_in[2], t_list_cmd *bloc_data)
+{
+	int	r_redir;
+
+	r_redir = redirections(bloc_data);
+	if (bloc_data->id == 0)
+	{
+		if (r_redir == 1 || r_redir == -1)
+			dup2(p_out[1], STDOUT_FILENO);
+	}
+	else if (r_redir == 3)
+	{
+		
+	}
 	else
 	{
-		dup2(pipe1[0], STDIN_FILENO);
-		dup2(pipe2[1], STDOUT_FILENO);
+		if (r_redir == 1 || r_redir == -1)
+			dup2(p_in[0], STDIN_FILENO);
+		if (r_redir == 2 || r_redir == -1)
+			dup2(p_out[1], STDOUT_FILENO);
 	}
 }
- */
