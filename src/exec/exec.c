@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/22 17:54:15 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/22 21:17:04 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 	ft_free_split(args);
 }
 */
+
 static void	pipes_trsf(int id, int p_out[2], int p_in[2])
 {
 	if (id > 0)
@@ -44,7 +45,7 @@ static int	child_management(t_sh_data *sh_data, int p_out[2],
 	int	i;
 
 	i = bloc_data->id;
-	pipes_management(p_out, p_in, bloc_data);
+	pipes_redir(sh_data, p_out, p_in, bloc_data);
 	if (bloc_data->id > 0)
 		close_pipes(p_in);
 	close_pipes(p_out);

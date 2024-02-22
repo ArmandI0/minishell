@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/22 15:47:01 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/22 20:41:21 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,13 @@ void	bt_echo(t_cmd *echo_cmd);
 /* EXEC FUNCTION */
 int		exec_cmds_loop(t_sh_data *sh_data ,t_list_cmd *list_cmds);
 void	launch_hdocs(t_list_cmd *cmds);
+void	pipes_redir(t_sh_data *sh, int out[2], int in[2], t_list_cmd *bloc);
 
 /* FREE FUNCTIONS*/
 void	free_tabchar(char **tabchar);
 void	free_cmd(t_cmd *cmd);
 void	free_redir(t_redir *redir);
+void 	free_env_var(t_env_var *var1);
 void	free_list_cmd(t_list_cmd *cmd_data);
 
 /* PROMPT TERMINAL FUNCTIONS */
