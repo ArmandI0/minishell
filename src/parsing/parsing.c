@@ -6,8 +6,16 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/14 15:23:59 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:33:03 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+
+// void	parsing(t_lexer	*lx)
+// {
+// 	//printf("quotes : %d\n", check_quotes(lx));
+// }
+
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/18 17:25:25 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/21 09:29:50 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ int main(int argc, char **argv, char **envp)
 
 	r_value = 1;
 	init_shell_data(argc, argv, envp, &sh_data);
-	init_signals(&sh_data);
-	if (check_args == 0) //a verifier selon que mode script ou non
-		r_value = prompt_rl(&sh_data);
+	if (check_args(argc) == 0) //a verifier selon que mode script ou non
+		r_value = prompt_rl();
 	else
 		print_error(0);
 	return (r_value);

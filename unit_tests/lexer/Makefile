@@ -6,34 +6,31 @@
 #    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/21 09:28:37 by aranger          ###   ########.fr        #
+#    Updated: 2024/02/22 18:05:56 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #-PATH FILES-#
 
-SRC_DIR			= src
-SRC_BONUS_DIR	= src_bonus
-OBJ_DIR			= obj
-OBJ_BONUS_DIR	= obj_bonus
+SRC_DIR			= ../../src
+SRC_BONUS_DIR	= ../../src_bonus
+OBJ_DIR			= ../../obj
+OBJ_BONUS_DIR	= ../../obj_bonus
 
 #-LIBFT-#
 
-LIBFT			= lib/libft
-LIBFT_A			= lib/libft/libft.a
+LIBFT			= ../../lib/libft
+LIBFT_A			= ../../lib/libft/libft.a
 
 #-SRC-#
 
 SRCS			= 	\
-					prompt_terminal/main.c \
-					prompt_terminal/prompt.c \
-					prompt_terminal/signals.c \
 					parsing/lexer.c \
 					parsing/parsing.c \
 					parsing/split_lexer.c \
-					test.c \
+					parsing/manage_list_cmd.c \
 
-SRC				= $(addprefix src/, $(SRCS))
+SRC				= $(addprefix ../../src/, $(SRCS))
 OBJS			= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 D_OBJS			= mkdir -p $(@D)
 
@@ -42,15 +39,15 @@ D_OBJS			= mkdir -p $(@D)
 SRCS_BONUS		=	\
 
 
-SRC_BONUS		= $(addprefix src_bonus/, $(SRCS_BONUS))
+SRC_BONUS		= $(addprefix ../../src_bonus/, $(SRCS_BONUS))
 OBJS_BONUS		= $(SRC_BONUS:$(SRC_BONUS_DIR)/%.c=$(OBJ_BONUS_DIR)/%.o)
 D_OBJS_BONUS	= mkdir -p $(@D)
 
 #-UTILS-#
 
 CC 				= cc
-CFLAGS 			= -Wall -Wextra -Werror -g
-NAME 			= minishell
+CFLAGS 			= -Wall -Wextra  -g
+NAME 			= lexer_test
 RM 				= rm -f
 RMR				= rm -rf
 
