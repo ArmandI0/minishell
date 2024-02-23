@@ -6,7 +6,7 @@
 #    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/22 18:05:56 by aranger          ###   ########.fr        #
+#    Updated: 2024/02/23 15:35:18 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ SRCS			= 	\
 					parsing/parsing.c \
 					parsing/split_lexer.c \
 					parsing/manage_list_cmd.c \
+					parsing/manage_error.c \
+					parsing/utils_free.c \
 
 SRC				= $(addprefix ../../src/, $(SRCS))
 OBJS			= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

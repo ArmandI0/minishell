@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 14:15:25 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/22 18:07:25 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/23 10:22:30 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,57 @@ static t_list_cmd	*lst_cmd_last(t_list_cmd *lst)
 	return (NULL);
 }
 
+// void *lst_cmd_last(void *lst) 
+// {
+//     t_list	*ptr;
+
+//     if (lst)
+// 	{
+//         ptr = lst;
+//         while (ptr->next != NULL)
+// 		{
+//             ptr = ptr->next;
+//         }
+//         return ptr;
+//     }
+//     return NULL;
+// }
+
 /* UNIT TEST */
 
-int main(void)
-{
-	t_list_cmd	*a;
+// void print_list(t_list_cmd *lst)
+// {
+//     t_list_cmd *current = lst;
 
-	a = lst_cmd_new(sizeof(t_list_cmd));
-	if (a == NULL)
-		return (0);
-	a->id = 5;
-	ft_printf("%d", a->id);
-	return (0);
-}
+//     while (current != NULL) {
+//         // Affichage des champs de la structure t_list_cmd
+// //		printf("PREV: %p\n", current->prev);
+// //		printf("ADR: %p\n", &current);
+// //        printf("ID: %d\n", current->id);
+// //        printf("Limiter: %s\n", current->limiter);
+// //        printf("Hdoc: %s\n", current->hdoc);
+//         // Affichage des champs de la structure t_redir (s'il y a des redirections)
+// //		printf("NEXT: %p\n", current->next);
+
+//         printf("\n");
+
+//         current = current->next;
+//     }
+// }
+
+// int main(void)
+// {
+// 	t_list_cmd	*tmp;
+// 	t_list_cmd	**list = NULL;
+// 	int			i = 0;
+
+// 	list = ft_calloc(1, sizeof(t_list *));
+// 	while (i < 3)
+// 	{
+// 		tmp = (t_list_cmd *)lst_cmd_new(sizeof(t_list_cmd));
+// 		lst_cmd_add_back(list, tmp);
+// 		i++;
+// 	}
+// 	print_list(*list);
+// 	return (0);
+// }

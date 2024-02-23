@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:53:50 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/21 09:17:40 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/23 11:18:47 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static char	*ft_add_word(char const *src, t_token *tab, t_token sep, char c)
 
 	i = 0;
 	j = 0;
-	while (src[j] && src[j] != c && src && tab[j] != sep)
+	while (src[j] && (src[j] != c || tab[j] != sep))
 		j++;
 	str = malloc(sizeof(char) * (j + 1));
 	if (str == NULL)
 		return (NULL);
-	while (src[i] && src[i] != c && tab[i] != sep)
+	while (src[i] && (src[i] != c || tab[i] != sep))
 	{
 		str[i] = src[i];
 		i++;
@@ -83,7 +83,7 @@ char	**split_lexer(t_lexer *lx, t_token sep, char c)
 		return (NULL);
 	while (lx->entry[i])
 	{
-		if (lx->entry[i] != c && lx->lexing[i] != sep && (i == 0 || lx->entry[i - 1] == c))
+		if (lx->entry[i] != c && lx->lexing[i] != sep && (i == 0 || (lx->entry[i - 1] == c && lx->lexing[i - 1] == sep)))
 		{
 			tab[k] = ft_add_word(&lx->entry[i], &lx->lexing[i], sep, c);
 			if (tab[k] == NULL)

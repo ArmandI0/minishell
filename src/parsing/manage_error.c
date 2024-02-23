@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   manage_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 09:18:31 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/23 09:22:59 by aranger          ###   ########.fr       */
+/*   Created: 2024/02/23 14:31:57 by aranger           #+#    #+#             */
+/*   Updated: 2024/02/23 15:35:53 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
-void	*ft_lstnew(size_t size)
+void	quote_error(t_lexer *lx)
 {
-	unsigned char *a;
-
-	a = ft_calloc(1, sizeof(size));
-	if (a == NULL)
-		return (NULL);
-	return ((void *)a);
+	free_lexer(lx);
+	ft_putstr_fd("Quotes error\n", 2);
 }

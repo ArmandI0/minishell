@@ -6,7 +6,7 @@
 #    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/21 09:28:37 by aranger          ###   ########.fr        #
+#    Updated: 2024/02/23 14:53:40 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS			= 	\
 					parsing/lexer.c \
 					parsing/parsing.c \
 					parsing/split_lexer.c \
+					parsing/manage_error.c \
 					test.c \
 
 SRC				= $(addprefix src/, $(SRCS))

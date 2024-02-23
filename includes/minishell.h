@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/22 18:12:32 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/23 15:35:41 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef enum e_token
 	PIPE,
 	DOLLAR,
 	IS_SPACE,
+	END,
 } t_token;
 
 typedef struct s_lexer
@@ -45,7 +46,6 @@ typedef struct s_lexer
 	char *entry;
 	t_token	*lexing;
 }				t_lexer;
-
 
 typedef enum e_builtin
 {
@@ -126,6 +126,8 @@ void		lst_cmd_add_back(t_list_cmd **lst, t_list_cmd *new);
 t_lexer *lexing(char *line);
 void	parsing(t_lexer	*entry);
 char	**split_lexer(t_lexer *lx, t_token sep, char c);
+void		quote_error(t_lexer *lx);
+void	free_lexer(t_lexer *lx);
 
 /* BUILTINS FUNCTIONS */
 

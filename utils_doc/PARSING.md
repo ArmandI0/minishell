@@ -1,6 +1,9 @@
 # Lexer
 
-- Prendre tous les elements et split selon ' ' dans un ** et continuer jusqu'a operateur ou \0;
+- ordre d'operation
+	Trouver les here_doc
+	Trouver les redirections
+	Trouver la commande
 
 
 # Notes pour le parsing :
