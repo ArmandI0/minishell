@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/22 20:41:21 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/23 16:51:06 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ typedef struct s_shell_data
 {
 	int			return_value;
 	int 		ac;
-	t_env_var	*env_var1;
 	char		**av;
 	char		**envp;
 	t_list_cmd	*cmd_bloc1;
@@ -117,6 +116,7 @@ void	bt_echo(t_cmd *echo_cmd);
 /* EXEC FUNCTION */
 int		exec_cmds_loop(t_sh_data *sh_data ,t_list_cmd *list_cmds);
 void	launch_hdocs(t_list_cmd *cmds);
+void	close_pipes(int pipe_x[2]);
 void	pipes_redir(t_sh_data *sh, int out[2], int in[2], t_list_cmd *bloc);
 
 /* FREE FUNCTIONS*/

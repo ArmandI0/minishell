@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/23 17:08:56 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/23 17:07:54 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,12 @@ void	pipes_redir(t_sh_data *sh, int p_out[2], int p_in[2], t_list_cmd *bloc)
 	}
 	else if (bloc->id == 0)
 	{
+			ft_putnbr_fd(r_redir, 2);
 		if ((r_redir == 0 || r_redir == 2) && bloc->next != NULL)
+		{
+
 			dup2(p_out[1], STDOUT_FILENO);
+		}
 	}
 	else
 	{
