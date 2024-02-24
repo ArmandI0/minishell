@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/24 17:21:06 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/24 19:13:02 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_shell_data
 	char		**envp;
 	t_list_cmd	*cmd_bloc1;
 	t_env_var	*env_var1;
+	int			n_env_var;
 }			t_sh_data;
 
 /* PARSING FUNCTIONS */
@@ -132,5 +133,10 @@ int		prompt_rl(t_sh_data *sh_data);
 /* UTILS FONCTIONS*/
 void	print_error(t_errors error, t_list_cmd *cmd_data);
 void	del_tmp_hdocs(t_sh_data *sh);
+int		add_env_var(t_sh_data *sh, char *name, char *value);
+void	envp_to_list(t_sh_data *sh_data);
+char	**list_to_envp(t_sh_data *sh_data);
+void	print_env(t_sh_data *sh_data);
+void	print_tabchar(char **tabchar);
 
 #endif

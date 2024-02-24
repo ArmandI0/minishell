@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/24 16:04:54 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/24 19:26:09 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
 	sh_data->ac = ac;
 	sh_data->av = av;
 	sh_data->envp = envp;
+	sh_data->n_env_var = 0;
 	sh_data->env_var1 = NULL;
+	
 }
 
 int main(int argc, char **argv, char **envp)
@@ -95,6 +97,7 @@ int main(int argc, char **argv, char **envp)
 /*	t_list_cmd	*el3; */
 
 	init_shell_data(argc, argv, envp, &sh_data);
+	envp_to_list(&sh_data);
 	el1 = NULL;
 	el1 = init_cmd1(NULL);
 	el2 = init_cmd2(el1);

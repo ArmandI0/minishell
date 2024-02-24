@@ -6,16 +6,11 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/24 17:20:54 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/24 19:25:27 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-/* static void	prepare_new_env(t_sh_data *sh_data)
-{
-	
-} */
 
 static void	pipes_trsf(int id, int p_out[2], int p_in[2])
 {
@@ -28,7 +23,7 @@ static void	pipes_trsf(int id, int p_out[2], int p_in[2])
 static int	child_management(t_sh_data *sh_data, int p_out[2],
 							int p_in[2], t_list_cmd	*bloc_data)
 {
-	//char	**new_env;
+	char	**new_env;
 
 	pipes_redir(sh_data, p_out, p_in, bloc_data);
 	if (bloc_data->id > 0)
@@ -36,9 +31,10 @@ static int	child_management(t_sh_data *sh_data, int p_out[2],
 	close_pipes(p_out);
 	if (bloc_data->cmd.name != NULL && bloc_data->cmd.name[0] != 0)
 	{
-		//new_env = prepare_new_env(sh_data);
-		execve(bloc_data->cmd.path, bloc_data->cmd.args, sh_data->envp);
+		new_env = list_to_envp(sh_data);
+		execve(bloc_data->cmd.path, bloc_data->cmd.args, new_env);
 		perror("Error execve");
+		free_tabchar(new_env);
 	}
 	else if (bloc_data->cmd.name != NULL && bloc_data->cmd.name[0] == 0)
 		print_error(ER_CMD_N_FOUND, bloc_data);

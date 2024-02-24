@@ -1,5 +1,6 @@
 /** SHELL GLOBAL **/
-- 
+- tester avec pleins de redirections. notamment les redirections >outfile créent toutes des fichiers sauf si il y a un probleme de permission : les fichiers suivants ne sont pas 
+créés car le processus s'arrete là. Par contre les here docs suivant sont quand meme exécutés vu qu'ils sont lancés en amont par le shell. 
 
 /** FONCTIONS BUILTINS **/
 - ECHO
