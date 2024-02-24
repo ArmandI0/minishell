@@ -6,12 +6,11 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/23 17:07:54 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/24 17:29:18 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 void	close_pipes(int pipe_x[2])
 {
@@ -31,7 +30,7 @@ static int	init_input(t_redir *redir)
 	}
 	else
 	{
-		dup2(input, STDOUT_FILENO);
+		dup2(input, STDIN_FILENO);
 		close(input);
 		return (2);
 	}
@@ -89,6 +88,27 @@ static int	redirections(t_list_cmd *bloc_data)
 
 void	pipes_redir(t_sh_data *sh, int p_out[2], int p_in[2], t_list_cmd *bloc)
 {
+	if (bloc->next != NULL)
+		dup2(p_out[1], STDOUT_FILENO);
+	else
+	{
+		dup2(p_out[1], STDOUT_FILENO);
+		dup2(p_in[0], STDIN_FILENO);
+	}
+	if (redirections(bloc) >= 4)
+	{
+		if (bloc->id == 0)
+			close_pipes(p_in);
+		close_pipes(p_out);
+		free_list_cmd(sh->cmd_bloc1);
+		free_env_var(sh->env_var1);
+		exit(1);
+	}
+}
+
+/*
+void	pipes_redir(t_sh_data *sh, int p_out[2], int p_in[2], t_list_cmd *bloc)
+{
 	int	r_redir;
 
 	r_redir = redirections(bloc);
@@ -103,12 +123,8 @@ void	pipes_redir(t_sh_data *sh, int p_out[2], int p_in[2], t_list_cmd *bloc)
 	}
 	else if (bloc->id == 0)
 	{
-			ft_putnbr_fd(r_redir, 2);
 		if ((r_redir == 0 || r_redir == 2) && bloc->next != NULL)
-		{
-
 			dup2(p_out[1], STDOUT_FILENO);
-		}
 	}
 	else
 	{
@@ -118,3 +134,4 @@ void	pipes_redir(t_sh_data *sh, int p_out[2], int p_in[2], t_list_cmd *bloc)
 			dup2(p_in[0], STDIN_FILENO);
 	}
 }
+ */

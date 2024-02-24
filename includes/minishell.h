@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/23 16:51:06 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/24 17:21:06 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	list_of_command(int argc, char **argv);
 void	bt_echo(t_cmd *echo_cmd);
 
 /* EXEC FUNCTION */
-int		exec_cmds_loop(t_sh_data *sh_data ,t_list_cmd *list_cmds);
+int		exec_cmds_loop(t_sh_data *sh_data);
 void	launch_hdocs(t_list_cmd *cmds);
 void	close_pipes(int pipe_x[2]);
 void	pipes_redir(t_sh_data *sh, int out[2], int in[2], t_list_cmd *bloc);
@@ -131,5 +131,6 @@ int		prompt_rl(t_sh_data *sh_data);
 
 /* UTILS FONCTIONS*/
 void	print_error(t_errors error, t_list_cmd *cmd_data);
+void	del_tmp_hdocs(t_sh_data *sh);
 
 #endif

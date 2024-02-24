@@ -6,15 +6,15 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/22 15:41:33 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/24 15:45:17 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void free_tabchar(char **tabchar)
+void	free_tabchar(char **tabchar)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (tabchar != NULL)
@@ -28,9 +28,9 @@ void free_tabchar(char **tabchar)
 	}
 }
 
-void free_redir(t_redir *redir)
+void	free_redir(t_redir *redir)
 {
-	t_redir *next;
+	t_redir	*next;
 
 	if (redir != NULL)
 	{
@@ -39,14 +39,14 @@ void free_redir(t_redir *redir)
 		{
 			if (next->file_path != NULL)
 				free(next->file_path);
-			redir = next;	
+			redir = next;
 			next = next->next;
 			free(redir);
 		}
 	}
 }
 
-void free_cmd(t_cmd *cmd)
+void	free_cmd(t_cmd *cmd)
 {
 	if (cmd->name != NULL)
 		free(cmd->name);
@@ -56,9 +56,9 @@ void free_cmd(t_cmd *cmd)
 		free_tabchar(cmd->args);
 }
 
-void free_env_var(t_env_var *var1)
+void	free_env_var(t_env_var *var1)
 {
-	t_env_var *next;
+	t_env_var	*next;
 
 	if (var1 != NULL)
 	{
@@ -78,9 +78,9 @@ void free_env_var(t_env_var *var1)
 	}
 }
 
-void free_list_cmd(t_list_cmd *cmd_data)
+void	free_list_cmd(t_list_cmd *cmd_data)
 {
-	t_list_cmd *next;
+	t_list_cmd	*next;
 
 	if (cmd_data != NULL)
 	{

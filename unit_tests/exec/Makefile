@@ -6,7 +6,7 @@
 #    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/23 15:05:46 by nledent          ###   ########.fr        #
+#    Updated: 2024/02/24 17:27:24 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ SRCS			= 	UT_exec.c \
 					free_functions.c \
 					here_docs.c \
 					pipes.c \
+					del_tmp_hdoc.c \
+
 
 OBJS		= $(SRCS:.c=.o)
 
