@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/24 15:45:17 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ void	free_env_var(t_env_var *var1)
 	}
 }
 
-void	free_list_cmd(t_list_cmd *cmd_data)
+void	free_list_cmd(t_bloc_cmd *cmd_data)
 {
-	t_list_cmd	*next;
+	t_bloc_cmd	*next;
 
 	if (cmd_data != NULL)
 	{

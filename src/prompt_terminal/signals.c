@@ -6,13 +6,23 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/17 21:06:30 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:28:31 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	init_signals(t_sh_data *sh_data)
+static void handler_sigint(int signum)
 {
-	
+	(void)signum;
+    printf("\n");
+    rl_on_new_line();
+    rl_replace_line("", 0);
+    rl_redisplay();
+}
+
+void	init_signals(void)
+{
+	signal(SIGINT, handler_sigint);
+	signal(SIGQUIT, SIG_IGN);
 }

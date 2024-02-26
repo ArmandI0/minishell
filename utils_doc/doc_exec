@@ -12,7 +12,7 @@ typedef struct s_list_cmd
 	t_builtin			builtin;
 	t_redir				*redir;
 	struct s_list_cmd	*next;
-}			t_list_cmd;
+}			t_bloc_cmd;
 
 4) exec_cmds doit interpreter chaque commande comme un bloc. 
 - a priori, si il y a deux commandes c'est qu'il y a un pipe.
@@ -63,14 +63,14 @@ should expand to their values.
 foreground pipeline.
 • Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.
 • In interactive mode:
-	◦ ctrl-C displays a new prompt on a new line.
-	◦ ctrl-D exits the shell.
-	◦ ctrl-\ does nothing.
+	◦ ctrl-C displays a new prompt on a new line.													>>OK
+	◦ ctrl-D exits the shell.																		>>OK
+	◦ ctrl-\ does nothing.																			>>OK
 • Your shell must implement the following builtins:
 	◦ echo with option -n 																			>>OK
-	◦ cd with only a relative or absolute path
+	◦ cd with only a relative or absolute path														>>MISS
 	◦ pwd with no options																			>>OK
-	◦ export with no options
-	◦ unset with no options
+	◦ export with no options																		>>MISS
+	◦ unset with no options																			>>MISS
 	◦ env with no options or arguments																>>OK
-	◦ exit with no options
+	◦ exit with no options																			>>MISS

@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/26 12:23:21 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <errno.h>
+# include <signal.h>
 # include "../lib/libft/src/libft.h"
 
 /* typedef */
@@ -26,6 +27,7 @@ typedef	enum mn_errors
 {
 	ER_EXECVE,
 	ER_CMD_N_FOUND,
+	ER_NO_ARG,
 }			t_errors;
 
 typedef	enum token
@@ -87,14 +89,14 @@ typedef struct s_redir
 /* s_cmd_data contains all data required for redirections and execution of one cmd */
 /* builtin : 0 = oui ; 1 = non - */
 /* bien initialiser chaque pointeur */
-typedef struct s_list_cmd
+typedef struct s_bloc_cmd
 {
 	int					id;
 	t_cmd				cmd;
 	t_builtin			builtin;
 	t_redir				*redir;
-	struct s_list_cmd	*next;
-}			t_list_cmd;
+	struct s_bloc_cmd	*next;
+}			t_bloc_cmd;
 
 /* s_shell_data contains global data for the actual minishell processus */
 typedef struct s_shell_data
@@ -103,7 +105,7 @@ typedef struct s_shell_data
 	int 		ac;
 	char		**av;
 	char		**envp;
-	t_list_cmd	*cmd_bloc1;
+	t_bloc_cmd	*cmd_bloc1;
 	t_env_var	*env_var1;
 	int			n_env_var;
 }			t_sh_data;
@@ -115,26 +117,29 @@ void	list_of_command(int argc, char **argv);
 void	bt_echo(t_cmd *echo_cmd);
 void	bt_env(t_sh_data *sh_data);
 int		bt_pwd(void);
-int		exec_bt(t_sh_data *sh_data, t_list_cmd *cmd_bloc);
+int		exec_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc);
 
 /* EXEC FUNCTION */
 int		exec_cmds_loop(t_sh_data *sh_data);
-void	launch_hdocs(t_list_cmd *cmds);
+void	launch_hdocs(t_bloc_cmd *cmds);
 void	close_pipes(int pipe_x[2]);
-void	pipes_redir(t_sh_data *sh, int out[2], int in[2], t_list_cmd *bloc);
+void	pipes_redir(t_sh_data *sh, int out[2], int in[2], t_bloc_cmd *bloc);
 
 /* FREE FUNCTIONS*/
 void	free_tabchar(char **tabchar);
 void	free_cmd(t_cmd *cmd);
 void	free_redir(t_redir *redir);
 void 	free_env_var(t_env_var *var1);
-void	free_list_cmd(t_list_cmd *cmd_data);
+void	free_list_cmd(t_bloc_cmd *cmd_data);
 
 /* PROMPT TERMINAL FUNCTIONS */
 int		prompt_rl(t_sh_data *sh_data);
 
+/* SIGNALS FUNCTIONS */
+void	init_signals(void);
+
 /* UTILS FONCTIONS*/
-void	print_error(t_errors error, t_list_cmd *cmd_data);
+void	print_error(t_errors error, t_bloc_cmd *cmd_data);
 void	del_tmp_hdocs(t_sh_data *sh);
 int		add_env_var(t_sh_data *sh, char *name, char *value);
 void	envp_to_list(t_sh_data *sh_data);

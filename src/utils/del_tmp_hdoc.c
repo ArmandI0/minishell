@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:59:30 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/24 17:32:15 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	del_tmp_hdocs(t_sh_data *sh)
 {
-	t_list_cmd	*next_cmd;
+	t_bloc_cmd	*next_cmd;
 	t_redir		*next_redir;
 
 	next_cmd = sh->cmd_bloc1;

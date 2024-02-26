@@ -6,13 +6,13 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:59:30 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/22 15:48:29 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	print_error(t_errors error, t_list_cmd *cmd_data)
+void	print_error(t_errors error, t_bloc_cmd *cmd_data)
 {
 	if (error == ER_CMD_N_FOUND)
 	{

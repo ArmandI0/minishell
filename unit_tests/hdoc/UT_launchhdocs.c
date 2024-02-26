@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/21 21:34:08 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	free_cmd(t_cmd *cmd)
 		free_tabchar(cmd->args);
 }
 
-void	free_list_cmd(t_list_cmd *cmd_data)
+void	free_list_cmd(t_bloc_cmd *cmd_data)
 {
-	t_list_cmd	*next;
+	t_bloc_cmd	*next;
 
 	if (cmd_data != NULL)
 	{
@@ -73,14 +73,14 @@ void	free_list_cmd(t_list_cmd *cmd_data)
 	}
 }
 
-static t_list_cmd	*init_cmd(t_list_cmd *el1, char *limiter)
+static t_bloc_cmd	*init_cmd(t_bloc_cmd *el1, char *limiter)
 {
-	t_list_cmd *el_new;
-	t_list_cmd *next;
+	t_bloc_cmd *el_new;
+	t_bloc_cmd *next;
 	int	i;
 
 	i=0;
-	el_new = malloc(sizeof(t_list_cmd));
+	el_new = malloc(sizeof(t_bloc_cmd));
 	next = el1;
 	if (next != NULL)
 	{
@@ -112,10 +112,10 @@ static t_list_cmd	*init_cmd(t_list_cmd *el1, char *limiter)
 
 int main(void)
 {
-	t_list_cmd	*el1;
-	t_list_cmd	*el2;
-	t_list_cmd	*el3;
-	t_list_cmd	*next_cmd;
+	t_bloc_cmd	*el1;
+	t_bloc_cmd	*el2;
+	t_bloc_cmd	*el3;
+	t_bloc_cmd	*next_cmd;
 	t_redir		*next_redir;
 
 	el1=NULL;

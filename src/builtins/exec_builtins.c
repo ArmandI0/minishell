@@ -6,13 +6,13 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:09:19 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/26 14:43:53 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	exec_bt(t_sh_data *sh_data, t_list_cmd *cmd_bloc)
+int	exec_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc)
 {
 	int	r_value;
 

@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/21 21:36:29 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ static char	*hdoc_to_file(char *hdoc)
 	return (filename);
 }
 
-void	launch_hdocs(t_list_cmd *cmds)
+void	launch_hdocs(t_bloc_cmd *cmds)
 {
 	char		*path_hdoc;
 	char		*hdoc;
-	t_list_cmd	*next_cmd;
+	t_bloc_cmd	*next_cmd;
 	t_redir		*next_redir;
 
 	next_cmd = cmds;

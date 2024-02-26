@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/26 15:30:10 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	pipes_trsf(int id, int p_out[2], int p_in[2])
 }
 
 static int	child_management(t_sh_data *sh_data, int p_out[2],
-							int p_in[2], t_list_cmd	*bloc_data)
+							int p_in[2], t_bloc_cmd	*bloc_data)
 {
 	char	**new_env;
 	int		r_value;
@@ -47,9 +47,9 @@ static int	child_management(t_sh_data *sh_data, int p_out[2],
 	exit (r_value);
 }
 
-static void	wait_all_sons(t_sh_data *sh,t_list_cmd *list_cmds)
+static void	wait_all_sons(t_sh_data *sh,t_bloc_cmd *list_cmds)
 {
-	t_list_cmd	*next;
+	t_bloc_cmd	*next;
 	int			status;
 
 	next = list_cmds;
@@ -66,7 +66,7 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 	int			pipe_out[2];
 	int			pipe_in[2];
 	int			r_pipe;
-	t_list_cmd	*next;
+	t_bloc_cmd	*next;
 	pid_t		pid;
 
 	pid = 0;

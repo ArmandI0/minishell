@@ -6,19 +6,19 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/26 13:21:55 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static t_list_cmd	*init_cmd1(t_list_cmd *prev_el, t_sh_data *sh)
+static t_bloc_cmd	*init_cmd1(t_bloc_cmd *prev_el, t_sh_data *sh)
 {
-	t_list_cmd *el_new;
+	t_bloc_cmd *el_new;
 	int			i;
 
 	i = 0;
-	el_new = ft_calloc(1, sizeof(t_list_cmd));
+	el_new = ft_calloc(1, sizeof(t_bloc_cmd));
 	if (prev_el != NULL)
 		prev_el->next = el_new;
 	el_new->cmd.name = ft_strdup(sh->av[1]);
@@ -68,7 +68,7 @@ static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
 int main(int argc, char **argv, char **envp)
 {
 	t_sh_data	sh_data;
-	t_list_cmd	*el1;
+	t_bloc_cmd	*el1;
 
 	if (argc == 1)
 		return (1);

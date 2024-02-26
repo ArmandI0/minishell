@@ -6,17 +6,11 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/18 17:25:25 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:54:49 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	print_error(int error)
-{
-	if (error == 0)
-		printf("No arguments are required");
-}
 
 static int	check_args(int argc)
 {
@@ -31,6 +25,8 @@ static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
 	sh_data->ac = ac;
 	sh_data->av = av;
 	sh_data->envp = envp;
+	sh_data->env_var1 = NULL;
+	sh_data->cmd_bloc1 = NULL;
 }
 
 int main(int argc, char **argv, char **envp)
@@ -40,10 +36,11 @@ int main(int argc, char **argv, char **envp)
 
 	r_value = 1;
 	init_shell_data(argc, argv, envp, &sh_data);
-	init_signals(&sh_data);
-	if (check_args == 0) //a verifier selon que mode script ou non
+	init_signals();
+	if (check_args(argc) == 0)
 		r_value = prompt_rl(&sh_data);
 	else
-		print_error(0);
+		print_error(ER_NO_ARG, NULL);
+	free_env_var(sh_data.env_var1);
 	return (r_value);
 }
