@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/21 12:02:18 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 12:42:28 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,11 @@ static void	init_cmd(t_cmd *cmd)
 {
 	cmd->argc = 4;
 	cmd->name = ft_strdup("echo");
-	cmd->args = malloc(sizeof(char *) * (cmd->argc + 1));
+	cmd->args = ft_calloc((cmd->argc + 1), sizeof(char *));
 	cmd->args[0] = ft_strdup("echo");
-	cmd->args[1] = ft_strdup("-n");
-	cmd->args[2] = ft_strdup("sdfsdfsdf");
+	cmd->args[1] = ft_strdup("d");
+	cmd->args[2] = ft_strdup("blabla");
 	cmd->args[3] = ft_strdup("-n");
-	cmd->args[cmd->argc] = NULL;
 	cmd->path = ft_strdup("");
 }
 

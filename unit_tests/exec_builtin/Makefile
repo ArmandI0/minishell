@@ -6,7 +6,7 @@
 #    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/26 13:25:47 by nledent          ###   ########.fr        #
+#    Updated: 2024/02/26 12:57:49 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,19 +17,15 @@ LIBFT_A			= ../../lib/libft/libft.a
 
 #-SRC-#
 
-SRCS			= 	UT_exec.c \
-					errors.c \
-					exec.c \
-					exit_functions.c \
+SRCS			= 	UT_exec_bt.c \
 					free_functions.c \
-					here_docs.c \
-					pipes.c \
 					del_tmp_hdoc.c \
 					new_envp.c \
 					echo.c \
 					pwd.c \
 					env.c \
 					exec_builtins.c \
+
 
 OBJS		= $(SRCS:.c=.o)
 

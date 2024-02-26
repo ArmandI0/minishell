@@ -36,9 +36,9 @@ les autres redirection d'un bloc (entre deux | ), doivent bien être associée �
 
 cahier des charges : 
 Your shell should:
-• Display a prompt when waiting for a new command.
-• Have a working history.
-• Search and launch the right executable (based on the PATH variable or using a
+• Display a prompt when waiting for a new command.													>>OK
+• Have a working history.																			>>OK
+• Search and launch the right executable (based on the PATH variable or using a						>>OK
 relative or an absolute path).
 • Avoid using more than one global variable to indicate a received signal. Consider
 the implications: this approach ensures that your signal handler will not access your
@@ -50,16 +50,16 @@ characters in the quoted sequence.
 • Handle " (double quote) which should prevent the shell from interpreting the meta-
 characters in the quoted sequence except for $ (dollar sign).
 • Implement redirections:
-	◦ < should redirect input.
-	◦ > should redirect output.
-	◦ << should be given a delimiter, then read the input until a line containing the
+	◦ < should redirect input.																		>>OK
+	◦ > should redirect output.																		>>OK
+	◦ << should be given a delimiter, then read the input until a line containing the				>>OK
 	delimiter is seen. However, it doesn’t have to update the history!
-	◦ >> should redirect output in append mode.
-• Implement pipes (| character). The output of each command in the pipeline is
+	◦ >> should redirect output in append mode.														>>OK
+• Implement pipes (| character). The output of each command in the pipeline is						>>OK
 connected to the input of the next command via a pipe.
-• Handle environment variables ($ followed by a sequence of characters) which
+• Handle environment variables ($ followed by a sequence of characters) which						>>OK
 should expand to their values.
-• Handle $? which should expand to the exit status of the most recently executed
+• Handle $? which should expand to the exit status of the most recently executed					>>OK
 foreground pipeline.
 • Handle ctrl-C, ctrl-D and ctrl-\ which should behave like in bash.
 • In interactive mode:
@@ -72,5 +72,5 @@ foreground pipeline.
 	◦ pwd with no options																			>>OK
 	◦ export with no options
 	◦ unset with no options
-	◦ env with no options or arguments
+	◦ env with no options or arguments																>>OK
 	◦ exit with no options

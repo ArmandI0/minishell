@@ -6,16 +6,11 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/24 17:20:54 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 15:30:10 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-/* static void	prepare_new_env(t_sh_data *sh_data)
-{
-	
-} */
 
 static void	pipes_trsf(int id, int p_out[2], int p_in[2])
 {
@@ -28,33 +23,40 @@ static void	pipes_trsf(int id, int p_out[2], int p_in[2])
 static int	child_management(t_sh_data *sh_data, int p_out[2],
 							int p_in[2], t_list_cmd	*bloc_data)
 {
-	//char	**new_env;
+	char	**new_env;
+	int		r_value;
 
+	r_value = 1;
 	pipes_redir(sh_data, p_out, p_in, bloc_data);
 	if (bloc_data->id > 0)
 		close_pipes(p_in);
 	close_pipes(p_out);
-	if (bloc_data->cmd.name != NULL && bloc_data->cmd.name[0] != 0)
+	if (bloc_data->builtin != BT_NO)
+		r_value = exec_bt(sh_data, bloc_data);
+	else if (bloc_data->cmd.name != NULL && bloc_data->cmd.name[0] != 0)
 	{
-		//new_env = prepare_new_env(sh_data);
-		execve(bloc_data->cmd.path, bloc_data->cmd.args, sh_data->envp);
+		new_env = list_to_envp(sh_data);
+		execve(bloc_data->cmd.path, bloc_data->cmd.args, new_env);
 		perror("Error execve");
+		free_tabchar(new_env);
 	}
 	else if (bloc_data->cmd.name != NULL && bloc_data->cmd.name[0] == 0)
 		print_error(ER_CMD_N_FOUND, bloc_data);
 	free_list_cmd(sh_data->cmd_bloc1);
 	free_env_var(sh_data->env_var1);
-	exit (1);
+	exit (r_value);
 }
 
-static void	wait_all_sons(t_list_cmd *list_cmds)
+static void	wait_all_sons(t_sh_data *sh,t_list_cmd *list_cmds)
 {
 	t_list_cmd	*next;
+	int			status;
 
 	next = list_cmds;
 	while (next != NULL)
 	{
-		waitpid(-1, NULL, 0);
+		waitpid(-1, &status, 0);
+		sh->return_value = status;
 		next = next->next;
 	}
 }
@@ -82,7 +84,7 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 		next = next->next;
 	}
 	close_pipes(pipe_out);
-	wait_all_sons(sh_data->cmd_bloc1);
+	wait_all_sons(sh_data, sh_data->cmd_bloc1);
 	del_tmp_hdocs(sh_data);
 	return (2);
 }

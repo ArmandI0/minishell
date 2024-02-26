@@ -1,48 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/26 13:19:28 by nledent          ###   ########.fr       */
+/*   Created: 2024/02/26 12:09:19 by nledent           #+#    #+#             */
+/*   Updated: 2024/02/26 14:43:53 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	print_pwd(char *pwd)
+int	exec_bt(t_sh_data *sh_data, t_list_cmd *cmd_bloc)
 {
-	ft_putstr_fd(pwd, STDOUT_FILENO);
-	ft_putchar_fd('\n', STDOUT_FILENO);
-	return (0);
-}
+	int	r_value;
 
-int	bt_pwd(void) 
-{
-	char	*pwd;
-	int		size;
-	int		r_value;
-
-	size = 500;
-	r_value = -1;
-	while (1)
-	{
-		pwd = ft_calloc(size, sizeof(char));
-		if (pwd == NULL)
-			return (-1);
-		if (getcwd(pwd, size) != NULL)
-		{
-			r_value = print_pwd(pwd);
-			break;
-		}
-		else if (errno == ERANGE)
-			size += 500;
-		else
-			break;
-		free(pwd);
-	}
-	free(pwd);
+	r_value = 0;	
+	if (cmd_bloc->builtin == BT_ECHO)
+		bt_echo(&(cmd_bloc->cmd));
+	else if (cmd_bloc->builtin == BT_ENV)
+		bt_env(sh_data);
+	else if (cmd_bloc->builtin == BT_PWD)
+		r_value = bt_pwd();
 	return (r_value);
 }

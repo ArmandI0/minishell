@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/24 19:13:02 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 12:23:21 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,9 @@ void	list_of_command(int argc, char **argv);
 
 /* BUILTINS FUNCTIONS */
 void	bt_echo(t_cmd *echo_cmd);
+void	bt_env(t_sh_data *sh_data);
+int		bt_pwd(void);
+int		exec_bt(t_sh_data *sh_data, t_list_cmd *cmd_bloc);
 
 /* EXEC FUNCTION */
 int		exec_cmds_loop(t_sh_data *sh_data);

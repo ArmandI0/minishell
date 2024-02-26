@@ -1,11 +1,14 @@
 /** SHELL GLOBAL **/
 - tester avec pleins de redirections. notamment les redirections >outfile créent toutes des fichiers sauf si il y a un probleme de permission : les fichiers suivants ne sont pas 
 créés car le processus s'arrete là. Par contre les here docs suivant sont quand meme exécutés vu qu'ils sont lancés en amont par le shell. 
+- 
 
 /** FONCTIONS BUILTINS **/
 - ECHO
 	*verifier avec -n, sans -n, avec arguments et sans arguments et combinaisons
 	*gérer echo -n -n ? (ne fait rien)
+	*verifier les espaces entre arguments et pas a la fin
+	*redirections in avec echo ne fait rien
 
 - PWD 
 	*verifier que fonctionne avec des longs chemins (> long que le buffer)

@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/24 18:52:55 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/24 19:16:08 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,23 @@
 
 int	add_env_var(t_sh_data *sh, char *name, char *value)
 {
+	t_env_var	*new_var;
 	t_env_var	*next;
 
-	next = sh->env_var1;
-	if (next == NULL)
-		next = ft_calloc(1, sizeof(t_env_var));
+	new_var = ft_calloc(1, sizeof(t_env_var));
+	if (new_var == NULL)
+		return (1);
+	if (sh->env_var1 == NULL)
+		sh->env_var1 = new_var;
 	else
 	{
+		next = sh->env_var1;
 		while (next->next != NULL)
 			next = next->next;
-		next->next = ft_calloc(1, sizeof(t_env_var));
-		next = next->next;
+		next->next = new_var;
 	}
-	if (next == NULL)
-		return (1);
-	next->name = ft_strdup(name);
-	next->value = ft_strdup(value);
+	new_var->name = ft_strdup(name);
+	new_var->value = ft_strdup(value);
 	(sh->n_env_var)++;
 	return (0);
 }
@@ -86,5 +87,20 @@ void	print_env(t_sh_data *sh_data)
 	{
 		printf("%s=%s\n", next->name, next->value);
 		next = next->next;
+	}
+}
+
+void	print_tabchar(char **tabchar)
+{
+	int	i;
+
+	i = 0;
+	if (tabchar != NULL)
+	{
+		while (tabchar[i] != NULL)
+		{
+			printf("%s\n", tabchar[i]);
+			i++;
+		}
 	}
 }

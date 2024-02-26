@@ -6,7 +6,7 @@
 #    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/24 17:27:05 by nledent          ###   ########.fr        #
+#    Updated: 2024/02/26 12:18:05 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,10 @@ SRCS			= 	\
 					exec/exit_functions.c \
 					exec/exec.c \
 					exec/pipes.c \
+					builtins/exec_bt.c \
+					builtins/echo.c \
+					builtins/env.c \
+					builtins/pwd.c \
 					utils/errors.c \
 					utils/del_tmp_hdoc.c \
 
@@ -44,7 +48,6 @@ D_OBJS			= mkdir -p $(@D)
 #-BONUS-#
 
 SRCS_BONUS		=	\
-
 
 SRC_BONUS		= $(addprefix src_bonus/, $(SRCS_BONUS))
 OBJS_BONUS		= $(SRC_BONUS:$(SRC_BONUS_DIR)/%.c=$(OBJ_BONUS_DIR)/%.o)

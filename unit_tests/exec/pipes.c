@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/24 17:29:18 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 15:16:59 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,15 @@ static int	redirections(t_list_cmd *bloc_data)
 
 void	pipes_redir(t_sh_data *sh, int p_out[2], int p_in[2], t_list_cmd *bloc)
 {
-	if (bloc->next != NULL)
-		dup2(p_out[1], STDOUT_FILENO);
-	else
-	{
-		dup2(p_out[1], STDOUT_FILENO);
+	if (bloc->next == NULL && bloc->id > 0)
 		dup2(p_in[0], STDIN_FILENO);
+	else if (bloc->next != NULL && bloc->id > 0)
+	{
+		dup2(p_in[0], STDIN_FILENO);
+		dup2(p_out[1], STDOUT_FILENO);
 	}
+	else if (bloc->next != NULL && bloc->id == 0)
+		dup2(p_out[1], STDOUT_FILENO);
 	if (redirections(bloc) >= 4)
 	{
 		if (bloc->id == 0)
