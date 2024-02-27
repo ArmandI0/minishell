@@ -3,12 +3,12 @@
 Checker les differentes fonction :
 
 ##### Nico :
-- exit
 - pwd
+- env
 - export
 
 #### Armand :
+- exit
 - echo
 - cd
 - unset
-- env

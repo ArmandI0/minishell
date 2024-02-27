@@ -6,7 +6,7 @@
 #    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 11:13:31 by aranger           #+#    #+#              #
-#    Updated: 2024/01/08 12:50:49 by aranger          ###   ########.fr        #
+#    Updated: 2024/02/23 15:49:37 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS		= \
 			ft_strjoin.c \
 			ft_strnstr.c \
 			ft_split.c \
+			ft_free_split.c \
 			ft_itoa.c \
 			ft_count_word.c \
 			ft_putchar_fd.c \
@@ -56,6 +57,7 @@ SRCS		= \
 			ft_lstlast.c \
 			ft_lstnew.c \
 			ft_lstsize.c \
+			ft_fstrjoin.c \
 			ft_printf/ft_print_adress.c \
 			ft_printf/ft_print_others.c \
 			ft_printf/ft_print_unsigned.c \

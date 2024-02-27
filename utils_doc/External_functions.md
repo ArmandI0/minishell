@@ -110,6 +110,9 @@ librairy needed :
        #include <dirent.h>
 fermer le repertoire ouvert avec opendir
 ## strerror
+librairy needed : 
+       #include <errno.h>
+       #include <string.h>
 prend en parametre errno et retourne une chaine de caracetere détaillant l'erreur (mais ne l'affiche pas).
 ## isatty
 librairy needed : 

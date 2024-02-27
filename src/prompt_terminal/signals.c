@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/14 16:04:35 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:28:31 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int main(int argc, char **argv, char **envp)
+static void handler_sigint(int signum)
 {
-	(void)envp;
-	(void)argc;
-	(void)argv;
-	prompt_rl();
-	//list_of_command(argc, argv);
-	return (0);
+	(void)signum;
+    printf("\n");
+    rl_on_new_line();
+    rl_replace_line("", 0);
+    rl_redisplay();
+}
+
+void	init_signals(void)
+{
+	signal(SIGINT, handler_sigint);
+	signal(SIGQUIT, SIG_IGN);
 }

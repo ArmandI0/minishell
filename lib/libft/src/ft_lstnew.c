@@ -6,21 +6,18 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 09:18:31 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/13 11:50:34 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/23 09:22:59 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(char **content)
+void	*ft_lstnew(size_t size)
 {
-	struct s_list	*a;
+	unsigned char *a;
 
-	a = malloc(sizeof(t_list));
+	a = ft_calloc(1, sizeof(size));
 	if (a == NULL)
 		return (NULL);
-	a->prev = NULL;
-	a->content = content;
-	a->next = NULL;
-	return (a);
+	return ((void *)a);
 }
