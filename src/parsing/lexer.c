@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:22:23 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/26 17:54:47 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:29:42 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void add_token(t_lexer *lx)
 		else if (lx->entry[i] == 34)
 			lx->lexing[i] = DOUBLE_QUOTE;
 		else if (lx->entry[i] == 32)
-			lx->lexing[i] = IS_SPACE;
+			lx->lexing[i] = SPACES;
 		else
 			lx->lexing[i] = CHARACTER;
 		i++;
@@ -79,7 +79,7 @@ static char *supp_extra_spaces(t_lexer *lx)
 	int i;
 
 	i = 0;
-	tmp = split_lexer(lx, IS_SPACE, 32);
+	tmp = split_lexer(lx, SPACES, 32);
 	if (tmp == NULL)
 		return (NULL);
 	newline = ft_calloc(1, sizeof(char));
@@ -233,7 +233,7 @@ static void	set_quotes(t_lexer *lx)
 
 	/* ################### TEST SPLIT_LEEXEUR ###################*/
 
-	// split = split_lexer(test, IS_SPACE, 32);
+	// split = split_lexer(test, SPACES, 32);
 	// i = 0;
 	// if (split == NULL)
 	// {
