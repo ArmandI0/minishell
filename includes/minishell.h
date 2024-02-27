@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/27 13:58:05 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:34:06 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,14 @@ typedef	enum builtin
 	BT_EXIT,
 }			t_builtin;
 
+/* STRUCTURE POUR LE LEXER */
+
+typedef struct s_lexer
+{
+	char *entry;
+	t_token	*lexing;
+}				t_lexer;
+
 /* s_env_var liste pour stocker variables d'environnement */
 /* exported : 0 = oui ; 1 = non */
 typedef struct s_env_var
@@ -87,6 +95,7 @@ typedef struct s_redir
 	int				in_out;
 	int				app_mod_hdoc;
 	char			*lim_hdoc;
+	struct s_redir	*prev;
 	struct s_redir	*next;
 }			t_redir;
 
@@ -96,9 +105,10 @@ typedef struct s_redir
 typedef struct s_bloc_cmd
 {
 	int					id;
-	t_cmd				cmd;
+	t_cmd				*cmd;
 	t_builtin			builtin;
 	t_redir				*redir;
+	struct s_bloc_cmd	*prev;
 	struct s_bloc_cmd	*next;
 }			t_bloc_cmd;
 
@@ -115,7 +125,16 @@ typedef struct s_shell_data
 }			t_sh_data;
 
 /* PARSING FUNCTIONS */
-void	list_of_command(int argc, char **argv);
+
+char	*find_command_path(char **envp, char *command);
+t_lexer	*lexing(char *line);
+t_cmd	*init_command_struct(char *arg, t_token *t_arg, char **envp);
+void	free_lexer(t_lexer *lx);
+t_bool	check_path_acces(char *path);
+void	quote_error(t_lexer *lx);
+char	**split_lexer(t_lexer *lx, t_token sep, char c);
+
+
 
 /* BUILTINS FUNCTIONS */
 void	bt_echo(t_cmd *echo_cmd);
