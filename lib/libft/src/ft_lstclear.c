@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 12:28:15 by aranger           #+#    #+#             */
-/*   Updated: 2024/01/11 15:38:49 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/27 18:07:42 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_lstclear(t_list **lst)
 		while (tmp)
 		{
 			tmp1 = tmp->next;
+			free(tmp->content);
 			free(tmp);
 			tmp = tmp1;
 		}

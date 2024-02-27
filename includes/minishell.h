@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/27 14:34:06 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/27 16:29:30 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 typedef int t_bool;
 
 /* typedef */
+
 typedef	enum mn_errors
 {
 	ER_EXECVE,
@@ -133,8 +134,7 @@ void	free_lexer(t_lexer *lx);
 t_bool	check_path_acces(char *path);
 void	quote_error(t_lexer *lx);
 char	**split_lexer(t_lexer *lx, t_token sep, char c);
-
-
+char	*strdup_size(const char *src, size_t size);
 
 /* BUILTINS FUNCTIONS */
 void	bt_echo(t_cmd *echo_cmd);

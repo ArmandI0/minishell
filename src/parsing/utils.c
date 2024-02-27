@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 16:58:08 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/27 13:21:09 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/27 17:07:53 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ char	*strdup_size(const char *src, size_t size)
 	size_t		i;
 	char	*dest;
 
-	dest = malloc((sizeof(char) * size) + 1);
+	dest = malloc(sizeof(char) * (size + 1));
 	if (dest == NULL)
 		return (NULL);
 	i = 0;
-	while (src[i] != '\0' || i < size)
+	while (src[i] != '\0' && i < size)
 	{
 		dest[i] = src[i];
 		i++;
