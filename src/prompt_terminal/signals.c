@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/26 17:28:31 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/27 13:49:24 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/minishell.h"
 
@@ -26,3 +27,4 @@ void	init_signals(void)
 	signal(SIGINT, handler_sigint);
 	signal(SIGQUIT, SIG_IGN);
 }
+

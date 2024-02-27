@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_parsing.c                                    :+:      :+:    :+:   */
+/*   manage_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 16:58:01 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/14 15:24:09 by aranger          ###   ########.fr       */
+/*   Created: 2024/02/23 14:31:57 by aranger           #+#    #+#             */
+/*   Updated: 2024/02/23 15:35:53 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_bool	is_operator(char c)
+void	quote_error(t_lexer *lx)
 {
-	if (c == '<'|| c == '>' || c == '|' )
-	
+	free_lexer(lx);
+	ft_putstr_fd("Quotes error\n", 2);
 }

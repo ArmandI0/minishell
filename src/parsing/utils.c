@@ -1,33 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   struct_command.c                                   :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/12 15:33:07 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/27 13:21:04 by aranger          ###   ########.fr       */
+/*   Created: 2024/02/26 16:58:08 by aranger           #+#    #+#             */
+/*   Updated: 2024/02/27 13:21:09 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_cmd	*init_command_struct(char *arg, t_token *t_arg, char **envp)
+t_bool	check_path_acces(char *path)
 {
-	int		i;
-	char	*command;
-	t_cmd	*cmd;
+	int	a;
 
-	i = 0;
-	while (arg[i] != '\0' && t_arg[i] == CHARACTER)
-		i++;
-	command = malloc(sizeof(char) * (i + 1));
-	if (command == NULL)
+	a = access(path, F_OK | R_OK);
+	if (a == -1)
+		return (FALSE);
+	return (TRUE);
+}
+
+char	*strdup_size(const char *src, size_t size)
+{
+	size_t		i;
+	char	*dest;
+
+	dest = malloc((sizeof(char) * size) + 1);
+	if (dest == NULL)
 		return (NULL);
-	ft_strlcpy(command, arg, i + 1);
-	cmd = ft_calloc(1, sizeof(t_cmd));
-	cmd->name = command;
-	cmd->path = find_command_path(envp, command);
 	i = 0;
-	return (cmd);
+	while (src[i] != '\0' || i < size)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

@@ -1,6 +1,9 @@
 # Lexer
 
-- Prendre tous les elements et split selon ' ' dans un ** et continuer jusqu'a operateur ou \0;
+- ordre d'operation
+	Trouver les here_doc
+	Trouver les redirections
+	Trouver la commande
 
 
 # Notes pour le parsing :
@@ -29,11 +32,17 @@ Synthaxe d'entree
 - '|'
 - ""
 - ''
-- $
+- = -> gerer l'attribution des variables
+- $ -> remplacer les valeurs dans le parsing 
 
 ### Opérateurs de redirection : 
 
-	> : Redirige la sortie standard vers un fichier, écrasant le contenu existant.
+	> : Redirige la sortie standard vers un fichier, écrasant le contenu existant. 
+	Cas specifique :
+
+	cat file1 > file2 > file3
+	cat file 1 dans file2 et file3
+
 	>> : Redirige la sortie standard vers un fichier, en ajoutant à la fin du fichier.
 	< : Redirige l'entrée standard depuis un fichier.
 #

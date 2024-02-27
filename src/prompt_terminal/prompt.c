@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/26 18:01:01 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/27 13:49:21 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ static int	init_bloc_cmds(t_sh_data *sh, char *line)
 	return (0);
 }
 
-int	prompt_rl(t_sh_data *sh_data)
+int	prompt_rl(void)
 {
 	char		*line;
 	int			r_exec;
+	t_lexer		*lx;
 	
 	r_exec = 2;
 	line = NULL;
