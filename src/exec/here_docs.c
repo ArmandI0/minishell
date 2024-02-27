@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_docs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/18 21:33:17 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/27 12:23:52 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static char	*ft_here_doc(char *lim)
 	return (here_doc);
 }
 
-void	launch_hdocs(t_list_cmd *list_cmds)
+void	launch_hdocs(t_bloc_cmd *list_cmds)
 {
-	t_list_cmd	*next;
+	t_bloc_cmd	*next;
 
 	next = list_cmds;
 	while (next != NULL)

@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:22:23 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/23 17:16:12 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/26 17:54:47 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static void add_token(t_lexer *lx)
 		i++;
 	}
 	set_quotes(lx);
-	lx->lexing[i] = END;
 }
 
 static char *supp_extra_spaces(t_lexer *lx)

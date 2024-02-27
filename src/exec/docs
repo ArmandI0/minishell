@@ -12,7 +12,7 @@ typedef struct s_list_cmd
 	t_builtin			builtin;
 	t_redir				*redir;
 	struct s_list_cmd	*next;
-}			t_list_cmd;
+}			t_bloc_cmd;
 
 4) exec_cmds doit interpreter chaque commande comme un bloc. 
 - a priori, si il y a deux commandes c'est qu'il y a un pipe.

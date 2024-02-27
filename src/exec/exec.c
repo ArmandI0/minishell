@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/18 21:35:53 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/27 12:23:52 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ static void	child_management(t_pipex *pip, int p1[2], int p2[2], char *hdoc)
 	exit(1);
 } */
 
-static void	wait_all_sons(t_list_cmd *list_cmds)
+static void	wait_all_sons(t_bloc_cmd *list_cmds)
 {
-	t_list_cmd	*next;
+	t_bloc_cmd	*next;
 
 	next = list_cmds;
 	while (next != NULL)
@@ -74,11 +74,11 @@ static void	wait_all_sons(t_list_cmd *list_cmds)
 	}
 }
 
-int	exec_cmds_loop(t_sh_data *sh_data, t_list_cmd *list_cmds)
+int	exec_cmds_loop(t_sh_data *sh_data, t_bloc_cmd *list_cmds)
 {
 	int			pipe_out[2];
 	int			pipe_in[2];
-	t_list_cmd	*next;
+	t_bloc_cmd	*next;
 	pid_t		pid;
 
 	pid = 0;

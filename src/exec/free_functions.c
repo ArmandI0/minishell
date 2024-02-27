@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/18 21:42:20 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/27 12:23:52 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	free_cmd(t_cmd *cmd)
 	free_tabchar(cmd->args);
 }
 
-void	free_list_cmd(t_list_cmd *cmd_data)
+void	free_list_cmd(t_bloc_cmd *cmd_data)
 {
-	t_list_cmd	*next;
+	t_bloc_cmd	*next;
 
 	if (cmd_data != NULL)
 	{

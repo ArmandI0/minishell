@@ -6,27 +6,50 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/23 17:47:31 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/27 12:23:52 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-
-void	parsing(char *line)
+t_bloc_cmd	*set_new_node(char *line, t_token *tline, char **envp)
 {
-	t_lexer *lx;
+	int			i;
+	t_bloc_cmd	*n_node;
+	t_bool		operator;
+
+	i = 0;
+	operator = FALSE;
+	n_node = ft_calloc(1, sizeof(t_bloc_cmd));
+	while (line[i] != '\0' && tline[i] != PIPE)
+	{
+		if (operator == FALSE && n_node->cmd == NULL && tline[i] == CHARACTER)
+			n_node->cmd = init_command_struct(&line[i], &tline[i], envp);
+		i++;
+	}	
+	return (n_node);
+}
+
+void	parsing(char *line, char **envp)
+{
+	t_lexer		*lx;
+	t_bloc_cmd **lc;
+	//int		i;
 	
 	lx = lexing(line);
-	
-	
+	if (lx == NULL) 	
+		return ;
+	lc = malloc(sizeof(t_bloc_cmd *));
+	*lc = set_new_node(lx->entry, lx->lexing, envp);
+	ft_printf("%s\n", (*lc)->cmd->name);
+	ft_printf("%s\n", (*lc)->cmd->path);
 }
+
 
 /*  ################### MAIN TEST : PARSING ###################  */
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
-	t_lexer	*test;
 	char	*all_arg;
 	int		i;
 	
@@ -41,21 +64,5 @@ int main(int argc, char **argv)
 			all_arg = ft_strjoin(all_arg, " ", TRUE);
 		i++;
 	}
-	ft_printf("ENTREE :%s\n", all_arg);
-	test = lexing(all_arg);
-	
-	i = 0;
-	ft_printf("LEXEUR :");
-	if (test != NULL)
-	{
-		while(test->entry[i])
-		{
-			ft_printf("%d", test->lexing[i]);
-			i++;
-		}
-		ft_printf("\n");
-		ft_printf("LEXEUR :");
-		ft_printf("%s", test->entry);
-	}
-	free_lexer(test);
+	parsing(all_arg, envp);	
 }
