@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/27 13:49:26 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/28 11:35:11 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	free_list_cmd(t_bloc_cmd *cmd_data)
 		next = cmd_data;
 		while (next != NULL)
 		{
-			free_cmd(&(next->cmd));
+			free_cmd( (next->cmd));
 			free_redir(next->redir);
 			cmd_data = next;
 			next = next->next;

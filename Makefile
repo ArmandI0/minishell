@@ -6,7 +6,7 @@
 #    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/27 13:45:44 by aranger          ###   ########.fr        #
+#    Updated: 2024/02/28 10:01:23 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,15 @@ LIBFT_A			= lib/libft/libft.a
 #-SRC-#
 
 SRCS			= 	\
+					parsing/lexer.c \
+					parsing/parsing.c \
+					parsing/split_lexer.c \
+					parsing/manage_list_cmd.c \
+					parsing/manage_error.c \
+					parsing/utils_free.c \
+					parsing/struct_command.c \
+					parsing/find_command_path.c \
+					parsing/utils.c \
 					prompt_terminal/main.c \
 					prompt_terminal/prompt.c \
 					prompt_terminal/signals.c \

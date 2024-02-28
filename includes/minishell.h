@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/27 16:29:30 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/28 11:44:00 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,20 +135,24 @@ t_bool	check_path_acces(char *path);
 void	quote_error(t_lexer *lx);
 char	**split_lexer(t_lexer *lx, t_token sep, char c);
 char	*strdup_size(const char *src, size_t size);
+void	parsing(char *line, t_sh_data *data);
 
 /* BUILTINS FUNCTIONS */
+
 void	bt_echo(t_cmd *echo_cmd);
 void	bt_env(t_sh_data *sh_data);
 int		bt_pwd(void);
 int		exec_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc);
 
 /* EXEC FUNCTION */
+
 int		exec_cmds_loop(t_sh_data *sh_data);
 void	launch_hdocs(t_bloc_cmd *cmds);
 void	close_pipes(int pipe_x[2]);
 void	pipes_redir(t_sh_data *sh, int out[2], int in[2], t_bloc_cmd *bloc);
 
-/* FREE FUNCTIONS*/
+/* FREE FUNCTIONS */
+
 void	free_tabchar(char **tabchar);
 void	free_cmd(t_cmd *cmd);
 void	free_redir(t_redir *redir);
@@ -161,7 +165,7 @@ int		prompt_rl(t_sh_data *sh_data);
 /* SIGNALS FUNCTIONS */
 void	init_signals(void);
 
-/* UTILS FONCTIONS*/
+/* UTILS FONCTIONS */
 void	print_error(t_errors error, t_bloc_cmd *cmd_data);
 void	del_tmp_hdocs(t_sh_data *sh);
 int		add_env_var(t_sh_data *sh, char *name, char *value);
