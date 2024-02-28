@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:22:23 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/27 14:29:42 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/28 15:08:14 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ static char *supp_extra_spaces(t_lexer *lx)
 		i++;
 	}
 	free(tmp);
-	if (lx->entry != NULL)
-		free(lx->entry);
+//	if (lx->entry != NULL)
+		//free(lx->entry);
 	return (newline);
 }
 

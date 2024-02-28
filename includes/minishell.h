@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/28 11:44:00 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/28 17:20:25 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ typedef	enum mn_errors
 	ER_CMD_N_FOUND,
 	ER_NO_ARG,
 }			t_errors;
+
+typedef	enum e_redir_def
+{
+	HEREDOC,
+	INPUT_REDIR,
+	OUTPUT_REDIR,
+	APPEND,
+}			t_redir_def;
 
 typedef	enum token
 {
@@ -95,6 +103,7 @@ typedef struct s_redir
 	char			*file_path;
 	int				in_out;
 	int				app_mod_hdoc;
+	t_redir_def		type;
 	char			*lim_hdoc;
 	struct s_redir	*prev;
 	struct s_redir	*next;
@@ -160,9 +169,11 @@ void 	free_env_var(t_env_var *var1);
 void	free_list_cmd(t_bloc_cmd *cmd_data);
 
 /* PROMPT TERMINAL FUNCTIONS */
+
 int		prompt_rl(t_sh_data *sh_data);
 
 /* SIGNALS FUNCTIONS */
+
 void	init_signals(void);
 
 /* UTILS FONCTIONS */
