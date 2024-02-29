@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/28 11:13:57 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/29 22:38:55 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,28 @@ static void	wait_all_sons(t_sh_data *sh,t_bloc_cmd *list_cmds)
 		next = next->next;
 	}
 }
+
+/* static int	loop_pipes_exec(t_sh_data *sh_data, t_bloc_cmd	*next,
+							int pipe_out[2], int pipe_in[2])
+{
+	int		r_pipe;
+	pid_t	pid;
+
+	pid = 0;
+	r_pipe = 0;
+	while (next != NULL)
+	{
+		r_pipe = pipe(pipe_out);
+		pid = fork();
+		if (pid < 0 || r_pipe < 0)
+			return (1);
+		else if (pid == 0)
+			child_management(sh_data, pipe_out, pipe_in, next);
+		pipes_trsf(next->id, pipe_out, pipe_in);
+		next = next->next;
+	}
+	return (0);
+} */
 
 int	exec_cmds_loop(t_sh_data *sh_data)
 {
