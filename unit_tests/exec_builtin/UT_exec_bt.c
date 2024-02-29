@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   UT_exec_bt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/29 09:52:57 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int main(int argc, char **argv, char **envp)
 	envp_to_list(&sh_data);
 	el1 = NULL;
 	el1 = init_cmd1(NULL, &sh_data);
-	sh_data.cmd_bloc1 = el1;
+	sh_data.bloc = el1;
 	exec_bt(&sh_data, el1);
 	del_tmp_hdocs(&sh_data);
 	free_list_cmd(el1);

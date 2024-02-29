@@ -6,7 +6,7 @@
 #    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 11:13:31 by aranger           #+#    #+#              #
-#    Updated: 2024/02/23 15:49:37 by aranger          ###   ########.fr        #
+#    Updated: 2024/02/29 10:58:09 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,10 @@ SRCS		= \
 			ft_printf/ft_printf.c \
 			get_next_line/get_next_line_utils.c \
 			get_next_line/get_next_line.c \
+			ft_printf_fd/ft_print_fd_adress.c \
+			ft_printf_fd/ft_print_fd_others.c \
+			ft_printf_fd/ft_print_fd_unsigned.c \
+			ft_printf_fd/ft_printf_fd.c \
 
 SRC			= $(addprefix src/, $(SRCS))
 

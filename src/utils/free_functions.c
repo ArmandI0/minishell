@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/28 11:35:11 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/29 12:58:04 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,16 @@ void	free_redir(t_redir *redir)
 
 void	free_cmd(t_cmd *cmd)
 {
-	if (cmd->name != NULL)
-		free(cmd->name);
-	if (cmd->path != NULL)
-		free(cmd->path);
-	if (cmd->args != NULL)
-		free_tabchar(cmd->args);
+	if (cmd)
+	{
+		if (cmd->name != NULL)
+			free(cmd->name);
+		if (cmd->path != NULL)
+			free(cmd->path);
+		if (cmd->args != NULL)
+			free_tabchar(cmd->args);
+		free(cmd);
+	}
 }
 
 void	free_env_var(t_env_var *var1)

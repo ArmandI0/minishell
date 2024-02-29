@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/28 17:20:25 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/29 09:50:32 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ typedef struct s_shell_data
 	int 		ac;
 	char		**av;
 	char		**envp;
-	t_bloc_cmd	*cmd_bloc1;
+	t_bloc_cmd	*bloc;
 	t_env_var	*env_var1;
 	int			n_env_var;
 }			t_sh_data;

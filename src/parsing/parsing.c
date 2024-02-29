@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/28 18:36:09 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/29 14:40:43 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,47 @@
 
 void printList(t_list* node);
 
+const char* redir_def_to_string(t_redir_def redir) {
+    switch (redir) {
+        case HEREDOC:
+            return "HEREDOC";
+        case INPUT_REDIR:
+            return "INPUT_REDIR";
+        case OUTPUT_REDIR:
+            return "OUTPUT_REDIR";
+        case APPEND:
+            return "APPEND";
+        default:
+            return "UNKNOWN";
+    }
+}
+
+void print_all_redir(t_sh_data *a)
+{
+	int i = 0;
+	t_bloc_cmd	*bloc;
+	t_redir		*tmp;
+	
+	bloc = a->bloc;
+	ft_printf_fd(1, "%p", bloc);
+	while (bloc != NULL)
+	{
+		ft_printf_fd(1, "\n--------------------------------------------------------------\n");
+		ft_printf_fd(1, "ID = %d // ADR %p : redir %p \n", i, bloc, bloc->redir);
+		tmp = bloc->redir;
+		while (tmp != NULL)
+		{
+			ft_printf_fd(1, "ADR=%p NEXT=%p TYPE=%s PATH=%s\n",tmp, tmp->next, redir_def_to_string(tmp->type), tmp->file_path);
+			tmp = tmp->next;
+		}	
+		bloc = bloc->next;
+		i++;
+	}
+	
+}
+
 void afficher_redirs(t_bloc_cmd *cmd_bloc)
 {
-	ft_putstr_fd("blabla", 1);
     while (cmd_bloc != NULL) {
         t_redir *redir = cmd_bloc->redir;
         while (redir != NULL) {
@@ -38,66 +76,79 @@ void afficher_redirs(t_bloc_cmd *cmd_bloc)
     }
 }
  
-void	add_new_redir(t_redir *lst, t_redir_def type, char *path, char *lim)
+void	add_new_redir(t_bloc_cmd *lst, t_redir_def type, char *path, char *lim)
 {
-	t_redir	*tmp;
-
-	tmp = ft_calloc(1, sizeof(t_redir));
-	if (tmp == NULL)
+	t_redir	*new;
+	t_redir *tmp;
+	
+	tmp = lst->redir;
+	new = ft_calloc(1, sizeof(t_redir));
+	if (new == NULL)
 		return ;
-	tmp->type = type;
-	tmp->file_path = path;
-	tmp->lim_hdoc = lim;
-	if (lst == NULL)
-		lst = tmp;
+	new->type = type;
+	new->file_path = ft_strdup(path);
+	new->lim_hdoc = ft_strdup(lim);
+	if (tmp == NULL)
+		lst->redir = new;
 	else
 	{
-		while (lst->next != NULL)
-			lst = lst->next;
-		lst->next = tmp;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
 }
 
-t_bloc_cmd	*add_new_bloc(t_bloc_cmd *lst)
+t_bloc_cmd	*add_new_bloc(t_sh_data *data)
 {
+	t_bloc_cmd	*new;
 	t_bloc_cmd	*tmp;
 
-	tmp = ft_calloc(1, sizeof(t_bloc_cmd));
-	if (lst == NULL)
-		lst = tmp;
+	tmp = data->bloc;
+	new = ft_calloc(1, sizeof(t_bloc_cmd));
+	if (new == NULL)
+		return (NULL);
+	if (tmp == NULL)
+		data->bloc = new;
 	else
 	{
-		while (lst->next != NULL)
-			lst = lst->next;
-		lst->next = tmp;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
-	return (tmp);
+	return (new);
 }
 
 void	redirection_parsing(t_list **args, t_sh_data *data)
 {
 	t_list		*tmp;
-	t_bloc_cmd	*tmpbc;
+	t_bloc_cmd	*new_bloc;
 
 	tmp = *args;
-	tmpbc = add_new_bloc(data->cmd_bloc1);
+	new_bloc = add_new_bloc(data);
 	while (tmp != NULL)
 	{
 		if (ft_strncmp(tmp->content, "|", 2) == 0)
-			add_new_bloc(data->cmd_bloc1);
+		{
+			new_bloc = add_new_bloc(data);
+		}
 		if (tmp->next != NULL)
 		{
 			if (ft_strncmp(tmp->content, "<<", 3) == 0)
-				add_new_redir(tmpbc->redir, HEREDOC, NULL, tmp->next->content);
+				add_new_redir(new_bloc, HEREDOC, NULL, tmp->next->content);
 			else if (ft_strncmp(tmp->content, ">>", 3) == 0)
-				add_new_redir(tmpbc->redir, APPEND, tmp->next->content, NULL);
+				add_new_redir(new_bloc, APPEND, tmp->next->content, NULL);
 			else if (ft_strncmp(tmp->content, "<", 2) == 0)
-				add_new_redir(tmpbc->redir, INPUT_REDIR, tmp->next->content, NULL);
+				add_new_redir(new_bloc, INPUT_REDIR, tmp->next->content, NULL);
 			else if (ft_strncmp(tmp->content, ">", 2) == 0)
-				add_new_redir(tmpbc->redir, OUTPUT_REDIR, tmp->next->content, NULL);
+				add_new_redir(new_bloc, OUTPUT_REDIR, tmp->next->content, NULL);
+		}
+		if (new_bloc != NULL)
+		{
+			//ft_printf_fd(1, "arg = ADR = %p et CONTENT = %d\n", tmp->content, new_bloc, new_bloc->redir);
 		}
 		tmp = tmp->next;
 	}
+	print_all_redir(data);
 }
 
 int	count_argument(t_lexer *lx)
@@ -193,8 +244,6 @@ void	parsing(char *line, t_sh_data *data)
 	split_cmd(lx, a);
 	redirection_parsing(a, data);
 	ft_lstclear(a);
-	//ft_putstr_fd("jsdjkjkfdg", 1);
-	afficher_redirs(data->cmd_bloc1);
 	free(a);
 	free_lexer(lx);
 }

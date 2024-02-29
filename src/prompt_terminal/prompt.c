@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/28 11:40:39 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/29 12:59:00 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
 // 	(void)sh;
 // 	(void)line;
 
-// 	sh->cmd_bloc1 = ft_calloc(1, sizeof(t_bloc_cmd));
+// 	sh->bloc = ft_calloc(1, sizeof(t_bloc_cmd));
 
-// 	sh->cmd_bloc1->builtin = BT_ECHO;
-// 	sh->cmd_bloc1->cmd->name = ft_strdup("echo");
-// 	sh->cmd_bloc1->cmd->path = ft_strdup("");
-// 	sh->cmd_bloc1->cmd->args = ft_calloc(4, sizeof(char *));
-// 	sh->cmd_bloc1->cmd->args[0] = ft_strdup("echo");
-// 	sh->cmd_bloc1->cmd->args[1] = ft_strdup("sdsd");
-// 	sh->cmd_bloc1->cmd->args[2] = ft_strdup("-n");
+// 	sh->bloc->builtin = BT_ECHO;
+// 	sh->bloc->cmd->name = ft_strdup("echo");
+// 	sh->bloc->cmd->path = ft_strdup("");
+// 	sh->bloc->cmd->args = ft_calloc(4, sizeof(char *));
+// 	sh->bloc->cmd->args[0] = ft_strdup("echo");
+// 	sh->bloc->cmd->args[1] = ft_strdup("sdsd");
+// 	sh->bloc->cmd->args[2] = ft_strdup("-n");
 // 	return (0);
 // }
 
@@ -46,7 +46,8 @@ int	prompt_rl(t_sh_data *sh_data)
 		add_history(line);
 		// if (init_bloc_cmds(sh_data, line) == 0)	//send line to parsing here
 		// 	r_exec = exec_cmds_loop(sh_data);
-		// free_list_cmd(sh_data->cmd_bloc1);	
+		free_list_cmd(sh_data->bloc);	
+		sh_data->bloc = NULL;
 		free (line);
 	}
 	if (line != NULL)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/26 17:54:49 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/29 09:51:35 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
 	sh_data->av = av;
 	sh_data->envp = envp;
 	sh_data->env_var1 = NULL;
-	sh_data->cmd_bloc1 = NULL;
+	sh_data->bloc = NULL;
 }
 
 int main(int argc, char **argv, char **envp)

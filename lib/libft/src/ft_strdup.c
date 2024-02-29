@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 18:14:52 by aranger           #+#    #+#             */
-/*   Updated: 2023/11/08 17:57:36 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/29 14:39:12 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *src)
 	size_t	size;
 	char	*dest;
 
+	if (src == NULL)
+		return (NULL);
 	size = ft_strlen(src);
 	dest = malloc((sizeof(char) * size) + 1);
 	if (dest == NULL)

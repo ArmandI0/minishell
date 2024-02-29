@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/29 09:52:57 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	child_management(t_sh_data *sh_data, int p_out[2],
 	}
 	else if (bloc_data->cmd.name != NULL && bloc_data->cmd.name[0] == 0)
 		print_error(ER_CMD_N_FOUND, bloc_data);
-	free_list_cmd(sh_data->cmd_bloc1);
+	free_list_cmd(sh_data->bloc);
 	free_env_var(sh_data->env_var1);
 	exit (r_value);
 }
@@ -70,8 +70,8 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 	pid_t		pid;
 
 	pid = 0;
-	next = sh_data->cmd_bloc1;
-	launch_hdocs(sh_data->cmd_bloc1);
+	next = sh_data->bloc;
+	launch_hdocs(sh_data->bloc);
 	while (next != NULL)
 	{
 		r_pipe = pipe(pipe_out);
@@ -84,7 +84,7 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 		next = next->next;
 	}
 	close_pipes(pipe_out);
-	wait_all_sons(sh_data, sh_data->cmd_bloc1);
+	wait_all_sons(sh_data, sh_data->bloc);
 	del_tmp_hdocs(sh_data);
 	return (2);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   del_tmp_hdoc.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:59:30 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/29 09:52:57 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	del_tmp_hdocs(t_sh_data *sh)
 	t_bloc_cmd	*next_cmd;
 	t_redir		*next_redir;
 
-	next_cmd = sh->cmd_bloc1;
+	next_cmd = sh->bloc;
 	while (next_cmd != NULL)
 	{
 		next_redir = next_cmd->redir;
