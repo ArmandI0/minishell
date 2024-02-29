@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/28 11:35:11 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/29 21:13:39 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,16 @@ void	free_redir(t_redir *redir)
 
 void	free_cmd(t_cmd *cmd)
 {
-	if (cmd->name != NULL)
-		free(cmd->name);
-	if (cmd->path != NULL)
-		free(cmd->path);
-	if (cmd->args != NULL)
-		free_tabchar(cmd->args);
+	if (cmd != NULL)
+	{
+		if (cmd->name != NULL)
+			free(cmd->name);
+		if (cmd->path != NULL)
+			free(cmd->path);
+		if (cmd->args != NULL)
+			free_tabchar(cmd->args);
+		free(cmd);
+	}
 }
 
 void	free_env_var(t_env_var *var1)
@@ -87,7 +91,7 @@ void	free_list_cmd(t_bloc_cmd *cmd_data)
 		next = cmd_data;
 		while (next != NULL)
 		{
-			free_cmd( (next->cmd));
+			free_cmd(next->cmd);
 			free_redir(next->redir);
 			cmd_data = next;
 			next = next->next;

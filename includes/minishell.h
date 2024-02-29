@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/28 11:44:00 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/29 22:01:31 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef	enum mn_errors
 	ER_EXECVE,
 	ER_CMD_N_FOUND,
 	ER_NO_ARG,
+	ER_CD_DIR_FILE_N_FOUND,
+	ER_CD_TOO_MANY_ARGS,
 }			t_errors;
 
 typedef	enum token
@@ -142,6 +144,7 @@ void	parsing(char *line, t_sh_data *data);
 void	bt_echo(t_cmd *echo_cmd);
 void	bt_env(t_sh_data *sh_data);
 int		bt_pwd(void);
+void    bt_cd(t_cmd *cd);
 int		exec_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc);
 
 /* EXEC FUNCTION */
@@ -166,7 +169,7 @@ int		prompt_rl(t_sh_data *sh_data);
 void	init_signals(void);
 
 /* UTILS FONCTIONS */
-void	print_error(t_errors error, t_bloc_cmd *cmd_data);
+void	print_error(t_errors error, t_cmd *cmd);
 void	del_tmp_hdocs(t_sh_data *sh);
 int		add_env_var(t_sh_data *sh, char *name, char *value);
 void	envp_to_list(t_sh_data *sh_data);

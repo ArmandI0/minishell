@@ -6,7 +6,7 @@
 #    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/29 21:22:58 by nledent          ###   ########.fr        #
+#    Updated: 2024/02/29 22:10:24 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,10 @@ LIBFT_A			= ../../lib/libft/libft.a
 
 #-SRC-#
 
-SRCS			= 	UT_launchhdocs.c \
-					../../src/exec/here_docs.c \
+SRCS			= 	UT_cd.c \
+					../../src/builtins/cd.c \
+					../../src/builtins/pwd.c \
+					../../src/utils/errors.c \
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -41,7 +43,7 @@ $(LIBFT_A) :
 				$(CC) $(CFLAGS)  -c -o $@ $<
 
 $(NAME): 		$(OBJS)  $(LIBFT_A) 
-				@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME) -lreadline 
+				@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME) -lreadline
 				
 clean:
 				@$(RM) $(OBJS)

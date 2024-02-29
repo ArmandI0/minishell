@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/29 21:12:38 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ static t_bloc_cmd	*init_cmd(t_bloc_cmd *el1, char *limiter)
 	}
 	else
 		el_new->redir = NULL;
-	el_new->cmd.args = NULL;
-	el_new->cmd.name = NULL;
-	el_new->cmd.path = NULL;
+	el_new->cmd->args = NULL;
+	el_new->cmd->name = NULL;
+	el_new->cmd->path = NULL;
 	el_new->next = NULL;
 	return(el_new);
 }

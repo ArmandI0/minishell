@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
+#    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/28 14:49:06 by aranger          ###   ########.fr        #
+#    Updated: 2024/02/29 21:20:59 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,18 +18,18 @@ LIBFT_A			= ../../lib/libft/libft.a
 #-SRC-#
 
 SRCS			= 	UT_exec.c \
-					errors.c \
-					exec.c \
-					exit_functions.c \
-					free_functions.c \
-					here_docs.c \
-					pipes.c \
-					del_tmp_hdoc.c \
-					new_envp.c \
-					echo.c \
-					pwd.c \
-					env.c \
-					exec_builtins.c \
+					../../src/utils/errors.c \
+					../../src/utils/free_functions.c \
+					../../src/utils/new_envp.c \
+					../../src/utils/del_tmp_hdoc.c \
+					../../src/exec/exec.c \
+					../../src/exec/here_docs.c \
+					../../src/exec/exit_functions.c \
+					../../src/exec/pipes.c \
+					../../src/builtins/echo.c \
+					../../src/builtins/pwd.c \
+					../../src/builtins/env.c \
+					../../src/builtins/exec_builtins.c \
 
 OBJS		= $(SRCS:.c=.o)
 
