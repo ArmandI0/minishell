@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/29 12:58:04 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/01 14:35:25 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	free_redir(t_redir *redir)
 		{
 			if (next->file_path != NULL)
 				free(next->file_path);
+			if (next->lim_hdoc != NULL)
+				free(next->lim_hdoc);
 			redir = next;
 			next = next->next;
 			free(redir);

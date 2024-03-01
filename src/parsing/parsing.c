@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/29 14:40:43 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/01 18:05:27 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 
 void printList(t_list* node);
 
-const char* redir_def_to_string(t_redir_def redir) {
+const char* redir_def_to_string(t_redir_def redir)
+{
     switch (redir) {
         case HEREDOC:
             return "HEREDOC";
@@ -75,19 +76,47 @@ void afficher_redirs(t_bloc_cmd *cmd_bloc)
         cmd_bloc = cmd_bloc->next;
     }
 }
- 
-void	add_new_redir(t_bloc_cmd *lst, t_redir_def type, char *path, char *lim)
+
+t_list 	*suppp_from_list(t_list *node, t_list **head)
+{
+	t_list	*tmp;
+	t_list	*new_head;
+
+	if (node->prev == NULL)
+	{
+		new_head = node->next->next;
+		free_node(node->next);
+		free_node(node);
+		*head = new_head;
+		new_head->prev = NULL;
+	}
+	else
+	{
+		new_head = node->prev;
+		tmp = node->next->next;
+		free_node(node->next);
+		free_node(node);
+		if (tmp != NULL)
+			tmp->prev = new_head;
+		new_head->next = tmp;
+	}
+	return (new_head);
+}
+
+t_list	*add_new_redir(t_bloc_cmd *lst, t_redir_def type, t_list *node, t_list **head)
 {
 	t_redir	*new;
 	t_redir *tmp;
-	
+
 	tmp = lst->redir;
 	new = ft_calloc(1, sizeof(t_redir));
 	if (new == NULL)
-		return ;
+		return (NULL);
 	new->type = type;
-	new->file_path = ft_strdup(path);
-	new->lim_hdoc = ft_strdup(lim);
+	if (type == HEREDOC)
+		new->lim_hdoc = ft_strdup(node->next->content);
+	else
+		new->file_path = ft_strdup(node->next->content);
 	if (tmp == NULL)
 		lst->redir = new;
 	else
@@ -96,6 +125,7 @@ void	add_new_redir(t_bloc_cmd *lst, t_redir_def type, char *path, char *lim)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
+	return (suppp_from_list(node, head));
 }
 
 t_bloc_cmd	*add_new_bloc(t_sh_data *data)
@@ -128,27 +158,23 @@ void	redirection_parsing(t_list **args, t_sh_data *data)
 	while (tmp != NULL)
 	{
 		if (ft_strncmp(tmp->content, "|", 2) == 0)
-		{
 			new_bloc = add_new_bloc(data);
-		}
 		if (tmp->next != NULL)
 		{
+			ft_printf_fd(1, "TMP->PREV : %p\n", tmp->prev);
 			if (ft_strncmp(tmp->content, "<<", 3) == 0)
-				add_new_redir(new_bloc, HEREDOC, NULL, tmp->next->content);
+				tmp = add_new_redir(new_bloc, HEREDOC, tmp, args);
 			else if (ft_strncmp(tmp->content, ">>", 3) == 0)
-				add_new_redir(new_bloc, APPEND, tmp->next->content, NULL);
+				tmp = add_new_redir(new_bloc, APPEND, tmp, args);
 			else if (ft_strncmp(tmp->content, "<", 2) == 0)
-				add_new_redir(new_bloc, INPUT_REDIR, tmp->next->content, NULL);
+				tmp = add_new_redir(new_bloc, INPUT_REDIR, tmp, args);
 			else if (ft_strncmp(tmp->content, ">", 2) == 0)
-				add_new_redir(new_bloc, OUTPUT_REDIR, tmp->next->content, NULL);
+				tmp = add_new_redir(new_bloc, OUTPUT_REDIR, tmp, args);
 		}
-		if (new_bloc != NULL)
-		{
-			//ft_printf_fd(1, "arg = ADR = %p et CONTENT = %d\n", tmp->content, new_bloc, new_bloc->redir);
-		}
+		printList(*args);
 		tmp = tmp->next;
 	}
-	print_all_redir(data);
+ 	print_all_redir(data);
 }
 
 int	count_argument(t_lexer *lx)
@@ -294,10 +320,8 @@ void printList(t_list* node)
 {
     while (node != NULL) 
 	{
-	//	ft_printf("%p\n", node->prev);
-        ft_printf("-%s-", node->content);
-	//	ft_printf("%p\n", node->next);
-	//	ft_printf("\n");
+
+        ft_printf_fd(1, "-%s-", node->content);
         node = node->next;
     }
     printf("\n");
