@@ -6,7 +6,7 @@
 #    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/29 21:22:58 by nledent          ###   ########.fr        #
+#    Updated: 2024/03/02 22:14:24 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,10 @@ LIBFT_A			= ../../lib/libft/libft.a
 
 SRCS			= 	UT_launchhdocs.c \
 					../../src/exec/here_docs.c \
+					../../src/utils/free_functions.c \
+					../../src/utils/del_tmp_hdoc.c \
+					../../src/builtins/export.c \
+					../../src/builtins/pwd.c \
 
 OBJS		= $(SRCS:.c=.o)
 

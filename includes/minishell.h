@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/02 16:25:57 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/02 18:47:16 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ typedef struct s_shell_data
 	int 		ac;
 	char		**av;
 	char		**envp;
+	char		*dir_tmp_files;
 	t_bloc_cmd	*cmd_bloc1;
 	t_env_var	*env_var1;
 	int			n_env_var;
@@ -144,13 +145,14 @@ void	parsing(char *line, t_sh_data *data);
 void	bt_echo(t_cmd *echo_cmd);
 void	bt_env(t_sh_data *sh_data);
 int		bt_pwd(void);
-int	    bt_cd(t_cmd *cd);
+char	*ft_getcwd(void);
+int	    bt_cd(t_sh_data *sh, t_cmd *cd);
 int		exec_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc);
 
 /* EXEC FUNCTION */
 
 int		exec_cmds_loop(t_sh_data *sh_data);
-void	launch_hdocs(t_bloc_cmd *cmds);
+void	launch_hdocs(t_sh_data *sh,t_bloc_cmd *cmds);
 void	close_pipes(int pipe_x[2]);
 void	pipes_redir(t_sh_data *sh, int out[2], int in[2], t_bloc_cmd *bloc);
 
@@ -176,5 +178,6 @@ void	envp_to_list(t_sh_data *sh_data);
 char	**list_to_envp(t_sh_data *sh_data);
 void	print_env(t_sh_data *sh_data);
 void	print_tabchar(char **tabchar);
+int   	upd_env_var(t_sh_data *sh, char *name_var, char *new_value);
 
 #endif

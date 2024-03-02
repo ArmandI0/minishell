@@ -6,7 +6,7 @@
 #    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/02 16:27:19 by nledent          ###   ########.fr        #
+#    Updated: 2024/03/02 18:08:58 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS			= 	UT_exec.c \
 					../../src/builtins/pwd.c \
 					../../src/builtins/env.c \
 					../../src/builtins/cd.c \
+					../../src/builtins/export.c \
 					../../src/builtins/exec_builtins.c \
 
 OBJS		= $(SRCS:.c=.o)

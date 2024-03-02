@@ -1,60 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/02 18:37:43 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/02 18:45:16 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-
-static int	print_pwd(char *pwd)
+int    upd_env_var(t_sh_data *sh, char *name_var, char *new_value)
 {
-	ft_putstr_fd(pwd, STDOUT_FILENO);
-	ft_putchar_fd('\n', STDOUT_FILENO);
-	return (0);
-}
+    t_env_var	*var;
 
-char	*ft_getcwd(void)
-{
-	char	*pwd;
-	int		size;
-
-	size = 500;
-	while (1)
-	{
-		pwd = NULL;
-		pwd = ft_calloc(size, sizeof(char));
-		if (pwd == NULL)
-			return (NULL);
-		if (getcwd(pwd, size) != NULL)
-			break;
-		else if (errno == ERANGE)
-			size += 500;
-		else
-			break;
-		free(pwd);
-	}
-	return (pwd);
-}
-
-int	bt_pwd(void) 
-{
-	char	*pwd;
-	int		r_value;
-
-	r_value = 1;
-	pwd = ft_getcwd();
-	if (pwd != NULL)
-	{
-		print_pwd(pwd);
-		free(pwd);
-		r_value = 0;
-	}
-	return (r_value);
+	var = sh->env_var1;
+	if (var == NULL)
+		return (1);
+	while (var != NULL)
+    {
+        if (var->name != NULL && name_var != NULL)
+        {
+			if (ft_strncmp(name_var, var->name, ft_strlen(name_var) + 1) == 0)
+            {
+				if (var->value != NULL)
+					free (var->value);
+				if (new_value == NULL)
+					var->value = NULL;
+				else
+					var->value = ft_strdup(new_value);
+				return (0);
+			}
+        }
+		var = var->next;
+    }
+    return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/02 16:58:07 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/02 22:40:11 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static t_bloc_cmd	*init_cmd1(t_bloc_cmd *prev_el)
 	el_new->cmd->path = ft_strdup("");
 	el_new->cmd->args = ft_calloc(3, sizeof(char *));
 	el_new->cmd->args[0] = ft_strdup("cd");
-	el_new->cmd->args[1] = ft_strdup("~");
+	el_new->cmd->args[1] = ft_strdup("..");
 	el_new->cmd->argc = 2;
 
 	el_new->builtin = BT_CD;
@@ -145,6 +145,7 @@ int main(int argc, char **argv, char **envp)
 	exec_cmds_loop(&sh_data);
 	free_list_cmd(el1);
 	free_env_var(sh_data.env_var1);
+	free(sh_data.dir_tmp_files);
 	printf("retour value : %d\n", sh_data.return_value);
 	return (0);
 }

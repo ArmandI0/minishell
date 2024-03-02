@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:09:19 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/02 16:43:23 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/02 17:51:44 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int	exec_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc)
 	else if (cmd_bloc->builtin == BT_PWD)
 		r_value = bt_pwd();
 	else if (cmd_bloc->builtin == BT_CD)
-		r_value = bt_cd(cmd_bloc->cmd);
+		r_value = bt_cd(sh_data, cmd_bloc->cmd);
 	return (r_value);
 }

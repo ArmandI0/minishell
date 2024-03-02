@@ -6,35 +6,11 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/29 22:05:13 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/02 18:41:26 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	free_tabchar(char **tabchar)
-{
-	int	i;
-
-	i = 0;
-	if (tabchar != NULL)
-	{
-		while (tabchar[i] != NULL)
-		{
-			free(tabchar[i]);
-			i++;
-		}
-		free(tabchar);
-	}
-}
-
-void free_cmd(t_cmd *cmd)
-{
-	free(cmd->name);
-	free(cmd->path);
-	free_tabchar(cmd->args);
-	free(cmd);
-}
 
 static t_cmd	*init_cmd(int argc, char **argv)
 {
@@ -58,12 +34,29 @@ static t_cmd	*init_cmd(int argc, char **argv)
 	return (cmd);
 }
 
-int main(int argc, char **argv)
+static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
 {
-	t_cmd	*cd;
+	sh_data->ac = ac;
+	sh_data->av = av;
+	sh_data->envp = envp;
+	sh_data->n_env_var = 0;
+	sh_data->env_var1 = NULL;
+	sh_data->env_var1 = NULL;
+	sh_data->cmd_bloc1 = NULL;
+}
 
+int main(int argc, char **argv, char **envp)
+{
+	t_cmd		*cd;
+	t_sh_data	sh;
+
+	init_shell_data(argc, argv, envp, &sh);
 	cd = init_cmd(argc, argv);
-	bt_cd(cd);
+	add_env_var(&sh, "OLDPWD", "xx");
+	add_env_var(&sh, "PWD", "x");
+	print_env(&sh);
+	bt_cd(&sh, cd);
 	free_cmd(cd);
+	free_env_var(sh.env_var1);
 	return (0);
 }

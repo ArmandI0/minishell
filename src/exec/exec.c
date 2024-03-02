@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/02 16:53:48 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/02 18:47:34 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 	if (sh_data->cmd_bloc1 == NULL)
 		return (2);
 	next = sh_data->cmd_bloc1;
-	launch_hdocs(sh_data->cmd_bloc1);
+	launch_hdocs(sh_data, sh_data->cmd_bloc1);
 	if (next->next == NULL && next->builtin == BT_CD)
-		sh_data->return_value = bt_cd(next->cmd);
+		sh_data->return_value = bt_cd(sh_data, next->cmd);
 	else
 		loop_pipes_exec(sh_data, next);
 	del_tmp_hdocs(sh_data);
