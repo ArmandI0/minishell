@@ -1,0 +1,118 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirection_parse.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: armandanger <armandanger@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
+/*   Updated: 2024/03/02 14:26:52 by armandanger      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/minishell.h"
+
+static t_bloc_cmd	*add_new_bloc(t_sh_data *data);
+static t_list	*add_new_redir(t_bloc_cmd *lst, t_redir_def type, t_list *node, t_list **head);
+static t_list 	*suppp_from_list(t_list *node, t_list **head);
+
+
+void	redirection_parsing(t_list **args, t_sh_data *data)
+{
+	t_list		*tmp;
+	t_bloc_cmd	*new_bloc;
+
+	tmp = *args;
+	new_bloc = add_new_bloc(data);
+	while (tmp != NULL)
+	{
+		if (ft_strncmp(tmp->content, "|", 2) == 0)
+			new_bloc = add_new_bloc(data);
+		if (tmp->next != NULL)
+		{
+			ft_printf_fd(1, "TMP->PREV : %p\n", tmp->prev);
+			if (ft_strncmp(tmp->content, "<<", 3) == 0)
+				tmp = add_new_redir(new_bloc, HEREDOC, tmp, args);
+			else if (ft_strncmp(tmp->content, ">>", 3) == 0)
+				tmp = add_new_redir(new_bloc, APPEND, tmp, args);
+			else if (ft_strncmp(tmp->content, "<", 2) == 0)
+				tmp = add_new_redir(new_bloc, INPUT_REDIR, tmp, args);
+			else if (ft_strncmp(tmp->content, ">", 2) == 0)
+				tmp = add_new_redir(new_bloc, OUTPUT_REDIR, tmp, args);
+		}
+		printList(*args);
+		tmp = tmp->next;
+	}
+ 	print_all_bloc(data);
+}
+
+static t_list	*add_new_redir(t_bloc_cmd *lst, t_redir_def type, t_list *node, t_list **head)
+{
+	t_redir	*new;
+	t_redir *tmp;
+
+	tmp = lst->redir;
+	new = ft_calloc(1, sizeof(t_redir));
+	if (new == NULL)
+		return (NULL);
+	new->type = type;
+	if (type == HEREDOC)
+		new->lim_hdoc = ft_strdup(node->next->content);
+	else
+		new->file_path = ft_strdup(node->next->content);
+	if (tmp == NULL)
+		lst->redir = new;
+	else
+	{
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+	return (suppp_from_list(node, head));
+}
+
+static t_bloc_cmd	*add_new_bloc(t_sh_data *data)
+{
+	t_bloc_cmd	*new;
+	t_bloc_cmd	*tmp;
+
+	tmp = data->bloc;
+	new = ft_calloc(1, sizeof(t_bloc_cmd));
+	if (new == NULL)
+		return (NULL);
+	if (tmp == NULL)
+		data->bloc = new;
+	else
+	{
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
+	return (new);
+}
+
+static t_list 	*suppp_from_list(t_list *node, t_list **head)
+{
+	t_list	*tmp;
+	t_list	*new_head;
+
+	if (node->prev == NULL)
+	{
+		new_head = node->next->next;
+		free_node(node->next);
+		free_node(node);
+		*head = new_head;
+		new_head->prev = NULL;
+	}
+	else
+	{
+		new_head = node->prev;
+		tmp = node->next->next;
+		free_node(node->next);
+		free_node(node);
+		if (tmp != NULL)
+			tmp->prev = new_head;
+		new_head->next = tmp;
+	}
+	return (new_head);
+}

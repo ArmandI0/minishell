@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: armandanger <armandanger@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:24:54 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/01 18:20:19 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/02 13:53:51 by armandanger      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	command_parsing(t_list **args, t_sh_data *data)
 			new_bloc = add_new_bloc(data);
 		new_cmd->path = find_command_path(data->envp, tmp->content);
 		new_cmd->name = tmp->content;
-		new_cmd->args = tmp
-		printList(*args);
+		new_cmd->args = tmp;
+		//printList(*args);
 		tmp = tmp->next;
 	}
  	print_all_redir(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: armandanger <armandanger@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/01 15:31:25 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/02 14:25:10 by armandanger      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,14 @@ char	**split_lexer(t_lexer *lx, t_token sep, char c);
 char	*strdup_size(const char *src, size_t size);
 void	parsing(char *line, t_sh_data *data);
 void	free_node(t_list *node);
+void	redirection_parsing(t_list **args, t_sh_data *data);
+
+
+/* FONCTION POUR TEST LE PARSING*/
+
+void print_all_bloc(t_sh_data *a);
+void printList(t_list* node);
+
 
 /* BUILTINS FUNCTIONS */
 

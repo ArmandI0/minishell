@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: armandanger <armandanger@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:22:23 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/28 15:08:14 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/02 13:26:21 by armandanger      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@ static void		set_quotes(t_lexer *lx);
 t_lexer	*lexing(char *line)
 {
 	t_lexer	*lexing;
-	int 	i;
 
-	i = 0;
 	if (!line)
 		return (NULL);
 	lexing = malloc(sizeof(t_lexer));

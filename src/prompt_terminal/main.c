@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: armandanger <armandanger@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/29 09:51:35 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/02 13:50:29 by armandanger      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int	check_args(int argc)
 {
 	if (argc == 1)
-		return (0);
+		return (0); 
 	else
-		return (1);
+		return (1); 
 }
 
 static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
