@@ -6,13 +6,13 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/29 21:16:58 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/02 16:58:07 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static t_bloc_cmd	*init_cmd3(t_bloc_cmd *prev_el)
+/* static t_bloc_cmd	*init_cmd3(t_bloc_cmd *prev_el)
 {
 	t_bloc_cmd *el_new;
 
@@ -21,27 +21,27 @@ static t_bloc_cmd	*init_cmd3(t_bloc_cmd *prev_el)
 		prev_el->next = el_new;
 
 	el_new->cmd = ft_calloc(1, sizeof(t_cmd));	
-	el_new->cmd->name = ft_strdup("pwd");
-	el_new->cmd->path = ft_strdup("");
+	el_new->cmd->name = ft_strdup("cat");
+	el_new->cmd->path = ft_strdup("/bin/cat");
 	el_new->cmd->args = ft_calloc(3, sizeof(char *));
-	el_new->cmd->args[0] = ft_strdup("pwd");
+	el_new->cmd->args[0] = ft_strdup("cat");
 	el_new->cmd->args[1] = ft_strdup("-e");
 	el_new->cmd->argc = 2;
 
-	el_new->builtin = BT_PWD;
+	el_new->builtin = BT_NO;
 
 	el_new->id = 2;
 	
 	el_new->redir = ft_calloc(1, sizeof(t_redir));
 	el_new->redir->in_out = 1;
 	el_new->redir->app_mod_hdoc = 0;
-	el_new->redir->file_path = ft_strdup("outfile_pwd");
+	el_new->redir->file_path = ft_strdup("outfile_cat");
 
-/*  	el_new->redir->next = ft_calloc(1, sizeof(t_redir));
+  	el_new->redir->next = ft_calloc(1, sizeof(t_redir));
 	el_new->redir->next->in_out = 1;
 	el_new->redir->next->app_mod_hdoc = 1;
 	el_new->redir->next->file_path = ft_strdup("outfile2");
-	el_new->redir->next->next = NULL; */
+	el_new->redir->next->next = NULL;
 	
 	el_new->next = NULL;
 
@@ -56,18 +56,18 @@ static t_bloc_cmd	*init_cmd2(t_bloc_cmd *prev_el)
 	if (prev_el != NULL)
 		prev_el->next = el_new;
 	el_new->cmd = ft_calloc(1, sizeof(t_cmd));	
-	el_new->cmd->name = ft_strdup("cat");
-	el_new->cmd->path = ft_strdup("/bin/cat");
+	el_new->cmd->name = ft_strdup("cd");
+	el_new->cmd->path = ft_strdup("");
 	el_new->cmd->args = ft_calloc(3, sizeof(char *));
-	el_new->cmd->args[0] = ft_strdup("cat");
-	el_new->cmd->args[1] = ft_strdup("-e");
+	el_new->cmd->args[0] = ft_strdup("cd");
+	el_new->cmd->args[1] = ft_strdup("..");
 	el_new->cmd->argc = 2;
 
-	el_new->builtin = BT_NO;
+	el_new->builtin = BT_CD;
 
 	el_new->id = 1;
 	
-/* 	el_new->redir = ft_calloc(1, sizeof(t_redir));
+ 	el_new->redir = ft_calloc(1, sizeof(t_redir));
 	el_new->redir->in_out = 1;
 	el_new->redir->app_mod_hdoc = 0;
 	el_new->redir->file_path = ft_strdup("outfile");
@@ -76,12 +76,12 @@ static t_bloc_cmd	*init_cmd2(t_bloc_cmd *prev_el)
 	el_new->redir->next->in_out = 1;
 	el_new->redir->next->app_mod_hdoc = 1;
 	el_new->redir->next->file_path = ft_strdup("outfile2");
-	el_new->redir->next->next = NULL; */
+	el_new->redir->next->next = NULL; 
 	
 	el_new->next = NULL;
 
 	return(el_new);
-}
+} */
 
 static t_bloc_cmd	*init_cmd1(t_bloc_cmd *prev_el)
 {
@@ -91,26 +91,26 @@ static t_bloc_cmd	*init_cmd1(t_bloc_cmd *prev_el)
 	if (prev_el != NULL)
 		prev_el->next = el_new;
 	el_new->cmd = ft_calloc(1, sizeof(t_cmd));	
-	el_new->cmd->name = ft_strdup("ls");
-	el_new->cmd->path = ft_strdup("/bin/ls");
-	el_new->cmd->args = ft_calloc(2, sizeof(char *));
-	el_new->cmd->args[0] = ft_strdup("ls");
-	el_new->cmd->argc = 1;
+	el_new->cmd->name = ft_strdup("cd");
+	el_new->cmd->path = ft_strdup("");
+	el_new->cmd->args = ft_calloc(3, sizeof(char *));
+	el_new->cmd->args[0] = ft_strdup("cd");
+	el_new->cmd->args[1] = ft_strdup("~");
+	el_new->cmd->argc = 2;
 
-	el_new->builtin = BT_NO;
+	el_new->builtin = BT_CD;
 
 	el_new->id = 0;
 	
-/* 	el_new->redir = ft_calloc(1, sizeof(t_redir));
-	el_new->redir->in_out = 1;
-	el_new->redir->app_mod_hdoc = 0;
-	el_new->redir->file_path = ft_strdup("outfile"); */
+ 	el_new->redir = ft_calloc(1, sizeof(t_redir));
+	el_new->redir->in_out = 0;
+	el_new->redir->app_mod_hdoc = 1;
+	el_new->redir->lim_hdoc = ft_strdup("123");
 
 /* 	el_new->redir = ft_calloc(1, sizeof(t_redir));
 	el_new->redir->in_out = 0;
 	el_new->redir->app_mod_hdoc = 1;
-	el_new->redir->lim_hdoc = ft_strdup("123");
-	el_new->redir->next = NULL; */
+	el_new->redir->next = NULL;*/
 	
 	el_new->next = NULL;
 
@@ -137,8 +137,8 @@ int main(int argc, char **argv, char **envp)
 	init_shell_data(argc, argv, envp, &sh_data);
 	envp_to_list(&sh_data);
 	el1 = init_cmd1(NULL);
-	el2 = init_cmd2(el1);
-	el3 = init_cmd3(el2);
+/* 	el2 = init_cmd2(el1);
+	el3 = init_cmd3(el2); */
 	(void)el2;
 	(void)el3;
 	sh_data.cmd_bloc1 = el1;

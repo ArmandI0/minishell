@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/02 16:53:48 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/02 13:09:07 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,9 @@ static void	wait_all_sons(t_sh_data *sh,t_bloc_cmd *list_cmds)
 	}
 }
 
-static int	loop_pipes_exec(t_sh_data *sh_data, t_bloc_cmd	*next)
+/* static int	loop_pipes_exec(t_sh_data *sh_data, t_bloc_cmd	*next,
+							int pipe_out[2], int pipe_in[2])
 {
-	int		pipe_out[2];
-	int		pipe_in[2];
 	int		r_pipe;
 	pid_t	pid;
 
@@ -84,23 +83,33 @@ static int	loop_pipes_exec(t_sh_data *sh_data, t_bloc_cmd	*next)
 		pipes_trsf(next->id, pipe_out, pipe_in);
 		next = next->next;
 	}
-	close_pipes(pipe_out);
-	wait_all_sons(sh_data, sh_data->cmd_bloc1);	
 	return (0);
-}
+} */
 
 int	exec_cmds_loop(t_sh_data *sh_data)
 {
+	int			pipe_out[2];
+	int			pipe_in[2];
+	int			r_pipe;
 	t_bloc_cmd	*next;
+	pid_t		pid;
 
-	if (sh_data->cmd_bloc1 == NULL)
-		return (2);
+	pid = 0;
 	next = sh_data->cmd_bloc1;
 	launch_hdocs(sh_data->cmd_bloc1);
-	if (next->next == NULL && next->builtin == BT_CD)
-		sh_data->return_value = bt_cd(next->cmd);
-	else
-		loop_pipes_exec(sh_data, next);
+	while (next != NULL)
+	{
+		r_pipe = pipe(pipe_out);
+		pid = fork();
+		if (pid < 0 || r_pipe < 0)
+			return (1);
+		else if (pid == 0)
+			child_management(sh_data, pipe_out, pipe_in, next);
+		pipes_trsf(next->id, pipe_out, pipe_in);
+		next = next->next;
+	}
+	close_pipes(pipe_out);
+	wait_all_sons(sh_data, sh_data->cmd_bloc1);
 	del_tmp_hdocs(sh_data);
 	return (2);
 }
