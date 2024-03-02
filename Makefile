@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: armandanger <armandanger@student.42.fr>    +#+  +:+       +#+         #
+#    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/02 14:23:50 by armandanger      ###   ########.fr        #
+#    Updated: 2024/03/02 16:36:54 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRCS			= 	\
 					utils/new_envp.c \
 					parsing/redirection_parse.c \
 					parsing/TEST_print_struct.c \
+					parsing/parsing_command.c \
 
 SRC				= $(addprefix src/, $(SRCS))
 OBJS			= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -66,7 +67,7 @@ D_OBJS_BONUS	= mkdir -p $(@D)
 
 #-UTILS-#
 
-CC 				= /usr/bin/gcc
+CC 				= cc
 CFLAGS 			= -Wall -Wextra -Werror -g
 NAME 			= minishell
 RM 				= rm -f
@@ -88,7 +89,7 @@ $(OBJ_BONUS_DIR)/%.o: $(SRC_BONUS_DIR)/%.c
 				$(CC) $(CFLAGS)  -c -o $@ $<
 
 $(NAME): 		$(OBJS)  $(LIBFT_A) 
-				@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME) -L/usr/local/opt/readline -lreadline
+				@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME) -lreadline
 
 clean:
 				@$(RMR) $(OBJ_DIR)

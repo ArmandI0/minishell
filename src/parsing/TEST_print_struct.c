@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   TEST_print_struct.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: armandanger <armandanger@student.42.fr>    +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/02 14:25:00 by armandanger      ###   ########.fr       */
+/*   Updated: 2024/03/02 16:53:04 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void print_all_bloc(t_sh_data *a)
 {
 	int i = 0;
 	t_bloc_cmd	*bloc;
-	t_redir		*tmp;
+	t_redir		*redir;
+	t_cmd		*cmd;
 	
 	bloc = a->bloc;
 	ft_printf_fd(1, "%p", bloc);
@@ -40,13 +41,30 @@ void print_all_bloc(t_sh_data *a)
 	{
 		ft_printf_fd(1, "\n--------------------------------------------------------------\n");
 		ft_printf_fd(1, "ID = %d // ADR %p : redir %p \n", i, bloc, bloc->redir);
-		tmp = bloc->redir;
-		while (tmp != NULL)
+		cmd = bloc->cmd;
+		ft_printf_fd(1, "######--COMMANDE--#####\n");
+		if (cmd != NULL)
 		{
-			ft_printf_fd(1, "ADR=%p NEXT=%p TYPE=%s PATH=%s\n",tmp, tmp->next, redir_def_to_string(tmp->type), tmp->file_path);
-			tmp = tmp->next;
+			ft_printf_fd(1, "Command name : %s || path : %s || arguments : ", cmd->name, cmd->path);
+			if (cmd->args != NULL)
+			{
+				while(cmd->args[i] != NULL)
+				{
+					ft_printf_fd(1, "%s", cmd->args[i]);
+					i++;				
+				}
+			}
+		}
+		ft_printf_fd(1, "\n##########################\n\n");
+		redir = bloc->redir;
+		ft_printf_fd(1, "######--REDIRECTION--#####\n");
+		while (redir != NULL)
+		{
+			ft_printf_fd(1, "ADR=%p NEXT=%p TYPE=%s PATH=%s\n",redir, redir->next, redir_def_to_string(redir->type), redir->file_path);
+			redir = redir->next;
 		}	
 		bloc = bloc->next;
+		ft_printf_fd(1, "##########################\n\n");
 		i++;
 	}
 	

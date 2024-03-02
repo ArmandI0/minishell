@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: armandanger <armandanger@student.42.fr>    +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/02 14:25:10 by armandanger      ###   ########.fr       */
+/*   Updated: 2024/03/02 18:02:57 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef	enum mn_errors
 	ER_EXECVE,
 	ER_CMD_N_FOUND,
 	ER_NO_ARG,
+	ER_PARS_QUOTE,
+	ER_PARS_REDIR,
 }			t_errors;
 
 typedef	enum e_redir_def
@@ -45,6 +47,7 @@ typedef	enum e_redir_def
 
 typedef	enum token
 {
+	T_NULL,
 	CHARACTER,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE,
@@ -147,6 +150,7 @@ char	*strdup_size(const char *src, size_t size);
 void	parsing(char *line, t_sh_data *data);
 void	free_node(t_list *node);
 void	redirection_parsing(t_list **args, t_sh_data *data);
+void	command_parsing(t_list **args, t_sh_data *data);
 
 
 /* FONCTION POUR TEST LE PARSING*/

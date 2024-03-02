@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_parse.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: armandanger <armandanger@student.42.fr>    +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/02 14:26:52 by armandanger      ###   ########.fr       */
+/*   Updated: 2024/03/02 19:46:56 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	redirection_parsing(t_list **args, t_sh_data *data)
 			new_bloc = add_new_bloc(data);
 		if (tmp->next != NULL)
 		{
-			ft_printf_fd(1, "TMP->PREV : %p\n", tmp->prev);
 			if (ft_strncmp(tmp->content, "<<", 3) == 0)
 				tmp = add_new_redir(new_bloc, HEREDOC, tmp, args);
 			else if (ft_strncmp(tmp->content, ">>", 3) == 0)
@@ -40,10 +39,10 @@ void	redirection_parsing(t_list **args, t_sh_data *data)
 			else if (ft_strncmp(tmp->content, ">", 2) == 0)
 				tmp = add_new_redir(new_bloc, OUTPUT_REDIR, tmp, args);
 		}
-		printList(*args);
-		tmp = tmp->next;
+		if (tmp != NULL)
+			tmp = tmp->next;
 	}
- 	print_all_bloc(data);
+ 	//print_all_bloc(data);
 }
 
 static t_list	*add_new_redir(t_bloc_cmd *lst, t_redir_def type, t_list *node, t_list **head)
@@ -102,7 +101,8 @@ static t_list 	*suppp_from_list(t_list *node, t_list **head)
 		free_node(node->next);
 		free_node(node);
 		*head = new_head;
-		new_head->prev = NULL;
+		if (*head != NULL)
+			new_head->prev = NULL;
 	}
 	else
 	{
