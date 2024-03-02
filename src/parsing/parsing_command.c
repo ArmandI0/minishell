@@ -6,13 +6,14 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:24:54 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/02 17:23:00 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/02 20:21:13 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static t_builtin	check_builtin(char *cmd);
+static char	**all_args(t_list *args);
 
 void	command_parsing(t_list **args, t_sh_data *data)
 {
@@ -39,7 +40,7 @@ void	command_parsing(t_list **args, t_sh_data *data)
 					return ;
 				new_cmd->path = find_command_path(data->envp, tmp->content);
 				new_cmd->name = ft_strdup(tmp->content);
-				new_cmd->args = NULL;
+				new_cmd->args = all_args(tmp);
 				bloc->cmd = new_cmd;
 			}
 			a = 1;
@@ -47,6 +48,31 @@ void	command_parsing(t_list **args, t_sh_data *data)
 		}
 		tmp = tmp->next;
 	}
+}
+
+static char	**all_args(t_list *args)
+{
+	t_list	*tmp;
+	char	*newline;
+	char	**all_args;
+
+	tmp = args;
+	newline = ft_calloc(1, sizeof(char));
+	while (tmp != NULL && ft_strncmp(tmp->content, "|", 2) != 0)
+	{
+		newline = ft_strjoin(newline, tmp->content, TRUE);
+		newline = ft_strjoin(newline, " ", TRUE);
+		tmp = tmp->next;
+	}
+	all_args = ft_split(newline, 32);
+	int i = 0;
+	while(all_args[i])
+	{
+		ft_printf_fd(1, "%s", all_args[i]);
+		i++;
+	}
+	free(newline);
+	return(all_args);
 }
 
 static t_builtin	check_builtin(char *cmd)

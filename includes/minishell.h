@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/02 18:02:57 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/02 19:56:49 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ t_bool	check_path_acces(char *path);
 void	quote_error(t_lexer *lx);
 char	**split_lexer(t_lexer *lx, t_token sep, char c);
 char	*strdup_size(const char *src, size_t size);
-void	parsing(char *line, t_sh_data *data);
+t_bool	parsing(char *line, t_sh_data *data);
 void	free_node(t_list *node);
 void	redirection_parsing(t_list **args, t_sh_data *data);
 void	command_parsing(t_list **args, t_sh_data *data);

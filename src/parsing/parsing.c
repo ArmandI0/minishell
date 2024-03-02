@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/02 19:15:22 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/02 20:42:33 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_bloc_cmd	*set_new_node(char *line, t_token *tline, char **envp)
 
 /*#################test : <<here_doc infile cat < file1 <file2 | cat >> here | grep -a "file 1   " */
 
-void	parsing(char *line, t_sh_data *data)
+t_bool	parsing(char *line, t_sh_data *data)
 {
 	t_lexer		*lx;
 	//t_bloc_cmd **lc;
@@ -107,18 +107,19 @@ void	parsing(char *line, t_sh_data *data)
 	(void)data;
 	lx = lexing(line);
 	if (lx == NULL)
-		return ;
+		return 0;
 	a = ft_calloc(1, sizeof(t_list *));	
 	if (a == NULL)
-		return ;
+		return 0;
 	
 	split_cmd(lx, a);
 	redirection_parsing(a, data);
 	command_parsing(a, data);
-	print_all_bloc(data);
+	//print_all_bloc(data);
 	ft_lstclear(a);
 	free(a);
 	free_lexer(lx);
+	return (1);
 }
 
 // void	parsing(char *line, t_sh_data *data) ////TEST
