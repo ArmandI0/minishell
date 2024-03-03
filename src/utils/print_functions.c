@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 21:21:09 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/03 21:46:10 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_env(t_sh_data *sh_data)
 	next = sh_data->env_var1;
 	while (next != NULL)
 	{
-		ft_printf_fd(1, "%s=%s\n", next->name, next->value);
+		printf("%s=%s\n", next->name, next->value);
 		next = next->next;
 	}
 }

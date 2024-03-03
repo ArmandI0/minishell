@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/03 21:40:08 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/03 21:47:23 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
 	sh_data->envp = envp;
 	sh_data->env_var1 = NULL;
 	sh_data->bloc = NULL;
+	envp_to_list(sh_data);
 }
 
 int main(int argc, char **argv, char **envp)
