@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/02 16:53:04 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/03 16:58:18 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void print_all_bloc(t_sh_data *a)
 		ft_printf_fd(1, "######--COMMANDE--#####\n");
 		if (cmd != NULL)
 		{
-			ft_printf_fd(1, "Command name : %s || path : %s || arguments : ", cmd->name, cmd->path);
+			ft_printf_fd(1, "Command name : %s || path : %s || argc : %d ||arguments : ", cmd->name, cmd->path, cmd->argc);
 			if (cmd->args != NULL)
 			{
 				while(cmd->args[i] != NULL)
 				{
-					ft_printf_fd(1, "%s", cmd->args[i]);
+					ft_printf_fd(1, "%s ", cmd->args[i]);
 					i++;				
 				}
 			}
