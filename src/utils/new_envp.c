@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/24 19:16:08 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/03 19:58:05 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,29 +78,29 @@ char	**list_to_envp(t_sh_data *sh_data)
 	return (new_env);
 }
 
-void	print_env(t_sh_data *sh_data)
+int	upd_env_var(t_sh_data *sh, char *name_var, char *new_value)
 {
-	t_env_var	*next;
+    t_env_var	*var;
 
-	next = sh_data->env_var1;
-	while (next != NULL)
-	{
-		printf("%s=%s\n", next->name, next->value);
-		next = next->next;
-	}
-}
-
-void	print_tabchar(char **tabchar)
-{
-	int	i;
-
-	i = 0;
-	if (tabchar != NULL)
-	{
-		while (tabchar[i] != NULL)
-		{
-			printf("%s\n", tabchar[i]);
-			i++;
-		}
-	}
+	var = sh->env_var1;
+	if (var == NULL)
+		return (1);
+	while (var != NULL)
+    {
+        if (var->name != NULL && name_var != NULL)
+        {
+			if (ft_strncmp(name_var, var->name, ft_strlen(name_var) + 1) == 0)
+            {
+				if (var->value != NULL)
+					free (var->value);
+				if (new_value == NULL)
+					var->value = NULL;
+				else
+					var->value = ft_strdup(new_value);
+				return (0);
+			}
+        }
+		var = var->next;
+    }
+    return (1);
 }
