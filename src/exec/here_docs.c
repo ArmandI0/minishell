@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/02 18:48:14 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/03 16:33:43 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*ft_here_doc(char *limiter)
 	char	*line;
 
 	here_doc = ft_strdup("");
-	limiter = ft_fstrjoin(limiter, ft_strdup("\n"));
+	limiter = ft_strjoin(limiter, "\n", 0);
 	line = ft_strdup("");
 	ft_putstr_fd(">", STDOUT_FILENO);
 	while (ft_strncmp(line, limiter, ft_strlen(limiter)) != 0)
