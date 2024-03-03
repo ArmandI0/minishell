@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   UT_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/02 18:41:26 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/03 14:45:31 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
 	sh_data->n_env_var = 0;
 	sh_data->env_var1 = NULL;
 	sh_data->env_var1 = NULL;
-	sh_data->cmd_bloc1 = NULL;
+	sh_data->bloc = NULL;
 }
 
 int main(int argc, char **argv, char **envp)

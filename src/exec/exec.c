@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 14:40:26 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/03 14:45:31 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	child_management(t_sh_data *sh_data, int p_out[2],
 		else if (bloc_data->cmd->name != NULL && bloc_data->cmd->name[0] == 0)
 			print_error(ER_CMD_N_FOUND, bloc_data->cmd);
 	}
-	free_list_cmd(sh_data->cmd_bloc1);
+	free_list_cmd(sh_data->bloc);
 	free_env_var(sh_data->env_var1);
 	exit (r_value);
 }
@@ -85,7 +85,7 @@ static int	loop_pipes_exec(t_sh_data *sh_data, t_bloc_cmd	*next)
 		next = next->next;
 	}
 	close_pipes(pipe_out);
-	wait_all_sons(sh_data, sh_data->cmd_bloc1);	
+	wait_all_sons(sh_data, sh_data->bloc);	
 	return (0);
 }
 
@@ -93,10 +93,10 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 {
 	t_bloc_cmd	*next;
 
-	if (sh_data->cmd_bloc1 == NULL)
+	if (sh_data->bloc == NULL)
 		return (2);
-	next = sh_data->cmd_bloc1;
-	launch_hdocs(sh_data, sh_data->cmd_bloc1);
+	next = sh_data->bloc;
+	launch_hdocs(sh_data, sh_data->bloc);
 	if (next->next == NULL && next->builtin == BT_CD)
 		sh_data->return_value = bt_cd(sh_data, next->cmd);
 	else

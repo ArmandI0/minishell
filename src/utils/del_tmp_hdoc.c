@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:59:30 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 14:40:44 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/03 14:45:31 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	del_tmp_hdocs(t_sh_data *sh)
 	char		*fpath;
 
 	fpath = NULL;
-	next_cmd = sh->cmd_bloc1;
+	next_cmd = sh->bloc;
 	while (next_cmd != NULL)
 	{
 		next_redir = next_cmd->redir;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   UT_launchhdocs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/02 22:30:25 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/03 14:45:31 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int main(int argc, char **argv, char **envp)
 	el3=init_cmd(el2, "123");
 	(void)el2;
 	(void)el3;
-	sh.cmd_bloc1 = el1;
+	sh.bloc = el1;
 	launch_hdocs(&sh, el1);
 	next_cmd = el1;
 	(void)next_redir;

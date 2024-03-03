@@ -6,7 +6,7 @@
 #    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/02 16:36:54 by aranger          ###   ########.fr        #
+#    Updated: 2024/03/03 14:50:40 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS			= 	\
 					builtins/echo.c \
 					builtins/env.c \
 					builtins/pwd.c \
+					builtins/cd.c \
 					utils/del_tmp_hdoc.c \
 					utils/errors.c \
 					utils/free_functions.c \
