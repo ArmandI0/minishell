@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:21:43 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/23 14:25:06 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/02 19:48:21 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,10 @@ void	free_lexer(t_lexer *lx)
 		free(lx);
 		lx = NULL;
 	}
+}
+
+void	free_node(t_list *node)
+{
+	free(node->content);
+	free(node);
 }

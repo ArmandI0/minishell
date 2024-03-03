@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   exec copy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/02 13:09:07 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/03 14:40:05 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 	pid_t		pid;
 
 	pid = 0;
-	next = sh_data->cmd_bloc1;
-	launch_hdocs(sh_data->cmd_bloc1);
+	next = sh_data->bloc;
+	launch_hdocs(sh_data->bloc);
 	while (next != NULL)
 	{
 		r_pipe = pipe(pipe_out);
@@ -109,7 +109,7 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 		next = next->next;
 	}
 	close_pipes(pipe_out);
-	wait_all_sons(sh_data, sh_data->cmd_bloc1);
+	wait_all_sons(sh_data, sh_data->bloc);
 	del_tmp_hdocs(sh_data);
 	return (2);
 }

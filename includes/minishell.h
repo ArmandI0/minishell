@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/02 18:47:16 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/03 14:39:32 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,23 @@ typedef	enum mn_errors
 	ER_EXECVE,
 	ER_CMD_N_FOUND,
 	ER_NO_ARG,
+	ER_PARS_QUOTE,
+	ER_PARS_REDIR,
 	ER_CD_DIR_FILE_N_FOUND,
 	ER_CD_TOO_MANY_ARGS,
 }			t_errors;
 
+typedef	enum e_redir_def
+{
+	HEREDOC,
+	INPUT_REDIR,
+	OUTPUT_REDIR,
+	APPEND,
+}			t_redir_def;
+
 typedef	enum token
 {
+	T_NULL,
 	CHARACTER,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE,
@@ -97,6 +108,7 @@ typedef struct s_redir
 	char			*file_path;
 	int				in_out;
 	int				app_mod_hdoc;
+	t_redir_def		type;
 	char			*lim_hdoc;
 	struct s_redir	*prev;
 	struct s_redir	*next;
@@ -122,8 +134,9 @@ typedef struct s_shell_data
 	int 		ac;
 	char		**av;
 	char		**envp;
+	t_bloc_cmd	*bloc;
 	char		*dir_tmp_files;
-	t_bloc_cmd	*cmd_bloc1;
+//	t_bloc_cmd	*cmd_bloc1;
 	t_env_var	*env_var1;
 	int			n_env_var;
 }			t_sh_data;
@@ -138,7 +151,17 @@ t_bool	check_path_acces(char *path);
 void	quote_error(t_lexer *lx);
 char	**split_lexer(t_lexer *lx, t_token sep, char c);
 char	*strdup_size(const char *src, size_t size);
-void	parsing(char *line, t_sh_data *data);
+t_bool	parsing(char *line, t_sh_data *data);
+void	free_node(t_list *node);
+void	redirection_parsing(t_list **args, t_sh_data *data);
+void	command_parsing(t_list **args, t_sh_data *data);
+
+
+/* FONCTION POUR TEST LE PARSING*/
+
+void print_all_bloc(t_sh_data *a);
+void printList(t_list* node);
+
 
 /* BUILTINS FUNCTIONS */
 
@@ -165,9 +188,11 @@ void 	free_env_var(t_env_var *var1);
 void	free_list_cmd(t_bloc_cmd *cmd_data);
 
 /* PROMPT TERMINAL FUNCTIONS */
+
 int		prompt_rl(t_sh_data *sh_data);
 
 /* SIGNALS FUNCTIONS */
+
 void	init_signals(void);
 
 /* UTILS FONCTIONS */

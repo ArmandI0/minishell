@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/29 21:13:39 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/03 14:41:42 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	free_redir(t_redir *redir)
 		{
 			if (next->file_path != NULL)
 				free(next->file_path);
+			if (next->lim_hdoc != NULL)
+				free(next->lim_hdoc);
 			redir = next;
 			next = next->next;
 			free(redir);

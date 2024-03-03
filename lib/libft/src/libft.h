@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:16:10 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/27 17:23:40 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/29 10:53:12 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,7 @@ int		ft_printf(const char *str, ...);
 char	*get_next_line(int fd);
 void	free_split(char **split);
 char	*ft_fstrjoin(char const *s1, char const *s2);
+int		ft_printf_fd(int fd, const char *str, ...);
+
 
 #endif

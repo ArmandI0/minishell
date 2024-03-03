@@ -6,7 +6,7 @@
 #    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/28 10:01:23 by aranger          ###   ########.fr        #
+#    Updated: 2024/03/02 16:36:54 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,9 @@ SRCS			= 	\
 					utils/errors.c \
 					utils/free_functions.c \
 					utils/new_envp.c \
+					parsing/redirection_parse.c \
+					parsing/TEST_print_struct.c \
+					parsing/parsing_command.c \
 
 SRC				= $(addprefix src/, $(SRCS))
 OBJS			= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -87,7 +90,7 @@ $(OBJ_BONUS_DIR)/%.o: $(SRC_BONUS_DIR)/%.c
 
 $(NAME): 		$(OBJS)  $(LIBFT_A) 
 				@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME) -lreadline
-				
+
 clean:
 				@$(RMR) $(OBJ_DIR)
 				@$(RMR) $(OBJ_BONUS_DIR)

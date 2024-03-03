@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
+/*   Updated: 2024/02/29 09:52:57 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	pipes_redir(t_sh_data *sh, int p_out[2], int p_in[2], t_bloc_cmd *bloc)
 		if (bloc->id == 0)
 			close_pipes(p_in);
 		close_pipes(p_out);
-		free_list_cmd(sh->cmd_bloc1);
+		free_list_cmd(sh->bloc);
 		free_env_var(sh->env_var1);
 		exit(1);
 	}
@@ -119,7 +119,7 @@ void	pipes_redir(t_sh_data *sh, int p_out[2], int p_in[2], t_bloc_cmd *bloc)
 		if (bloc->id == 0)
 			close_pipes(p_in);
 		close_pipes(p_out);
-		free_list_cmd(sh->cmd_bloc1);
+		free_list_cmd(sh->bloc);
 		free_env_var(sh->env_var1);
 		exit(1);
 	}
