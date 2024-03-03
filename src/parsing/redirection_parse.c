@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/02 19:46:56 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/03 12:56:51 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ void	redirection_parsing(t_list **args, t_sh_data *data)
 				tmp = add_new_redir(new_bloc, INPUT_REDIR, tmp, args);
 			else if (ft_strncmp(tmp->content, ">", 2) == 0)
 				tmp = add_new_redir(new_bloc, OUTPUT_REDIR, tmp, args);
+			else
+				tmp = tmp->next;
 		}
-		if (tmp != NULL)
-			tmp = tmp->next;
+		else
+			break;
 	}
  	//print_all_bloc(data);
 }
