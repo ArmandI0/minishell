@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:24:54 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/03 17:00:51 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/03 17:17:43 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	command_parsing(t_list **args, t_sh_data *data)
 			new_cmd = ft_calloc(1, sizeof(t_cmd));
 			if (new_cmd == NULL)
 				return ;
-			if (bloc->builtin != BT_NO)
+			if (bloc->builtin == BT_NO)
 				new_cmd->path = find_command_path(data->envp, tmp->content);
 			new_cmd->name = ft_strdup(tmp->content);
 			new_cmd->args = all_args(tmp);
