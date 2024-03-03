@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:24:54 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/02 20:21:13 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/03 17:00:51 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static t_builtin	check_builtin(char *cmd);
 static char	**all_args(t_list *args);
+static int	count_args(char **args);
 
 void	command_parsing(t_list **args, t_sh_data *data)
 {
@@ -33,21 +34,32 @@ void	command_parsing(t_list **args, t_sh_data *data)
 			if (ft_strncmp(tmp->content, "|", 2) == 0)
 				bloc = bloc->next;
 			bloc->builtin = check_builtin(tmp->content);
-			if (bloc->builtin == BT_NO)
-			{
-				new_cmd = ft_calloc(1, sizeof(t_cmd));
-				if (new_cmd == NULL)
-					return ;
+			new_cmd = ft_calloc(1, sizeof(t_cmd));
+			if (new_cmd == NULL)
+				return ;
+			if (bloc->builtin != BT_NO)
 				new_cmd->path = find_command_path(data->envp, tmp->content);
-				new_cmd->name = ft_strdup(tmp->content);
-				new_cmd->args = all_args(tmp);
-				bloc->cmd = new_cmd;
-			}
+			new_cmd->name = ft_strdup(tmp->content);
+			new_cmd->args = all_args(tmp);
+			new_cmd->argc = count_args(new_cmd->args);
+			bloc->cmd = new_cmd;
 			a = 1;
 			bloc = bloc->next;
 		}
 		tmp = tmp->next;
 	}
+}
+
+static int	count_args(char **args)
+{
+	int	i;
+
+	i = 0;
+	if (args == NULL)
+		return (0);
+	while (args[i])
+		i++;
+	return (i);
 }
 
 static char	**all_args(t_list *args)
