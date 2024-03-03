@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/29 09:52:57 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/03 14:40:49 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static t_bloc_cmd	*init_cmd1(t_bloc_cmd *prev_el, t_sh_data *sh)
 	el_new = ft_calloc(1, sizeof(t_bloc_cmd));
 	if (prev_el != NULL)
 		prev_el->next = el_new;
-	el_new->cmd.name = ft_strdup(sh->av[1]);
-	el_new->cmd.path = ft_strdup("");
-	el_new->cmd.args = ft_calloc(sh->ac, sizeof(char *));
+	el_new->cmd->name = ft_strdup(sh->av[1]);
+	el_new->cmd->path = ft_strdup("");
+	el_new->cmd->args = ft_calloc(sh->ac, sizeof(char *));
 	while (i < sh->ac - 1)
 	{
-		el_new->cmd.args[i] = ft_strdup(sh->av[i + 1]);
-		el_new->cmd.argc = i;
+		el_new->cmd->args[i] = ft_strdup(sh->av[i + 1]);
+		el_new->cmd->argc = i;
 		i++;
 	}
 

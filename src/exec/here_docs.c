@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/26 17:53:19 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/02 18:48:14 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static char	*hdoc_to_file(char *hdoc)
 	return (filename);
 }
 
-void	launch_hdocs(t_bloc_cmd *cmds)
+void	launch_hdocs(t_sh_data *sh, t_bloc_cmd *cmds)
 {
 	char		*path_hdoc;
 	char		*hdoc;
@@ -90,6 +90,7 @@ void	launch_hdocs(t_bloc_cmd *cmds)
 	t_redir		*next_redir;
 
 	next_cmd = cmds;
+	sh->dir_tmp_files = ft_getcwd();
 	while (next_cmd != NULL)
 	{
 		next_redir = next_cmd->redir;

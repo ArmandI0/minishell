@@ -6,7 +6,7 @@
 #    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/24 19:20:33 by nledent          ###   ########.fr        #
+#    Updated: 2024/02/29 21:23:33 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ LIBFT_A			= ../../lib/libft/libft.a
 #-SRC-#
 
 SRCS			= 	UT_envp.c \
-					new_envp.c \
-					free_functions.c \
+					../../src/utils/new_envp.c \
+					../../src/utils/free_functions.c \
 
 
 OBJS		= $(SRCS:.c=.o)

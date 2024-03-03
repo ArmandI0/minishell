@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/27 13:48:39 by aranger          ###   ########.fr       */
+/*   Updated: 2024/02/29 22:23:44 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void    bt_echo(t_cmd *echo)
         ft_putchar_fd('\n', STDOUT_FILENO);
 }
 
-void	bt_echo_aranger(t_cmd *echo)
+/* void	bt_echo_aranger(t_cmd *echo)
 {
 	int		i;
 	t_bool	n;
@@ -60,4 +60,4 @@ void	bt_echo_aranger(t_cmd *echo)
 		}	
 		i++;
 	}		
-}
+} */

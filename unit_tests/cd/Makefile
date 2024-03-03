@@ -6,7 +6,7 @@
 #    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/02 18:08:58 by nledent          ###   ########.fr        #
+#    Updated: 2024/03/02 18:26:58 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,21 +17,13 @@ LIBFT_A			= ../../lib/libft/libft.a
 
 #-SRC-#
 
-SRCS			= 	UT_exec.c \
-					../../src/utils/errors.c \
-					../../src/utils/free_functions.c \
-					../../src/utils/new_envp.c \
-					../../src/utils/del_tmp_hdoc.c \
-					../../src/exec/exec.c \
-					../../src/exec/here_docs.c \
-					../../src/exec/exit_functions.c \
-					../../src/exec/pipes.c \
-					../../src/builtins/echo.c \
-					../../src/builtins/pwd.c \
-					../../src/builtins/env.c \
+SRCS			= 	UT_cd.c \
 					../../src/builtins/cd.c \
+					../../src/builtins/pwd.c \
 					../../src/builtins/export.c \
-					../../src/builtins/exec_builtins.c \
+					../../src/utils/errors.c \
+					../../src/utils/new_envp.c \
+					../../src/utils/free_functions.c \
 
 OBJS		= $(SRCS:.c=.o)
 
@@ -54,7 +46,7 @@ $(LIBFT_A) :
 				$(CC) $(CFLAGS)  -c -o $@ $<
 
 $(NAME): 		$(OBJS)  $(LIBFT_A) 
-				@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME) -lreadline 
+				@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $(NAME) -lreadline
 				
 clean:
 				@$(RM) $(OBJS)

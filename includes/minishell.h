@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/02 19:56:49 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/03 14:39:32 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef	enum mn_errors
 	ER_NO_ARG,
 	ER_PARS_QUOTE,
 	ER_PARS_REDIR,
+	ER_CD_DIR_FILE_N_FOUND,
+	ER_CD_TOO_MANY_ARGS,
 }			t_errors;
 
 typedef	enum e_redir_def
@@ -133,6 +135,8 @@ typedef struct s_shell_data
 	char		**av;
 	char		**envp;
 	t_bloc_cmd	*bloc;
+	char		*dir_tmp_files;
+//	t_bloc_cmd	*cmd_bloc1;
 	t_env_var	*env_var1;
 	int			n_env_var;
 }			t_sh_data;
@@ -164,12 +168,14 @@ void printList(t_list* node);
 void	bt_echo(t_cmd *echo_cmd);
 void	bt_env(t_sh_data *sh_data);
 int		bt_pwd(void);
+char	*ft_getcwd(void);
+int	    bt_cd(t_sh_data *sh, t_cmd *cd);
 int		exec_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc);
 
 /* EXEC FUNCTION */
 
 int		exec_cmds_loop(t_sh_data *sh_data);
-void	launch_hdocs(t_bloc_cmd *cmds);
+void	launch_hdocs(t_sh_data *sh,t_bloc_cmd *cmds);
 void	close_pipes(int pipe_x[2]);
 void	pipes_redir(t_sh_data *sh, int out[2], int in[2], t_bloc_cmd *bloc);
 
@@ -190,12 +196,13 @@ int		prompt_rl(t_sh_data *sh_data);
 void	init_signals(void);
 
 /* UTILS FONCTIONS */
-void	print_error(t_errors error, t_bloc_cmd *cmd_data);
+void	print_error(t_errors error, t_cmd *cmd);
 void	del_tmp_hdocs(t_sh_data *sh);
 int		add_env_var(t_sh_data *sh, char *name, char *value);
 void	envp_to_list(t_sh_data *sh_data);
 char	**list_to_envp(t_sh_data *sh_data);
 void	print_env(t_sh_data *sh_data);
 void	print_tabchar(char **tabchar);
+int   	upd_env_var(t_sh_data *sh, char *name_var, char *new_value);
 
 #endif

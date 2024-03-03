@@ -6,7 +6,7 @@
 #    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/02/18 16:23:49 by nledent          ###   ########.fr        #
+#    Updated: 2024/02/29 21:23:52 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFT_A			= ../../lib/libft/libft.a
 #-SRC-#
 
 SRCS			= 	UT_echo.c \
-					echo.c \
+					../../src/builtins/echo.c \
 
 OBJS		= $(SRCS:.c=.o)
 
