@@ -6,13 +6,13 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 15:10:51 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/03 15:22:01 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int    bloc(t_sh_data *sh, char *name_var, char *new_value)
+int    upd_env_var(t_sh_data *sh, char *name_var, char *new_value)
 {
     t_env_var	*var;
 
