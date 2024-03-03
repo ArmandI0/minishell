@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:24:54 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/03 17:17:43 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/03 17:59:15 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,16 @@ void	command_parsing(t_list **args, t_sh_data *data)
 
 	tmp = *args;
 	bloc = data->bloc;
-	check_builtin("sfs");
 	a = 0;
 	while (tmp != NULL && bloc != NULL)
 	{
 		if (bloc != NULL && tmp->content && (ft_strncmp(tmp->content, "|", 2) == 0 || a == 0))
 		{
 			if (ft_strncmp(tmp->content, "|", 2) == 0)
+			{
 				bloc = bloc->next;
+				tmp = tmp->next;
+			}
 			bloc->builtin = check_builtin(tmp->content);
 			new_cmd = ft_calloc(1, sizeof(t_cmd));
 			if (new_cmd == NULL)
@@ -44,7 +46,7 @@ void	command_parsing(t_list **args, t_sh_data *data)
 			new_cmd->argc = count_args(new_cmd->args);
 			bloc->cmd = new_cmd;
 			a = 1;
-			bloc = bloc->next;
+			//bloc = bloc->next;
 		}
 		tmp = tmp->next;
 	}
