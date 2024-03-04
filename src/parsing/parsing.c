@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/03 16:55:59 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/04 15:22:34 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,15 @@ void	split_cmd(t_lexer *lx, t_list **args)
 		tmp = lx->lexing[i];
 		if (lx->lexing[i] != SPACES)
 		{
-			while (lx->lexing[j] == tmp)
+			if (lx->lexing[j] == DOLLAR)
+				size = 1;
+			else
 			{
-				size++;
-				j++;
+				while (lx->lexing[j] == tmp)
+				{
+					size++;
+					j++;
+				}
 			}
 			new_arg = ft_lstnew(strdup_size(&lx->entry[i], size));
 			ft_lstadd_back(args, new_arg);
@@ -124,15 +129,18 @@ t_bool	parsing(char *line, t_sh_data *data)
 	lx = lexing(line);
 	if (lx == NULL)
 		return 0;
+	//print_lexer(lx); //affichage du lexeur;
 	a = ft_calloc(1, sizeof(t_list *));	
 	if (a == NULL)
 		return 0;
 	
 	split_cmd(lx, a);
 	//printList(*a);
+	replace_var(a, data);
+	//printList(*a);
 	redirection_parsing(a, data);
 	command_parsing(a, data);
-	print_all_bloc(data);
+	//print_all_bloc(data);
 	ft_lstclear(a);
 	free(a);
 	free_lexer(lx);
