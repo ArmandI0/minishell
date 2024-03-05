@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 15:10:28 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/05 15:15:42 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ int main(int argc, char **argv, char **envp)
 	int			r_value;
 
 	r_value = 1;
-	init_shell_data(argc, argv, envp, &sh_data);
-	init_signals();
 	if (check_args(argc) == 0)
+	{
+		init_shell_data(argc, argv, envp, &sh_data);
+		init_signals();
 		r_value = prompt_rl(&sh_data);
+		free_env_var(sh_data.env_var1);
+	}
 	else
 		print_error(ER_NO_ARG, NULL, NULL);
-	free_env_var(sh_data.env_var1);
 	return (r_value);
 }
