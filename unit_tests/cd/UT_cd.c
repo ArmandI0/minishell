@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   UT_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 14:45:31 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/05 17:30:54 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int main(int argc, char **argv, char **envp)
 	add_env_var(&sh, "PWD", "x");
 	print_env(&sh);
 	bt_cd(&sh, cd);
+	print_env(&sh);
 	free_cmd(cd);
 	free_env_var(sh.env_var1);
 	return (0);
