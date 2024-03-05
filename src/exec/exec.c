@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 21:40:36 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/05 16:12:01 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ static int	child_management(t_sh_data *sh_data, int p_out[2],
 		else if (bloc_data->cmd->name != NULL && bloc_data->cmd->name[0] == 0)
 			print_error(ER_CMD_N_FOUND, bloc_data->cmd, NULL);
 	}
-	free_list_cmd(sh_data->bloc);
-	free_env_var(sh_data->env_var1);
+	free_sh_data(sh_data);
 	exit (r_value);
 }
 
@@ -99,8 +98,20 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 	launch_hdocs(sh_data, sh_data->bloc);
 	if (next->next == NULL && next->builtin == BT_CD)
 		sh_data->return_value = bt_cd(sh_data, next->cmd);
+	if (next->next == NULL && next->builtin == BT_EXPORT)
+		sh_data->return_value = bt_export(sh_data, next->cmd);
 	else
 		loop_pipes_exec(sh_data, next);
 	del_tmp_hdocs(sh_data);
+	if (sh_data->bloc != NULL)
+	{
+		free_list_cmd(sh_data->bloc);	
+		sh_data->bloc = NULL;
+	}
+	if (sh_data->dir_tmp_files != NULL)
+	{
+		free (sh_data->dir_tmp_files);	
+		sh_data->dir_tmp_files = NULL;
+	}
 	return (2);
 }
