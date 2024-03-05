@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 14:45:31 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/03 21:40:36 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	child_management(t_sh_data *sh_data, int p_out[2],
 			free_tabchar(new_env);
 		}
 		else if (bloc_data->cmd->name != NULL && bloc_data->cmd->name[0] == 0)
-			print_error(ER_CMD_N_FOUND, bloc_data->cmd);
+			print_error(ER_CMD_N_FOUND, bloc_data->cmd, NULL);
 	}
 	free_list_cmd(sh_data->bloc);
 	free_env_var(sh_data->env_var1);

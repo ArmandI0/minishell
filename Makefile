@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
+#    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/03 15:22:47 by aranger          ###   ########.fr        #
+#    Updated: 2024/03/03 21:06:58 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,8 +47,10 @@ SRCS			= 	\
 					builtins/pwd.c \
 					builtins/cd.c \
 					builtins/export.c \
+					builtins/export2.c \
 					utils/del_tmp_hdoc.c \
 					utils/errors.c \
+					utils/print_functions.c \
 					utils/free_functions.c \
 					utils/new_envp.c \
 					parsing/redirection_parse.c \
