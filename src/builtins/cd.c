@@ -30,7 +30,6 @@ static int	do_chdir(t_sh_data *sh,char *path_dir, t_cmd *cd)
 	free(path_dir);
 	path_dir = ft_getcwd();
 	upd_env_var(sh, "PWD", path_dir);
-	print_env(sh);
 	free(oldpwd);
 	free(path_dir);
 	return (0);
