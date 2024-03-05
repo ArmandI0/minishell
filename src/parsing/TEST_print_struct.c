@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/04 15:14:05 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/05 11:08:25 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void print_all_bloc(t_sh_data *a)
 	while (bloc != NULL)
 	{
 		ft_printf_fd(1, "\n--------------------------------------------------------------\n");
-		ft_printf_fd(1, "ID = %d // ADR %p : redir %p \n", i, bloc, bloc->redir);
+		ft_printf_fd(1, "ID = %d // ADR %p : redir %p \n", bloc->id, bloc, bloc->redir);
 		cmd = bloc->cmd;
 		ft_printf_fd(1, "##############################  COMMANDE  ##############################\n");
 		if (cmd != NULL)

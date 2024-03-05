@@ -6,7 +6,7 @@
 #    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/04 15:11:39 by aranger          ###   ########.fr        #
+#    Updated: 2024/03/05 12:25:29 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRCS			= 	\
 					parsing/TEST_print_struct.c \
 					parsing/parsing_command.c \
 					parsing/parsing_variable.c \
+					parsing/lexer_checking.c \
 
 
 SRC				= $(addprefix src/, $(SRCS))

@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/04 15:01:22 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/05 12:23:47 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ void	free_node(t_list *node);
 void	redirection_parsing(t_list **args, t_sh_data *data);
 void	command_parsing(t_list **args, t_sh_data *data);
 void	replace_var(t_list **args, t_sh_data *data);
+t_bool	lexer_checking(t_lexer *lx);
 
 
 
