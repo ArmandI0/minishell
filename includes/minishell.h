@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 12:23:47 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/05 12:39:05 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ typedef	enum mn_errors
 	ER_PARS_QUOTE,
 	ER_PARS_REDIR,
 	ER_CD_DIR_FILE_N_FOUND,
+	ER_HDOC_EOF,
 	ER_CD_TOO_MANY_ARGS,
+	ER_EXPORT,
 }			t_errors;
 
 typedef	enum e_redir_def
@@ -106,8 +108,6 @@ typedef struct s_command
 typedef struct s_redir
 {
 	char			*file_path;
-	int				in_out;
-	int				app_mod_hdoc;
 	t_redir_def		type;
 	char			*lim_hdoc;
 	struct s_redir	*prev;
@@ -174,6 +174,8 @@ int		bt_pwd(void);
 char	*ft_getcwd(void);
 int	    bt_cd(t_sh_data *sh, t_cmd *cd);
 int		exec_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc);
+int		bt_export(t_sh_data *sh, t_cmd *cmd);
+int		check_var_name(char *name);
 
 /* EXEC FUNCTION */
 
@@ -199,7 +201,7 @@ int		prompt_rl(t_sh_data *sh_data);
 void	init_signals(void);
 
 /* UTILS FONCTIONS */
-void	print_error(t_errors error, t_cmd *cmd);
+void	print_error(t_errors error, t_cmd *cmd, char *str);
 void	del_tmp_hdocs(t_sh_data *sh);
 int		add_env_var(t_sh_data *sh, char *name, char *value);
 void	envp_to_list(t_sh_data *sh_data);

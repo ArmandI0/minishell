@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_parse.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/03 12:56:51 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/03 18:52:50 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static t_bloc_cmd	*add_new_bloc(t_sh_data *data);
+static t_bloc_cmd	*add_new_bloc(t_sh_data *data, int id_bloc);
 static t_list	*add_new_redir(t_bloc_cmd *lst, t_redir_def type, t_list *node, t_list **head);
 static t_list 	*suppp_from_list(t_list *node, t_list **head);
 
@@ -21,13 +21,18 @@ void	redirection_parsing(t_list **args, t_sh_data *data)
 {
 	t_list		*tmp;
 	t_bloc_cmd	*new_bloc;
+	int			id_bloc;
 
+	id_bloc = 1;
 	tmp = *args;
-	new_bloc = add_new_bloc(data);
+	new_bloc = add_new_bloc(data, 0);
 	while (tmp != NULL)
 	{
 		if (ft_strncmp(tmp->content, "|", 2) == 0)
-			new_bloc = add_new_bloc(data);
+		{
+			new_bloc = add_new_bloc(data, id_bloc);
+			id_bloc++;
+		}
 		if (tmp->next != NULL)
 		{
 			if (ft_strncmp(tmp->content, "<<", 3) == 0)
@@ -72,7 +77,7 @@ static t_list	*add_new_redir(t_bloc_cmd *lst, t_redir_def type, t_list *node, t_
 	return (suppp_from_list(node, head));
 }
 
-static t_bloc_cmd	*add_new_bloc(t_sh_data *data)
+static t_bloc_cmd	*add_new_bloc(t_sh_data *data, int id_bloc)
 {
 	t_bloc_cmd	*new;
 	t_bloc_cmd	*tmp;
@@ -89,6 +94,7 @@ static t_bloc_cmd	*add_new_bloc(t_sh_data *data)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
+	new->id = id_bloc;
 	return (new);
 }
 

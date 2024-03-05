@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 16:33:43 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/03 21:40:53 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*ft_here_doc(char *limiter)
 		if (line == NULL)
 		{
 			line = ft_strdup(limiter);
-			printf("\nminishell warning : here_doc stopped by EOF (ctrl+d)\n");
+			print_error(ER_HDOC_EOF, NULL, NULL);
 		}
 	}
 	free(line);
@@ -96,7 +96,7 @@ void	launch_hdocs(t_sh_data *sh, t_bloc_cmd *cmds)
 		next_redir = next_cmd->redir;
 		while (next_redir != NULL)
 		{
-			if (next_redir->in_out == 0 && next_redir->app_mod_hdoc == 1)
+			if (next_redir->type == HEREDOC)
 			{
 				hdoc = ft_here_doc(next_redir->lim_hdoc);
 				path_hdoc = hdoc_to_file(hdoc);
