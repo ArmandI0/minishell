@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 13:24:34 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 16:01:17 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/05 18:45:10 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static char	*find_var(t_env_var *env, char *var)
 		}
 		tmp = tmp->next;
 	}
+	if (value == NULL)
+		value = ft_strdup(" ");
 	return (value);
 }
 
@@ -42,7 +44,7 @@ void	replace_var(t_list **args, t_sh_data *data)
 	node = *args;
 	while (node != NULL)
 	{
-		if (ft_strncmp(node->content, "$", 2) == 0)
+		if (node->content != NULL && ft_strncmp(node->content, "$", 2) == 0)
 		{
 			if (node->next != NULL)
 			{
@@ -65,7 +67,4 @@ void	replace_var(t_list **args, t_sh_data *data)
 		}
 		node = node->next;
 	}
-	
-
-	
 }
