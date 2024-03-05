@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:22:23 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/03 14:14:39 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/05 10:06:52 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void		add_token(t_lexer *lx);
 static char		*supp_extra_spaces(t_lexer *lx);
 static t_bool	check_quotes(t_lexer *lx);
 static void		set_quotes(t_lexer *lx);
-//sfd gsd gsdg"dSGGdfgG"gfdgG" '"
 
 int		check_redir_lexer(t_lexer *lx)
 {
@@ -141,8 +140,6 @@ static char *supp_extra_spaces(t_lexer *lx)
 		i++;
 	}
 	free(tmp);
-//	if (lx->entry != NULL)
-		//free(lx->entry);
 	return (newline);
 }
 
@@ -154,7 +151,6 @@ static t_bool	check_quotes(t_lexer *lx)
 
 	i = 0;
 	quote = TRUE;
-	a = CHARACTER;
 	while (lx->entry[i])
 	{
 		if (lx->lexing[i] == SINGLE_QUOTE || lx->lexing[i] == DOUBLE_QUOTE)
@@ -164,11 +160,10 @@ static t_bool	check_quotes(t_lexer *lx)
 			while (lx->entry[i])
 			{
 				i++;
-				if (/*lx->entry[i] == '\0' || */lx->lexing[i] == a)
-				{
+				if (lx->lexing[i] == a)
 					quote = TRUE;
-					break;
-				}
+				if (lx->lexing[i] == a)
+					break ;
 			}					
 		}
 		if (lx->entry[i] != '\0')
@@ -204,99 +199,3 @@ static void	set_quotes(t_lexer *lx)
 			i++;
 	}
 }
-/* ################### MAIN TEST : t_lexer *lexing(char *line) ###################*/
-
-
-// int main(int argc, char **argv)
-// {
-// 	t_lexer	*test;
-// 	char	*all_arg;
-// 	int		i;
-	
-// 	i = 1;
-// 	if (argc < 2)
-// 		return (0);					
-// 	all_arg = ft_calloc(1, sizeof(char));
-// 	while (argv[i])
-// 	{
-// 		all_arg = ft_strjoin(all_arg, argv[i], TRUE);
-// 		if (argv[i + 1] != NULL)
-// 			all_arg = ft_strjoin(all_arg, " ", TRUE);
-// 		i++;
-// 	}
-// 	ft_printf("ENTREE :%s\n", all_arg);
-// 	test = lexing(all_arg);
-	
-// 	i = 0;
-// 	ft_printf("LEXEUR :");
-// 	if (test != NULL)
-// 	{
-// 		while(test->entry[i])
-// 		{
-// 			ft_printf("%d", test->lexing[i]);
-// 			i++;
-// 		}
-// 		ft_printf("\n");
-// 		ft_printf("LEXEUR :");
-// 		ft_printf("%s", test->entry);
-// 	}
-// 	free_lexer(test);
-// }
-
-
-/* UNIT TEST */
-	/* ################### MAIN TEST TOUTES LES FONCTIONS ###################*/
-
-
-// int main(int argc, char **argv)
-// {
-// 	t_lexer	*test;
-// 	char	*all_arg;
-// 	char	**split = NULL;
-// 	int		i;
-// 	int		y = 0;
-// 	//12 33 '"a   b   a"'
-// 	i = 1;
-// 	if (argc < 2)
-// 		return (0);					
-// 	all_arg = ft_calloc(1, sizeof(char));
-// 	while (argv[i])
-// 	{
-// 		all_arg = ft_strjoin(all_arg, argv[i], TRUE);
-// 		if (argv[i + 1] != NULL)
-// 			all_arg = ft_strjoin(all_arg, " ", TRUE);
-// 		i++;
-// 	}
-// 	ft_printf("ENTREE :%s\n", all_arg);
-// 	test = malloc(sizeof(t_lexer));
-// 	test->lexing = malloc(sizeof(t_token) * (ft_strlen(all_arg) + 1));
-// 	test->entry = all_arg;
-// 	add_token(test);
-// 	set_quotes(test);
-// 	i = 0;
-// 	ft_printf("LEXEUR :");
-// 	while(all_arg[i])
-// 	{
-// 		ft_printf("%d", test->lexing[i]);
-// 		i++;
-// 	}
-// 	ft_printf("\n");
-// 	ft_printf("%s", supp_extra_spaces(test));
-
-// }
-
-	/* ################### TEST SPLIT_LEEXEUR ###################*/
-
-	// split = split_lexer(test, SPACES, 32);
-	// i = 0;
-	// if (split == NULL)
-	// {
-	// 	ft_printf("NULL");
-	// 	return (0);
-	// }
-	// ft_printf("SPLIT  :\n");
-	// while (split[y])
-	// {
-	// 	ft_printf("-arg %d :\"%s\"\n",y + 1 , split[y]);
-	// 	y++;
-	// }
