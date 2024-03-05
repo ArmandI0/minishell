@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 12:39:05 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/05 15:00:32 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ void	free_cmd(t_cmd *cmd);
 void	free_redir(t_redir *redir);
 void 	free_env_var(t_env_var *var1);
 void	free_list_cmd(t_bloc_cmd *cmd_data);
+void	free_sh_data(t_sh_data *sh);
 
 /* PROMPT TERMINAL FUNCTIONS */
 
