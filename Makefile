@@ -6,7 +6,7 @@
 #    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/05 15:02:50 by nledent          ###   ########.fr        #
+#    Updated: 2024/03/05 22:12:05 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS			= 	\
 					builtins/cd.c \
 					builtins/export.c \
 					builtins/export2.c \
+					builtins/unset.c \
 					utils/del_tmp_hdoc.c \
 					utils/free_all.c \
 					utils/errors.c \

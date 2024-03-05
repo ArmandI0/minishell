@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:09:19 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/05 17:42:09 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/05 22:11:29 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	exec_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc)
 		r_value = bt_cd(sh_data, cmd_bloc->cmd);
 	else if (cmd_bloc->builtin == BT_EXPORT)
 		r_value = bt_export(sh_data, cmd_bloc->cmd);
-/* 	else if (cmd_bloc->builtin == BT_UNSET)
-		r_value = bt_cd(sh_data, cmd_bloc->cmd);
-	else if (cmd_bloc->builtin == BT_EXIT)
+ 	else if (cmd_bloc->builtin == BT_UNSET)
+		r_value = bt_unset(sh_data, cmd_bloc->cmd);
+/*	else if (cmd_bloc->builtin == BT_EXIT)
 		r_value = bt_cd(sh_data, cmd_bloc->cmd); */
 	return (r_value);
 }
