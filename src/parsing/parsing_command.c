@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:24:54 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/03 17:59:15 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/05 12:06:30 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,18 @@ static t_builtin	check_builtin(char *cmd)
 {
 	if (ft_strncmp(cmd, "echo", 5) == 0)
 		return(BT_ECHO);
-	if (ft_strncmp(cmd, "cd", 3) == 0)
+	else if (ft_strncmp(cmd, "cd", 3) == 0)
 		return(BT_CD);
-	if (ft_strncmp(cmd, "pwd", 4) == 0)
+	else if (ft_strncmp(cmd, "pwd", 4) == 0)
 		return(BT_PWD);
-	if (ft_strncmp(cmd, "export", 7) == 0)
+	else if (ft_strncmp(cmd, "export", 7) == 0)
 		return(BT_EXPORT);	
-	if (ft_strncmp(cmd, "unset", 6) == 0)
+	else if (ft_strncmp(cmd, "unset", 6) == 0)
 		return(BT_UNSET);
-	if (ft_strncmp(cmd, "env", 4) == 0)
+	else if (ft_strncmp(cmd, "env", 4) == 0)
 		return(BT_ENV);
-	if (ft_strncmp(cmd, "exit", 5) == 0)
+	else if (ft_strncmp(cmd, "exit", 5) == 0)
 		return(BT_EXIT);
-	return(BT_NO);
+	else
+		return(BT_NO);
 }

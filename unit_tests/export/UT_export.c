@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 21:35:00 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/05 12:02:15 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
 	sh_data->env_var1 = NULL;
 	sh_data->env_var1 = NULL;
 	sh_data->bloc = NULL;
+	envp_to_list(sh_data);
 }
 
 int main(int argc, char **argv, char **envp)
@@ -50,7 +51,7 @@ int main(int argc, char **argv, char **envp)
 	t_cmd		*cmd;
 	t_sh_data	sh;
 
-	if (ft_strncmp(argv[1], "export", 7) != 0)
+	if (argc == 1 || ft_strncmp(argv[1], "export", 7) != 0)
 		printf("ajouter export en 1er arg");
 	else
 	{
