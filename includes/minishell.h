@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 15:00:32 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/05 16:23:31 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,6 @@ typedef struct s_shell_data
 	char		**envp;
 	t_bloc_cmd	*bloc;
 	char		*dir_tmp_files;
-//	t_bloc_cmd	*bloc;
 	t_env_var	*env_var1;
 	int			n_env_var;
 }			t_sh_data;

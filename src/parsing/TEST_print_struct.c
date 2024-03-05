@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 12:44:14 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/05 16:18:37 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void print_all_bloc(t_sh_data *a)
 			{
 				while(cmd->args[i] != NULL)
 				{
-					ft_printf_fd(1, "%s ", cmd->args[i]);
+					ft_printf_fd(1, " -%s- ", cmd->args[i]);
 					i++;				
 				}
 			}
@@ -102,7 +102,12 @@ void printList(t_list* node)
 	ft_printf_fd(1, "\n##############################  LIST  ##############################\n");
     while (node != NULL)
 	{
+		ft_printf_fd(1, "---------------------------------------------------------------------");
+		ft_printf_fd(1, "\nPREV = %p\n", node->prev);
+		ft_printf_fd(1, "ADR :%p\n", node);
         ft_printf_fd(1, " \"%s\" ", node->content);
+		ft_printf_fd(1, "\nNEXT = %p\n", node->next);
+		ft_printf_fd(1, "---------------------------------------------------------------------");
         node = node->next;
     }
     printf("\n");
