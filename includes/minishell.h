@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/03 21:37:41 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/05 12:39:05 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,13 +155,16 @@ t_bool	parsing(char *line, t_sh_data *data);
 void	free_node(t_list *node);
 void	redirection_parsing(t_list **args, t_sh_data *data);
 void	command_parsing(t_list **args, t_sh_data *data);
+void	replace_var(t_list **args, t_sh_data *data);
+t_bool	lexer_checking(t_lexer *lx);
+
 
 
 /* FONCTION POUR TEST LE PARSING*/
 
-void print_all_bloc(t_sh_data *a);
-void printList(t_list* node);
-
+void	print_all_bloc(t_sh_data *a);
+void	printList(t_list* node);
+void	print_lexer(t_lexer *lx);
 
 /* BUILTINS FUNCTIONS */
 

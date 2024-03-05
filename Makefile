@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
+#    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/03 21:06:58 by nledent          ###   ########.fr        #
+#    Updated: 2024/03/05 12:38:11 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,8 @@ SRCS			= 	\
 					parsing/redirection_parse.c \
 					parsing/TEST_print_struct.c \
 					parsing/parsing_command.c \
+					parsing/parsing_variable.c \
+					parsing/lexer_checking.c \
 
 
 SRC				= $(addprefix src/, $(SRCS))

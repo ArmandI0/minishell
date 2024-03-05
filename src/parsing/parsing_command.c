@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:24:54 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 12:06:30 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/05 12:39:14 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	command_parsing(t_list **args, t_sh_data *data)
 	t_list		*tmp;
 	t_bloc_cmd	*bloc;
 	t_cmd		*new_cmd;
-	int			a;
+	int			i;
 
 	tmp = *args;
 	bloc = data->bloc;
-	a = 0;
+	i = 0;
 	while (tmp != NULL && bloc != NULL)
 	{
-		if (bloc != NULL && tmp->content && (ft_strncmp(tmp->content, "|", 2) == 0 || a == 0))
+		if (bloc != NULL && tmp->content && (ft_strncmp(tmp->content, "|", 2) == 0 || i == 0))
 		{
 			if (ft_strncmp(tmp->content, "|", 2) == 0)
 			{
@@ -41,11 +41,12 @@ void	command_parsing(t_list **args, t_sh_data *data)
 				return ;
 			if (bloc->builtin == BT_NO)
 				new_cmd->path = find_command_path(data->envp, tmp->content);
+			bloc->id = i;
 			new_cmd->name = ft_strdup(tmp->content);
 			new_cmd->args = all_args(tmp);
 			new_cmd->argc = count_args(new_cmd->args);
 			bloc->cmd = new_cmd;
-			a = 1;
+			i++;
 			//bloc = bloc->next;
 		}
 		tmp = tmp->next;
