@@ -6,26 +6,29 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 13:24:34 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/04 15:35:17 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/05 16:01:17 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*find_var(char **envp, char *var)
+static char	*find_var(t_env_var *env, char *var)
 {
-	int		i;
-	int		j;
+	t_env_var	*tmp;
+	char		*value;
 
-	i = 0;
-	j = 0;
-	while (envp[i] && ft_strncmp(envp[i], var, ft_strlen(var)) != 0)
-		i++;
-	while (envp[i] && envp[i][j] && envp[i][j] != '=')
-		j++;
-	if (envp[i] != NULL)
-		var = ft_strdup(&envp[i][j + 1]);
-	return (var);
+	value = NULL;
+	tmp = env;
+	while (tmp != NULL)
+	{
+		if (ft_strncmp(tmp->name, var, ft_strlen(var) + 1) == 0)
+		{
+			value = ft_strdup(tmp->value);
+			break;
+		}
+		tmp = tmp->next;
+	}
+	return (value);
 }
 
 void	replace_var(t_list **args, t_sh_data *data)
@@ -43,7 +46,7 @@ void	replace_var(t_list **args, t_sh_data *data)
 		{
 			if (node->next != NULL)
 			{
-				tmp = find_var(data->envp, node->next->content);
+				tmp = find_var(data->env_var1, node->next->content);
 				new_node = node->next;
 				free(new_node->content);
 				new_node->content = tmp;

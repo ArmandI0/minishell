@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 12:33:16 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/05 16:20:35 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,44 @@ t_bloc_cmd	*set_new_node(char *line, t_token *tline, char **envp)
 	return (n_node);
 }
 
+void	supp_node_list(t_list **args, t_list *node)
+{
+	t_list	*top;
+	t_list	*bottom;
+
+	if (node != NULL && *args == node)
+	{
+		*args = node->next;
+		free_node(node);
+	}
+	else
+	{
+		top = node->prev;
+		bottom = node->next;
+		top->next = bottom;
+		if (bottom != NULL)
+			bottom->prev = top;
+		free_node(node);
+	}	
+}
+
+void	delete_quote(t_list **args)
+{
+	t_list	*tmp;
+
+	tmp = *args;
+	while (tmp != NULL)
+	{
+		if (ft_strncmp(tmp->content, "\"", 2) == 0  || ft_strncmp(tmp->content, "\'", 2) == 0)
+		{
+			supp_node_list(args, tmp);
+			tmp = *args;
+		}
+		if (tmp != NULL)
+			tmp = tmp->next;
+	}
+}
+
 /*#################test : <<here_doc infile cat < file1 <file2 | cat >> here | grep -a "file 1   " */
 
 t_bool	parsing(char *line, t_sh_data *data)
@@ -92,6 +130,9 @@ t_bool	parsing(char *line, t_sh_data *data)
 	split_cmd(lx, a);
 	//printList(*a);
 	replace_var(a, data);
+	delete_quote(a);
+	//rajouter d'enlever les quotes dans les arguments !!!!
+	
 	//printList(*a);
 	redirection_parsing(a, data);
 	command_parsing(a, data);

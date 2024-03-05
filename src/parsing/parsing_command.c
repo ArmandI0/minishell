@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:24:54 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 12:39:14 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/05 15:44:47 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,6 @@ static char	**all_args(t_list *args)
 		tmp = tmp->next;
 	}
 	all_args = ft_split(newline, 32);
-	int i = 0;
-	while(all_args[i])
-	{
-		ft_printf_fd(1, "%s", all_args[i]);
-		i++;
-	}
 	free(newline);
 	return(all_args);
 }
