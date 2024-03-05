@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:24:54 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 16:23:36 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/05 18:25:01 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,27 @@ static int	count_args(char **args)
 static char	**all_args(t_list *args)
 {
 	t_list	*tmp;
-	char	*newline;
 	char	**all_args;
+	int		size;
 
 	tmp = args;
-	newline = ft_calloc(1, sizeof(char));
+	size = 0;
+	while (tmp != NULL)
+	{
+		tmp = tmp->next;
+		size++;
+	}
+	all_args = ft_calloc(size + 1, sizeof(char *));
+	if (all_args == NULL)
+		return (NULL);
+	tmp = args;
+	size = 0;
 	while (tmp != NULL && ft_strncmp(tmp->content, "|", 2) != 0)
 	{
-		newline = ft_strjoin(newline, tmp->content, TRUE);
-		newline = ft_strjoin(newline, " ", TRUE);
+		all_args[size] = ft_strdup(tmp->content);
 		tmp = tmp->next;
+		size++;
 	}
-	all_args = ft_split(newline, 32);
-	free(newline);
 	return(all_args);
 }
 
