@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:59:30 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 21:38:15 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/05 20:08:07 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,6 @@ void	print_error(t_errors error, t_cmd *cmd, char *str)
 		ft_putendl_fd("\nminishell warning : here_doc stopped by EOF (ctrl+d)", 2);
 	else if (error == ER_EXPORT)	
 		ft_printf_fd(2, "export: not an identifier: %s\n", str);
+	else if (error == ER_UNSET)	
+		ft_printf_fd(2, "unset: %s: invalid parameter name\n", str);	
 }		

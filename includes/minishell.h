@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 16:23:31 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/05 22:08:42 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef	enum mn_errors
 	ER_HDOC_EOF,
 	ER_CD_TOO_MANY_ARGS,
 	ER_EXPORT,
+	ER_UNSET,
 }			t_errors;
 
 typedef	enum e_redir_def
@@ -175,6 +176,7 @@ int	    bt_cd(t_sh_data *sh, t_cmd *cd);
 int		exec_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc);
 int		bt_export(t_sh_data *sh, t_cmd *cmd);
 int		check_var_name(char *name);
+int		bt_unset(t_sh_data *sh, t_cmd *unset);
 
 /* EXEC FUNCTION */
 
@@ -191,6 +193,7 @@ void	free_redir(t_redir *redir);
 void 	free_env_var(t_env_var *var1);
 void	free_list_cmd(t_bloc_cmd *cmd_data);
 void	free_sh_data(t_sh_data *sh);
+void	free_one_env_var(t_env_var *var);
 
 /* PROMPT TERMINAL FUNCTIONS */
 

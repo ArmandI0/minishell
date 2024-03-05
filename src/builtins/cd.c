@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 21:38:44 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/05 19:55:32 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 static int	do_chdir(t_sh_data *sh,char *path_dir, t_cmd *cd)
 {
 	char	*oldpwd;
+	int		r;
 
 	oldpwd = ft_getcwd();
 	if (path_dir == NULL)
 		return (1);
-	if (chdir(path_dir) != 0)
+	r = chdir(path_dir);
+	if (r != 0)
 	{
 		print_error(ER_CD_DIR_FILE_N_FOUND, cd, NULL);
 		free(path_dir);
 		free(oldpwd);
-		return (1);
+		return (r);
 	}
 	upd_env_var(sh, "OLDPWD", oldpwd);
 	free(path_dir);
