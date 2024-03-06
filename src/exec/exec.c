@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/05 17:40:24 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/06 14:41:39 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,13 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 	next = sh_data->bloc;
 	launch_hdocs(sh_data, sh_data->bloc);
 	if (next->next == NULL && next->builtin != BT_NO)
-		sh_data->return_value = exec_bt(sh_data, next);
+		sh_data->return_value = one_bloc_bt(sh_data, next);
 	else
 		loop_pipes_exec(sh_data, next);
 	del_tmp_hdocs(sh_data);
 	if (sh_data->bloc != NULL)
 	{
-		free_list_cmd(sh_data->bloc);	
+		free_list_cmd(sh_data->bloc);
 		sh_data->bloc = NULL;
 	}
 	if (sh_data->dir_tmp_files != NULL)

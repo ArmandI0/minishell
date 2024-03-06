@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 18:59:02 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/06 14:09:23 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ case 3 : only input redirection : 		return 2
 case 4 : output & input redirection : 	return 1 + 2 = 3
 case 5 : error redirections :		 	return 4 | 5 | 6
 */
-static int	redirections(t_bloc_cmd *bloc_data)
+int	redirections(t_bloc_cmd *bloc_data)
 {
 	int		r_redir_in;
 	int		r_redir_out;
