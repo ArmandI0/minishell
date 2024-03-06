@@ -6,27 +6,47 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 13:24:34 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 18:45:10 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/06 17:46:21 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*find_var(t_env_var *env, char *var)
+static char	*return_value(t_sh_data *data, char *var)
+{
+	char	*newvar;
+	char	*tmp;
+
+	if (var[0] == '\0')
+		return (ft_itoa(data->return_value));
+	else
+	{
+		tmp = ft_strdup(var);
+		newvar = ft_strjoin(ft_itoa(data->return_value), tmp, FALSE);
+		return (newvar);
+	}		
+}
+
+static char	*find_var(t_sh_data *data, char *var)
 {
 	t_env_var	*tmp;
 	char		*value;
 
 	value = NULL;
-	tmp = env;
-	while (tmp != NULL)
-	{
-		if (ft_strncmp(tmp->name, var, ft_strlen(var) + 1) == 0)
-		{
-			value = ft_strdup(tmp->value);
-			break;
+	tmp = data->env_var1;
+	if (var != NULL && var[0] != '\0' && var[0] == '?')
+		value = return_value(data, &var[1]);
+	else
+	{	
+		while (tmp != NULL)
+		{	
+			if (ft_strncmp(tmp->name, var, ft_strlen(var) + 1) == 0)
+			{
+				value = ft_strdup(tmp->value);
+				break;
+			}
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
 	}
 	if (value == NULL)
 		value = ft_strdup(" ");
@@ -48,7 +68,7 @@ void	replace_var(t_list **args, t_sh_data *data)
 		{
 			if (node->next != NULL)
 			{
-				tmp = find_var(data->env_var1, node->next->content);
+				tmp = find_var(data, node->next->content);
 				new_node = node->next;
 				free(new_node->content);
 				new_node->content = tmp;
