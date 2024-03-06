@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/06 13:56:48 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/06 17:51:41 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,14 +127,14 @@ t_bool	parsing(char *line, t_sh_data *data)
 	if (a == NULL)
 		return 0;
 	split_cmd(lx, a);
-	printList(*a);
+	//printList(*a);
 	replace_var(a, data);
 	delete_quote(a);
 	//rajouter d'enlever les quotes dans les arguments !!!
-	printList(*a);
+	//printList(*a);
 	redirection_parsing(a, data);
 	command_parsing(a, data);
-	print_all_bloc(data);
+	//print_all_bloc(data);
 	ft_lstclear(a);
 	free(a);
 	free_lexer(lx);
