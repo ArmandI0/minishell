@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/06 14:40:38 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/06 17:43:18 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,8 @@ int		prompt_rl(t_sh_data *sh_data);
 /* SIGNALS FUNCTIONS */
 
 void	init_signals(void);
+void	re_init_def_signals(void);
+void    ign_sigint(void);
 
 /* UTILS FONCTIONS */
 void	print_error(t_errors error, t_cmd *cmd, char *str);

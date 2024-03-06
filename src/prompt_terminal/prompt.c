@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 16:25:51 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/06 17:45:31 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,10 @@ int	prompt_rl(t_sh_data *sh_data)
 		if (line == NULL)
 			break;
 		add_history(line);
-		if (init_bloc_cmds(sh_data, line) == 0)	//send line to parsing here
+		ign_sigint();
+		if (init_bloc_cmds(sh_data, line) == 0)
 			r_exec = exec_cmds_loop(sh_data);
+		init_signals();
 		free (line);
 	}
 	if (line != NULL)

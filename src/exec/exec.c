@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/06 14:41:39 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/06 17:41:01 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int	child_management(t_sh_data *sh_data, int p_out[2],
 		else if (bloc_data->cmd->name != NULL && bloc_data->cmd->name[0] != 0)
 		{
 			new_env = list_to_envp(sh_data);
+			re_init_def_signals();
 			execve(bloc_data->cmd->path, bloc_data->cmd->args, new_env);
 			perror("Error execve");
 			free_tabchar(new_env);
@@ -58,7 +59,15 @@ static void	wait_all_sons(t_sh_data *sh,t_bloc_cmd *list_cmds)
 	while (next != NULL)
 	{
 		waitpid(-1, &status, 0);
-		sh->return_value = status;
+		if (WIFEXITED(status))
+			sh->return_value =	WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+		{
+			sh->return_value =	128 + WTERMSIG(status);
+			rl_replace_line("", 0);
+			printf("\n");
+			//rl_redisplay();
+		}
 		next = next->next;
 	}
 }
@@ -111,5 +120,6 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 		free (sh_data->dir_tmp_files);	
 		sh_data->dir_tmp_files = NULL;
 	}
+	//printf("%d\n", sh_data->return_value);
 	return (2);
 }
