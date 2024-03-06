@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/06 18:37:56 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/06 19:06:05 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,11 +127,11 @@ t_bool	parsing(char *line, t_sh_data *data)
 	if (a == NULL)
 		return 0;
 	split_cmd(lx, a);
-	printList(*a);
+	//printList(*a);
 	replace_var(a, data);
 	delete_quote(a);
 	//rajouter d'enlever les quotes dans les arguments !!!
-	printList(*a);
+	//printList(*a);
 	redirection_parsing(a, data);
 	command_parsing(a, data);
 	print_all_bloc(data);

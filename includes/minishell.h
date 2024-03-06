@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 22:08:42 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/06 17:43:18 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,8 @@ int		exec_cmds_loop(t_sh_data *sh_data);
 void	launch_hdocs(t_sh_data *sh,t_bloc_cmd *cmds);
 void	close_pipes(int pipe_x[2]);
 void	pipes_redir(t_sh_data *sh, int out[2], int in[2], t_bloc_cmd *bloc);
+int		redirections(t_bloc_cmd *bloc_data);
+int		one_bloc_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc);
 
 /* FREE FUNCTIONS */
 
@@ -202,6 +204,8 @@ int		prompt_rl(t_sh_data *sh_data);
 /* SIGNALS FUNCTIONS */
 
 void	init_signals(void);
+void	re_init_def_signals(void);
+void    ign_sigint(void);
 
 /* UTILS FONCTIONS */
 void	print_error(t_errors error, t_cmd *cmd, char *str);
