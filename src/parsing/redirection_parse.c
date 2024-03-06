@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/06 18:49:50 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/06 18:57:01 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_bloc_cmd	*add_new_bloc(t_sh_data *data);
 static t_list	*add_new_redir(t_bloc_cmd *lst, t_redir_def type, t_list *node, t_list **head);
 static t_list 	*suppp_from_list(t_list *node, t_list **head);
-
+//test merge
 
 void	redirection_parsing(t_list **args, t_sh_data *data)
 {
