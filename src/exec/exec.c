@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/06 17:41:01 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/06 21:57:22 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,5 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 		free (sh_data->dir_tmp_files);	
 		sh_data->dir_tmp_files = NULL;
 	}
-	//printf("%d\n", sh_data->return_value);
 	return (2);
 }

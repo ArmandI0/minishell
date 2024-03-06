@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_variable.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 13:24:34 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/06 17:46:21 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/06 21:42:44 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,10 @@ static char	*find_var(t_sh_data *data, char *var)
 
 void	replace_var(t_list **args, t_sh_data *data)
 {
-	int	i;
 	char	*tmp;
 	t_list	*node;
 	t_list	*new_node;
 
-	i = 0;
 	node = *args;
 	while (node != NULL)
 	{
