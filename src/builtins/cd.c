@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/05 19:55:32 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/06 21:33:55 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int    bt_cd(t_sh_data *sh, t_cmd *cd)
 		path_dir = ft_strdup(cd->args[1]);
 	else
 	{
-		print_error(ER_CD_TOO_MANY_ARGS, cd, NULL);
+		print_error(ER_TOO_MANY_ARGS, cd, NULL);
 		return (1);
 	}
 	return (do_chdir(sh, path_dir, cd));

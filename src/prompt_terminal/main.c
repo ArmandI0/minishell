@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 15:42:17 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/06 22:18:07 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
 	sh_data->env_var1 = NULL;
 	sh_data->n_env_var = 0;
 	sh_data->bloc = NULL;
+	sh_data->return_value = 0;
 	envp_to_list(sh_data);
 }
 
@@ -43,6 +44,7 @@ int main(int argc, char **argv, char **envp)
 		init_signals();
 		r_value = prompt_rl(&sh_data);
 		free_env_var(sh_data.env_var1);
+		ft_printf_fd(1, "exit");
 	}
 	else
 		print_error(ER_NO_ARG, NULL, NULL);

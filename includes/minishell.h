@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/06 17:43:18 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/06 21:44:20 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef	enum mn_errors
 	ER_PARS_REDIR,
 	ER_CD_DIR_FILE_N_FOUND,
 	ER_HDOC_EOF,
-	ER_CD_TOO_MANY_ARGS,
+	ER_TOO_MANY_ARGS,
 	ER_EXPORT,
 	ER_UNSET,
 }			t_errors;
@@ -177,6 +177,7 @@ int		exec_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc);
 int		bt_export(t_sh_data *sh, t_cmd *cmd);
 int		check_var_name(char *name);
 int		bt_unset(t_sh_data *sh, t_cmd *unset);
+int		bt_exit(t_sh_data *sh, t_cmd *cmd);
 
 /* EXEC FUNCTION */
 
