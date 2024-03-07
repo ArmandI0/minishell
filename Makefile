@@ -6,7 +6,7 @@
 #    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/05 22:12:05 by nledent          ###   ########.fr        #
+#    Updated: 2024/03/06 21:44:34 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS			= 	\
 					builtins/echo.c \
 					builtins/env.c \
 					builtins/pwd.c \
+					builtins/exit.c \
 					builtins/cd.c \
 					builtins/export.c \
 					builtins/export2.c \
