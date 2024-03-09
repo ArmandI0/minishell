@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:24:54 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 18:25:01 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/09 11:45:15 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,30 @@ void	command_parsing(t_list **args, t_sh_data *data)
 				bloc = bloc->next;
 				tmp = tmp->next;
 			}
-			bloc->builtin = check_builtin(tmp->content);
-			new_cmd = ft_calloc(1, sizeof(t_cmd));
-			if (new_cmd == NULL)
-				return ;
-			if (bloc->builtin == BT_NO)
-				new_cmd->path = find_command_path(data->envp, tmp->content);
+			if (tmp == NULL)
+				bloc->builtin = BT_NO;
+			else
+			{
+				new_cmd = ft_calloc(1, sizeof(t_cmd));
+				bloc->builtin = check_builtin(tmp->content);
+				if (new_cmd == NULL)
+					return ;
+				if (bloc->builtin == BT_NO)
+				{
+					new_cmd->path = find_command_path(data->envp, tmp->content);
+					if (new_cmd->path == NULL)
+						new_cmd->path = ft_strdup(tmp->content);
+				}
+				new_cmd->name = ft_strdup(tmp->content);
+				new_cmd->args = all_args(tmp);
+				new_cmd->argc = count_args(new_cmd->args);
+				bloc->cmd = new_cmd;
+			}
 			bloc->id = i;
-			new_cmd->name = ft_strdup(tmp->content);
-			new_cmd->args = all_args(tmp);
-			new_cmd->argc = count_args(new_cmd->args);
-			bloc->cmd = new_cmd;
 			i++;
-			//bloc = bloc->next;
 		}
-		tmp = tmp->next;
+		if (tmp != NULL)
+			tmp = tmp->next;
 	}
 }
 

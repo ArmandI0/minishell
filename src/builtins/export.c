@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/05 16:03:11 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/07 15:21:35 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static int	check_and_print(char *arg, t_cmd *cmd)
 {
 	if (check_var_name(arg) == 1)
 	{
-		if (ft_strchr(arg, '=') != 0)
-			*(ft_strchr(arg, '=')) = 0;
+		if (ft_strchr(arg, '=') != NULL)
+			*(ft_strchr(arg, '=')) = '\0';
 		print_error(ER_EXPORT, cmd, arg);
 		return (1);
 	}
@@ -32,8 +32,8 @@ static char *export_extract_name(char *name)
 
 	extr_name = ft_strdup(name);
 	ad_equal = ft_strchr(extr_name, '=');
-	if (ad_equal != 0)
-		*ad_equal = 0;
+	if (ad_equal != NULL)
+		*ad_equal = '\0';
 	return (extr_name);
 }
 
