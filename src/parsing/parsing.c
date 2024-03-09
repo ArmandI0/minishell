@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/07 16:16:30 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/09 20:56:47 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 void printList(t_list* node);
 
+
 void	split_cmd(t_lexer *lx, t_list **args)
 {
 	size_t		i;
@@ -29,6 +30,14 @@ void	split_cmd(t_lexer *lx, t_list **args)
 	t_list	*new_arg;
 
 	i = 0;
+	//remove $ and ""
+	while (lx->entry[i])
+	{
+		if (lx->lexing[i] == DOUBLE_QUOTE || lx->lexing[i] == DOLLAR || lx->lexing[i] == SINGLE_QUOTE)
+			lx->lexing[i] = CHARACTER;
+		i++;
+	}
+	i = 0;
 	while (i < ft_strlen(lx->entry))
 	{
 		size = 0;
@@ -36,7 +45,7 @@ void	split_cmd(t_lexer *lx, t_list **args)
 		tmp = lx->lexing[i];
 		if (lx->lexing[i] != SPACES)
 		{
-			if (lx->lexing[j] == DOLLAR || lx->lexing[j] == PIPE)
+			if (lx->lexing[j] == PIPE)
 				size = 1;
 			else
 			{
@@ -126,15 +135,18 @@ t_bool	parsing(char *line, t_sh_data *data)
 	a = ft_calloc(1, sizeof(t_list *));	
 	if (a == NULL)
 		return 0;
+	ft_printf_fd(1, "replace VAR = %s\n", replace_variable(data, lx));
+	//print_lexer(lx);
+	//print_lexer(lx);
 	split_cmd(lx, a);
 	//printList(*a);
-	replace_var(a, data);
-	delete_quote(a);
-	//rajouter d'enlever les quotes dans les arguments !!!
+	suppr_quotes(a);
 	//printList(*a);
+	// //rajouter d'enlever les quotes dans les arguments !!!
+	// //printList(*a);
 	redirection_parsing(a, data);
 	command_parsing(a, data);
-	//print_all_bloc(data);
+	print_all_bloc(data);
 	ft_lstclear(a);
 	free(a);
 	free_lexer(lx);

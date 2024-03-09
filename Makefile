@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
+#    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/06 21:44:34 by nledent          ###   ########.fr        #
+#    Updated: 2024/03/09 18:49:39 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,9 @@ SRCS			= 	\
 					parsing/parsing_command.c \
 					parsing/parsing_variable.c \
 					parsing/lexer_checking.c \
-
+					parsing/replace_variable.c \
+					parsing/suppr_quotes.c \
+					parsing/split_token.c \
 
 SRC				= $(addprefix src/, $(SRCS))
 OBJS			= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

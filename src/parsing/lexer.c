@@ -6,13 +6,12 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:22:23 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 12:32:08 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/09 17:13:06 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void		add_token(t_lexer *lx);
 static char		*supp_extra_spaces(t_lexer *lx);
 static void		set_quotes(t_lexer *lx);
 
@@ -50,7 +49,7 @@ t_lexer	*lexing(char *line)
 	return (lexing);
 }
 
-static void add_token(t_lexer *lx)
+void add_token(t_lexer *lx)
 {
 	int i;
 

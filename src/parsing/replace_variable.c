@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_variable.c                                 :+:      :+:    :+:   */
+/*   replace_variable.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/04 13:24:34 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/09 13:13:38 by aranger          ###   ########.fr       */
+/*   Created: 2024/03/09 13:45:02 by aranger           #+#    #+#             */
+/*   Updated: 2024/03/09 21:09:38 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static t_bool	check_var_char(char c)
+{
+	if (c == '_')
+		return (TRUE);
+	else if (c >= 'A' && c <= 'Z') 
+		return (TRUE);
+	else if (c >= 'a' && c <= 'z')
+		return (TRUE);
+	else if (c >= '0' && c <= '9')
+		return (TRUE);
+	return (FALSE);
+}
 
 static char	*return_value(t_sh_data *data, char *var)
 {
@@ -53,36 +66,53 @@ static char	*find_var(t_sh_data *data, char *var)
 	return (value);
 }
 
-void	replace_var(t_list **args, t_sh_data *data)
+char	*replace_variable(t_sh_data *data, t_lexer *lx)
 {
-	char	*tmp;
-	t_list	*node;
-	t_list	*new_node;
+	int		i;
+	int		j;
+	char	*start;
+	char	*var;
+	char	*newline;
 
-	node = *args;
-	while (node != NULL)
+	i = 0;
+	j = 0;
+	start = lx->entry;
+	newline = ft_calloc(1 , sizeof(char));
+	while (lx->entry[i])
 	{
-		if (node->content != NULL && ft_strncmp(node->content, "$", 2) == 0)
+		if (lx->lexing[i] == DOLLAR)
 		{
-			if (node->next != NULL)
+			if (newline[0] == '\0')
+				newline = strdup_size(start, i);
+			//test == NULL
+			j = 0;
+			start = &lx->entry[i + 1];
+			i++;
+			while (check_var_char(lx->entry[i]) == TRUE)
 			{
-				tmp = find_var(data, node->next->content);
-				new_node = node->next;
-				free(new_node->content);
-				new_node->content = tmp;
-				if (node->prev == NULL)
-				{
-					free_node(node);
-					*args = new_node;
-				}
-				else
-				{
-					node = node->prev;
-					free_node(node->next);
-					node->next = new_node;
-				}
-			}		
+				i++;
+				j++;
+			}
+			var = strdup_size(start, j);
+			start = &lx->entry[i];
+			newline = ft_strjoin(newline, find_var(data, var), TRUE);
+			newline = ft_strjoin(newline, start, TRUE);
+			// free(lx->entry);
+			// lx->entry = newline;
 		}
-		node = node->next;
+		i++;
 	}
+	if (newline[0] != '\0')
+	{
+		free(lx->entry);
+		free(lx->lexing);
+		lx->entry = newline;
+		i = ft_strlen(lx->entry);
+		lx->lexing = malloc(sizeof(t_token) * (i + 1));
+		add_token(lx);
+	}
+	else
+		free(newline);
+	
+	return (lx->entry);
 }

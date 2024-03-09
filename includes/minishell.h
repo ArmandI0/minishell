@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/06 21:44:20 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/09 20:10:47 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef	enum token
 	PIPE,
 	DOLLAR,
 	SPACES,
+	SPLIT,
 }			t_token;
 
 typedef	enum builtin
@@ -145,6 +146,8 @@ typedef struct s_shell_data
 
 char	*find_command_path(char **envp, char *command);
 t_lexer	*lexing(char *line);
+void add_token(t_lexer *lx);
+
 t_cmd	*init_command_struct(char *arg, t_token *t_arg, char **envp);
 void	free_lexer(t_lexer *lx);
 t_bool	check_path_acces(char *path);
@@ -157,6 +160,9 @@ void	redirection_parsing(t_list **args, t_sh_data *data);
 void	command_parsing(t_list **args, t_sh_data *data);
 void	replace_var(t_list **args, t_sh_data *data);
 t_bool	lexer_checking(t_lexer *lx);
+char	*replace_variable(t_sh_data *data, t_lexer *lx);
+void	suppr_quotes(t_list **args);
+char	**split_token(t_lexer *lx, t_token sep);
 
 
 
