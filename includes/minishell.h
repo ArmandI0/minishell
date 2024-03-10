@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/10 12:37:49 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/10 14:32:53 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ t_bool	lexer_checking(t_lexer *lx);
 t_lexer	*replace_variable(t_sh_data *data, t_lexer *lx);
 void	suppr_quotes(t_list **args);
 char	**split_token(t_lexer *lx, t_token sep);
+t_bool	check_var_char(char c);
 
 
 

@@ -6,13 +6,13 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 13:45:02 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/10 14:13:45 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/10 14:46:40 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static t_bool	check_var_char(char c)
+t_bool	check_var_char(char c)
 {
 	if (c == '_')
 		return (TRUE);
@@ -21,6 +21,8 @@ static t_bool	check_var_char(char c)
 	else if (c >= 'a' && c <= 'z')
 		return (TRUE);
 	else if (c >= '0' && c <= '9')
+		return (TRUE);
+	else if (c == '?')
 		return (TRUE);
 	return (FALSE);
 }

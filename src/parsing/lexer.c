@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 11:22:23 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/09 17:13:06 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/10 14:46:44 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void add_token(t_lexer *lx)
 	i = 0;
 	while (lx->entry[i])
 	{
-		if (lx->entry[i] == '$')
+		if (lx->entry[i] == '$' && check_var_char(lx->entry[i + 1]) == TRUE)
 			lx->lexing[i] = DOLLAR;
 		else if (lx->entry[i] == '<' || lx->entry[i] == '>')
 			lx->lexing[i] = REDIRECTION_OPERATOR;
@@ -121,7 +121,7 @@ static void	set_quotes(t_lexer *lx)
 				i++;
 				if (lx->entry[i] == '\0' || lx->lexing[i] == a)
 					break;
-				else if (lx->entry[i] == '$' && a == DOUBLE_QUOTE)
+				else if (lx->entry[i] == '$' && lx->lexing[i + 1] == CHARACTER && a == DOUBLE_QUOTE)
 					lx->lexing[i] = DOLLAR;
 				else
 					lx->lexing[i] = CHARACTER;
