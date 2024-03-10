@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/09 20:56:47 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/10 12:38:14 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,28 +125,24 @@ void	delete_quote(t_list **args)
 t_bool	parsing(char *line, t_sh_data *data)
 {
 	t_lexer		*lx;
-	//t_bloc_cmd **lc;
 	t_list		**a = NULL;
-	(void)data;
+	
 	lx = lexing(line);
 	if (lx == NULL)
 		return 0;
-	//print_lexer(lx); //affichage du lexeur;
+	//print_lexer(lx);
 	a = ft_calloc(1, sizeof(t_list *));	
 	if (a == NULL)
 		return 0;
-	ft_printf_fd(1, "replace VAR = %s\n", replace_variable(data, lx));
-	//print_lexer(lx);
+	lx = replace_variable(data, lx);
 	//print_lexer(lx);
 	split_cmd(lx, a);
 	//printList(*a);
 	suppr_quotes(a);
 	//printList(*a);
-	// //rajouter d'enlever les quotes dans les arguments !!!
-	// //printList(*a);
 	redirection_parsing(a, data);
 	command_parsing(a, data);
-	print_all_bloc(data);
+	//print_all_bloc(data);
 	ft_lstclear(a);
 	free(a);
 	free_lexer(lx);
