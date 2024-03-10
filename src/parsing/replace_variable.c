@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 13:45:02 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/10 14:00:57 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/10 14:13:45 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int		var_size(char *var)
 	int size;
 
 	size = 0;
+	if (var[0] == '?')
+		return (1);
 	while (var[size] && check_var_char(var[size]) == TRUE)
 		size++;
 	return (size);
