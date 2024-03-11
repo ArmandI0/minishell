@@ -6,13 +6,13 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 14:21:43 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 18:23:34 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/11 13:51:04 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	free_lexer(t_lexer *lx)
+void	*free_lexer(t_lexer *lx)
 {
 	if (lx != NULL)
 	{
@@ -23,6 +23,7 @@ void	free_lexer(t_lexer *lx)
 		free(lx);
 		lx = NULL;
 	}
+	return (NULL);
 }
 
 void	free_node(t_list *node)

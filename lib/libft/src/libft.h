@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:16:10 by aranger           #+#    #+#             */
-/*   Updated: 2024/02/29 10:53:12 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/09 13:23:14 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_list
 	struct s_list	*prev;
 	struct s_list	*next;
 	char	*content;
+	t_bool	join;
 }			t_list;
 
 int		ft_isalpha(int c);

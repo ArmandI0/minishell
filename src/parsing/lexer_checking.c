@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:56:27 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 17:31:39 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:09:05 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,40 +82,39 @@ static t_bool	quotes_checking(t_lexer *lx)
 	return (quote);
 }
 
+static t_bool	check_redir_operator(t_lexer *lx, int i)
+{
+	int	j;
+
+	j = 1;
+	while (lx->entry[i + j] && lx->lexing[i + j] == REDIRECTION_OPERATOR)
+	{
+		if (j >= 2 || (lx->entry[i] != lx->entry[i + j]))
+			return (FALSE);
+		j++;
+	}
+	while (lx->entry[i + j] && (lx->lexing[i + j] != REDIRECTION_OPERATOR && lx->lexing[i + j] != PIPE))
+	{
+		if (lx->lexing[i + j] == CHAR || lx->lexing[i + j] == SINGLE_QUOTE || lx->lexing[i + j] == DOUBLE_QUOTE)
+			return (TRUE);
+		j++;
+	}
+	return (FALSE);
+}
+
 static t_bool	redirection_checking(t_lexer *lx)
 {
 	int	i;
-	int	j;
-	int	a;
 
-	a = 0;
 	i = 0;
 	while (lx->entry[i])
 	{
 		if (lx->lexing[i] == REDIRECTION_OPERATOR)
 		{
-			j = 1;
-			while (lx->entry[i + j] && lx->lexing[i + j] == REDIRECTION_OPERATOR)
-			{
-				if (j >= 2)
-					return (0);
-				if (lx->entry[i] != lx->entry[i + j])
-					return (0);
-				j++;
-			}
-			while (lx->entry[i + j] && (lx->lexing[i + j] != REDIRECTION_OPERATOR && lx->lexing[i + j] != PIPE))
-			{
-				if (lx->lexing[i + j] == CHARACTER || lx->lexing[i + j] == SINGLE_QUOTE || lx->lexing[i + j] == DOUBLE_QUOTE)
-				{
-					a = 1;
-					break;
-				}
-				j++;
-			}
-			if (a == 0)
-				return (0);
+			if (check_redir_operator(lx, i) == FALSE)
+				return (FALSE);
 		}
 		i++;
 	}
-	return (1);
+	return (TRUE);
 }

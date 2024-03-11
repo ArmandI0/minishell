@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/07 16:16:30 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:09:05 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,41 +20,6 @@
 
 void printList(t_list* node);
 
-void	split_cmd(t_lexer *lx, t_list **args)
-{
-	size_t		i;
-	size_t		j;
-	size_t		size;
-	t_token	tmp;
-	t_list	*new_arg;
-
-	i = 0;
-	while (i < ft_strlen(lx->entry))
-	{
-		size = 0;
-		j = i;
-		tmp = lx->lexing[i];
-		if (lx->lexing[i] != SPACES)
-		{
-			if (lx->lexing[j] == DOLLAR || lx->lexing[j] == PIPE)
-				size = 1;
-			else
-			{
-				while (lx->lexing[j] == tmp)
-				{
-					size++;
-					j++;
-				}
-			}
-			new_arg = ft_lstnew(strdup_size(&lx->entry[i], size));
-			ft_lstadd_back(args, new_arg);
-		}
-		else
-			i++;
-		i += size;
-	}
-}
-
 t_bloc_cmd	*set_new_node(char *line, t_token *tline, char **envp)
 {
 	int			i;
@@ -66,7 +31,7 @@ t_bloc_cmd	*set_new_node(char *line, t_token *tline, char **envp)
 	n_node = ft_calloc(1, sizeof(t_bloc_cmd));
 	while (line[i] != '\0' && tline[i] != PIPE)
 	{
-		if (operator == FALSE && n_node->cmd == NULL && tline[i] == CHARACTER)
+		if (operator == FALSE && n_node->cmd == NULL && tline[i] == CHAR)
 			n_node->cmd = init_command_struct(&line[i], &tline[i], envp);
 		i++;
 	}	
@@ -116,21 +81,20 @@ void	delete_quote(t_list **args)
 t_bool	parsing(char *line, t_sh_data *data)
 {
 	t_lexer		*lx;
-	//t_bloc_cmd **lc;
 	t_list		**a = NULL;
-	(void)data;
+	
 	lx = lexing(line);
 	if (lx == NULL)
 		return 0;
-	//print_lexer(lx); //affichage du lexeur;
+	//print_lexer(lx);
 	a = ft_calloc(1, sizeof(t_list *));	
 	if (a == NULL)
 		return 0;
+	lx = replace_variable(data, lx);
+	//print_lexer(lx);
 	split_cmd(lx, a);
 	//printList(*a);
-	replace_var(a, data);
-	delete_quote(a);
-	//rajouter d'enlever les quotes dans les arguments !!!
+	suppr_quotes(a);
 	//printList(*a);
 	redirection_parsing(a, data);
 	command_parsing(a, data);
