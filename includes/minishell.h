@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/10 14:32:53 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:09:05 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef	enum e_redir_def
 typedef	enum token
 {
 	T_NULL,
-	CHARACTER,
+	CHAR,
 	SINGLE_QUOTE,
 	DOUBLE_QUOTE,
 	REDIRECTION_OPERATOR,
@@ -149,7 +149,7 @@ t_lexer	*lexing(char *line);
 void add_token(t_lexer *lx);
 
 t_cmd	*init_command_struct(char *arg, t_token *t_arg, char **envp);
-void	free_lexer(t_lexer *lx);
+void	*free_lexer(t_lexer *lx);
 t_bool	check_path_acces(char *path);
 void	quote_error(t_lexer *lx);
 char	**split_lexer(t_lexer *lx, t_token sep, char c);
@@ -164,6 +164,9 @@ t_lexer	*replace_variable(t_sh_data *data, t_lexer *lx);
 void	suppr_quotes(t_list **args);
 char	**split_token(t_lexer *lx, t_token sep);
 t_bool	check_var_char(char c);
+t_lexer	*replace_lexer(char *new_entry, t_lexer *lx);
+void	split_cmd(t_lexer *lx, t_list **args);
+
 
 
 

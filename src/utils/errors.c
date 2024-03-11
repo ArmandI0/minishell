@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 14:59:30 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/06 21:33:40 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/11 13:44:12 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,4 @@ void	print_error(t_errors error, t_cmd *cmd, char *str)
 		ft_printf_fd(2, "export: not an identifier: %s\n", str);
 	else if (error == ER_UNSET)	
 		ft_printf_fd(2, "unset: %s: invalid parameter name\n", str);	
-}		
+}

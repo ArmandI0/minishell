@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/05 16:18:37 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/11 17:09:05 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ const char* token_to_string(t_token token)
     switch (token) {
         case T_NULL:
             return "T_NULL";
-        case CHARACTER:
-            return "CHARACTER";
+        case CHAR:
+            return "CHAR";
         case SINGLE_QUOTE:
             return "SINGLE_QUOTE";
         case DOUBLE_QUOTE:

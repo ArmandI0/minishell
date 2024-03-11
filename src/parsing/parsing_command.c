@@ -6,21 +6,21 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:24:54 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/09 11:45:15 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/11 14:56:33 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static t_builtin	check_builtin(char *cmd);
-static char	**all_args(t_list *args);
-static int	count_args(char **args);
+static char			**all_args(t_list *args);
+static int			count_args(char **args);
+static t_cmd		*set_new_cmd(t_bloc_cmd *bloc, t_sh_data *data, t_list *list);
 
 void	command_parsing(t_list **args, t_sh_data *data)
 {
 	t_list		*tmp;
 	t_bloc_cmd	*bloc;
-	t_cmd		*new_cmd;
 	int			i;
 
 	tmp = *args;
@@ -35,31 +35,38 @@ void	command_parsing(t_list **args, t_sh_data *data)
 				bloc = bloc->next;
 				tmp = tmp->next;
 			}
-			if (tmp == NULL)
-				bloc->builtin = BT_NO;
-			else
-			{
-				new_cmd = ft_calloc(1, sizeof(t_cmd));
-				bloc->builtin = check_builtin(tmp->content);
-				if (new_cmd == NULL)
-					return ;
-				if (bloc->builtin == BT_NO)
-				{
-					new_cmd->path = find_command_path(data->envp, tmp->content);
-					if (new_cmd->path == NULL)
-						new_cmd->path = ft_strdup(tmp->content);
-				}
-				new_cmd->name = ft_strdup(tmp->content);
-				new_cmd->args = all_args(tmp);
-				new_cmd->argc = count_args(new_cmd->args);
-				bloc->cmd = new_cmd;
-			}
+			bloc->cmd = set_new_cmd(bloc, data, tmp);
 			bloc->id = i;
 			i++;
 		}
 		if (tmp != NULL)
 			tmp = tmp->next;
 	}
+}
+
+static t_cmd	*set_new_cmd(t_bloc_cmd *bloc, t_sh_data *data, t_list *list)
+{
+	t_cmd	*new_cmd;
+
+	if (list == NULL)
+	{
+		bloc->builtin = BT_NO;
+		return (NULL);
+	}
+	new_cmd = ft_calloc(1, sizeof(t_cmd));
+	if (new_cmd == NULL)
+		return (NULL);
+	bloc->builtin = check_builtin(list->content);
+	if (bloc->builtin == BT_NO)
+	{
+		new_cmd->path = find_command_path(data->envp, list->content);
+		if (new_cmd->path == NULL)
+				new_cmd->path = ft_strdup(list->content);
+	}
+	new_cmd->name = ft_strdup(list->content);
+	new_cmd->args = all_args(list);
+	new_cmd->argc = count_args(new_cmd->args);
+	return (new_cmd);
 }
 
 static int	count_args(char **args)
