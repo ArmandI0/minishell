@@ -21,11 +21,9 @@ static int		var_size(char *var);
 t_lexer	*replace_variable(t_sh_data *data, t_lexer *lx)
 {
 	int		i;
-	char	*start;
 	char	*newline;
 
 	i = 0;
-	start = lx->entry;
 	newline = NULL;
 	while (lx->entry[i])
 	{

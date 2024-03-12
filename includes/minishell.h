@@ -144,9 +144,9 @@ typedef struct s_shell_data
 
 /* PARSING FUNCTIONS */
 
-char	*find_command_path(char **envp, char *command);
+char	*find_command_path(t_env_var *envp, char *command);
 t_lexer	*lexing(char *line);
-void add_token(t_lexer *lx);
+void 	add_token(t_lexer *lx);
 
 t_cmd	*init_command_struct(char *arg, t_token *t_arg, char **envp);
 void	*free_lexer(t_lexer *lx);
