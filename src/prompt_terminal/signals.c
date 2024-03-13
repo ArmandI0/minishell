@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/06 17:43:22 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/13 18:16:45 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	sign_received = 0;
 
 static void handler_sigint(int signum)
 {
@@ -21,11 +23,21 @@ static void handler_sigint(int signum)
     rl_redisplay();
 }
 
-/* static void handler_sigquit(int signum)
+static void handler_hdoc(int signum)
 {
-	(void)signum;
-    exit (1);
-} */
+    (void)signum;
+    close(0);
+    sign_received = 1;
+/*     printf("\n");
+    rl_on_new_line();
+    rl_replace_line("", 0);
+    rl_redisplay(); */
+}
+
+void    sigint_hdoc(void)
+{
+	signal(SIGINT, handler_hdoc);
+}
 
 void	init_signals(void)
 {

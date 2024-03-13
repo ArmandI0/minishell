@@ -3,94 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   here_docs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 21:40:53 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/12 19:23:30 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* NB : possibility of implementing variables in here docs */
-static char	*ft_here_doc(char *limiter)
+static char	*loop_hdoc(char * limiter)
 {
-	char	*here_doc;
 	char	*line;
+	char	*here_doc;
 
 	here_doc = ft_strdup("");
-	limiter = ft_strjoin(limiter, "\n", 0);
 	line = ft_strdup("");
-	ft_putstr_fd(">", STDOUT_FILENO);
-	while (ft_strncmp(line, limiter, ft_strlen(limiter)) != 0)
+	while (sign_received != 1 && ft_strncmp(line, limiter, ft_strlen(limiter)) != 0)
 	{
 		if (line[0] != 0)
 			ft_putstr_fd(">", STDOUT_FILENO);
 		here_doc = ft_fstrjoin(here_doc, line);
 		line = get_next_line(0);
-		if (line == NULL)
+		if (line == NULL && sign_received != 1)
 		{
 			line = ft_strdup(limiter);
 			print_error(ER_HDOC_EOF, NULL, NULL);
 		}
 	}
-	free(line);
-	free(limiter);
+	if (line != NULL)
+		free(line);	
 	return (here_doc);
 }
 
-static char	*add_char_str(char *str, char c)
+/* NB : possibility of implementing variables in here docs */
+static char	*ft_here_doc(char *limiter)
 {
-	char	*str_char;
-	int		i;
+	char	*here_doc;
+	char	*lim_backn;
 
-	i = 0;
-	str_char = malloc(sizeof(char) * (ft_strlen(str) + 2));
-	while (str[i] != 0)
+	here_doc = NULL;
+	if (sign_received != 1)
 	{
-		str_char[i] = str[i];
-		i++;
+		lim_backn = ft_strjoin(limiter, "\n", 0);
+		ft_putstr_fd(">", STDOUT_FILENO);
+		here_doc = loop_hdoc(lim_backn);
+		free(lim_backn);
 	}
-	str_char[i] = c;
-	str_char[i + 1] = 0;
-	free(str);
-	return (str_char);
+	return (here_doc);
 }
 
-static char	*hdoc_to_file(char *hdoc)
+static void	launch_hdocs(t_bloc_cmd *cmds)
 {
-	int		output;
-	char	*filename;
-	int		len;
-
-	filename = ft_strdup("tmp_hdoc_A");
-	len = ft_strlen(filename);
-	while (access(filename, F_OK) == 0)
-	{
-		if (filename[len - 1] == 'Z')
-		{
-			filename = add_char_str(filename, 'A');
-			len++;
-		}
-		else if (filename[len - 1] >= 'A' && filename[len - 1] < 'Z')
-			(filename[len - 1])++;
-	}
-	output = open(filename, O_WRONLY | O_CREAT, 0777);
-	ft_putstr_fd(hdoc, output);
-	close (output);
-	free(hdoc);
-	return (filename);
-}
-
-void	launch_hdocs(t_sh_data *sh, t_bloc_cmd *cmds)
-{
-	char		*path_hdoc;
 	char		*hdoc;
 	t_bloc_cmd	*next_cmd;
 	t_redir		*next_redir;
 
 	next_cmd = cmds;
-	sh->dir_tmp_files = ft_getcwd();
 	while (next_cmd != NULL)
 	{
 		next_redir = next_cmd->redir;
@@ -99,11 +68,32 @@ void	launch_hdocs(t_sh_data *sh, t_bloc_cmd *cmds)
 			if (next_redir->type == HEREDOC)
 			{
 				hdoc = ft_here_doc(next_redir->lim_hdoc);
-				path_hdoc = hdoc_to_file(hdoc);
-				next_redir->file_path = path_hdoc;
+				hdoc_to_file(hdoc, next_redir->file_path);
 			}
 			next_redir = next_redir->next;
 		}
 		next_cmd = next_cmd->next;
 	}
+}
+
+void	fork_hdocs(t_sh_data *sh, t_bloc_cmd *cmds)
+{
+	pid_t	pid;
+	int		r;
+
+	r = 0;	
+	sh->dir_tmp_files = ft_getcwd();
+	create_hdocs_files(cmds);
+	pid = fork();
+	if (pid == 0)
+	{
+		sigint_hdoc();
+		launch_hdocs(cmds);
+		free_sh_data(sh);
+		if (sign_received == 1)
+			r = 130;
+		exit (r);
+	}
+	else if (pid > 0)
+		check_r_values(pid, sh);
 }

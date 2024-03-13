@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/06 21:57:22 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/13 18:12:38 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static void	pipes_trsf(int id, int p_out[2], int p_in[2])
 static int	child_management(t_sh_data *sh_data, int p_out[2],
 							int p_in[2], t_bloc_cmd	*bloc_data)
 {
-	char	**new_env;
 	int		r_value;
 
 	r_value = 1;
@@ -36,16 +35,12 @@ static int	child_management(t_sh_data *sh_data, int p_out[2],
 		if (bloc_data->builtin != BT_NO)
 			r_value = exec_bt(sh_data, bloc_data);
 		else if (bloc_data->cmd->name != NULL && bloc_data->cmd->name[0] != 0)
-		{
-			new_env = list_to_envp(sh_data);
-			re_init_def_signals();
-			execve(bloc_data->cmd->path, bloc_data->cmd->args, new_env);
-			perror("Error execve");
-			free_tabchar(new_env);
-		}
+			launch_execve(sh_data, bloc_data->cmd->path, bloc_data->cmd->args);
 		else if (bloc_data->cmd->name != NULL && bloc_data->cmd->name[0] == 0)
 			print_error(ER_CMD_N_FOUND, bloc_data->cmd, NULL);
 	}
+	else
+		r_value = 0;
 	free_sh_data(sh_data);
 	exit (r_value);
 }
@@ -53,21 +48,11 @@ static int	child_management(t_sh_data *sh_data, int p_out[2],
 static void	wait_all_sons(t_sh_data *sh,t_bloc_cmd *list_cmds)
 {
 	t_bloc_cmd	*next;
-	int			status;
 
 	next = list_cmds;
 	while (next != NULL)
 	{
-		waitpid(-1, &status, 0);
-		if (WIFEXITED(status))
-			sh->return_value =	WEXITSTATUS(status);
-		else if (WIFSIGNALED(status))
-		{
-			sh->return_value =	128 + WTERMSIG(status);
-			rl_replace_line("", 0);
-			printf("\n");
-			//rl_redisplay();
-		}
+		check_r_values(-1, sh);
 		next = next->next;
 	}
 }
@@ -104,21 +89,20 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 	if (sh_data->bloc == NULL)
 		return (2);
 	next = sh_data->bloc;
-	launch_hdocs(sh_data, sh_data->bloc);
-	if (next->next == NULL && next->builtin != BT_NO)
+	fork_hdocs(sh_data, sh_data->bloc);
+	if (sh_data->return_value != 0)
+		sign_received = 1;
+	if (next->next == NULL && next->builtin != BT_NO && sign_received != 1)
 		sh_data->return_value = one_bloc_bt(sh_data, next);
-	else
+	else if (sign_received != 1)
 		loop_pipes_exec(sh_data, next);
 	del_tmp_hdocs(sh_data);
-	if (sh_data->bloc != NULL)
-	{
-		free_list_cmd(sh_data->bloc);
-		sh_data->bloc = NULL;
-	}
+	free_list_cmd(sh_data->bloc);
 	if (sh_data->dir_tmp_files != NULL)
 	{
 		free (sh_data->dir_tmp_files);	
 		sh_data->dir_tmp_files = NULL;
 	}
+	sign_received = 0;
 	return (2);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   UT_launchhdocs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 15:43:48 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 14:45:31 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/12 11:44:55 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ static t_bloc_cmd	*init_cmd(t_bloc_cmd *prev_el, char *limiter)
 		el_new->redir = ft_calloc(1, sizeof(t_redir));
 		el_new->redir->lim_hdoc=ft_strdup(limiter);
 		el_new->redir->next=NULL;
-		el_new->redir->in_out=0;
-		el_new->redir->app_mod_hdoc=1;
+		el_new->redir->type=HEREDOC;
 	}
 	return(el_new);
 }
@@ -60,6 +59,7 @@ int main(int argc, char **argv, char **envp)
 	(void)el2;
 	(void)el3;
 	sh.bloc = el1;
+	sigint_hdoc();
 	launch_hdocs(&sh, el1);
 	next_cmd = el1;
 	(void)next_redir;
