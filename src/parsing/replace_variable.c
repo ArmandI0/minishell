@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   replace_variable.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 13:45:02 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/11 15:33:46 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/12 12:27:05 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ static int		var_size(char *var);
 t_lexer	*replace_variable(t_sh_data *data, t_lexer *lx)
 {
 	int		i;
-	char	*start;
 	char	*newline;
 
 	i = 0;
-	start = lx->entry;
 	newline = NULL;
 	while (lx->entry[i])
 	{

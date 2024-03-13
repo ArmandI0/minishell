@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
+#    By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/02 22:14:24 by nledent          ###   ########.fr        #
+#    Updated: 2024/03/12 11:02:44 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,14 @@ LIBFT_A			= ../../lib/libft/libft.a
 
 SRCS			= 	UT_launchhdocs.c \
 					../../src/exec/here_docs.c \
+					../../src/prompt_terminal/signals.c \
 					../../src/utils/free_functions.c \
 					../../src/utils/del_tmp_hdoc.c \
+					../../src/utils/new_envp.c \
+					../../src/utils/errors.c \
+					../../src/utils/print_functions.c \
 					../../src/builtins/export.c \
+					../../src/builtins/export2.c \
 					../../src/builtins/pwd.c \
 
 OBJS		= $(SRCS:.c=.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/11 17:09:05 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/13 18:12:59 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define FALSE 0
 
 typedef int t_bool;
+
+extern int	sign_received;
 
 /* typedef */
 
@@ -192,11 +194,14 @@ int		bt_exit(t_sh_data *sh, t_cmd *cmd);
 /* EXEC FUNCTION */
 
 int		exec_cmds_loop(t_sh_data *sh_data);
-void	launch_hdocs(t_sh_data *sh,t_bloc_cmd *cmds);
+void	fork_hdocs(t_sh_data *sh, t_bloc_cmd *cmds);
 void	close_pipes(int pipe_x[2]);
 void	pipes_redir(t_sh_data *sh, int out[2], int in[2], t_bloc_cmd *bloc);
 int		redirections(t_bloc_cmd *bloc_data);
 int		one_bloc_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc);
+void	hdoc_to_file(char *hdoc, char *file_path);
+void	create_hdocs_files(t_bloc_cmd *cmds);
+void	launch_execve(t_sh_data *sh, char *path, char **args);
 
 /* FREE FUNCTIONS */
 
@@ -217,6 +222,7 @@ int		prompt_rl(t_sh_data *sh_data);
 void	init_signals(void);
 void	re_init_def_signals(void);
 void    ign_sigint(void);
+void    sigint_hdoc(void);
 
 /* UTILS FONCTIONS */
 void	print_error(t_errors error, t_cmd *cmd, char *str);
@@ -227,5 +233,6 @@ char	**list_to_envp(t_sh_data *sh_data);
 void	print_env(t_sh_data *sh_data);
 void	print_tabchar(char **tabchar);
 int   	upd_env_var(t_sh_data *sh, char *name_var, char *new_value);
+void	check_r_values(int pid, t_sh_data *sh);
 
 #endif

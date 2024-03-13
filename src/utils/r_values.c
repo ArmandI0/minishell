@@ -1,43 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   r_values.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/13 18:17:29 by nledent          ###   ########.fr       */
+/*   Created: 2024/02/22 14:59:30 by nledent           #+#    #+#             */
+/*   Updated: 2024/03/12 19:17:50 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	init_bloc_cmds(t_sh_data *sh, char *line)
+void	check_r_values(int pid, t_sh_data *sh)
 {
+	int	status;
 
-	if(parsing(line, sh) == FALSE)
-		return (1);
-	return (0);
-}
-
-int	prompt_rl(t_sh_data *sh_data)
-{
-	char		*line;
-	
-	line = NULL;
-	while (1)
+	waitpid(pid, &status, 0);
+	if (WIFEXITED(status))
+		sh->return_value =	WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
 	{
-		sh_data->bloc = NULL;
-		line = readline("minishell>");
-		if (line == NULL)
-			break;
-		add_history(line);
-		if (init_bloc_cmds(sh_data, line) == 0)
-			exec_cmds_loop(sh_data);
-		init_signals();
-		free (line);
+		sh->return_value =	128 + WTERMSIG(status);
+	/* 	rl_replace_line("", 0);
+		printf("\n"); */
+		//rl_redisplay();
 	}
-	if (line != NULL)
-		free(line);
-	return (0);	
 }

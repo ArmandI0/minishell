@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/06 22:18:07 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/12 11:34:24 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int main(int argc, char **argv, char **envp)
 		init_signals();
 		r_value = prompt_rl(&sh_data);
 		free_env_var(sh_data.env_var1);
-		ft_printf_fd(1, "exit");
+		ft_printf_fd(1, "exit\n");
 	}
 	else
 		print_error(ER_NO_ARG, NULL, NULL);

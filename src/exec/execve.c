@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_all.c                                         :+:      :+:    :+:   */
+/*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/12 19:36:08 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/13 18:09:37 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	free_sh_data(t_sh_data *sh)
+void	launch_execve(t_sh_data *sh, char *path, char **args)
 {
-	if (sh->bloc != NULL)
-		free_list_cmd(sh->bloc);
-	if (sh->env_var1 != NULL)
-		free_env_var(sh->env_var1);
-	if (sh->dir_tmp_files != NULL)
-		free (sh->dir_tmp_files);
-}
-
-void	free_one_env_var(t_env_var *var)
-{
-	if (var != NULL)
-	{
-		free(var->name);
-		if (var->value != NULL)
-			free(var->value);
-		ft_memset(var, 0, sizeof(t_env_var));
-		free(var);
-	}
+	char	**new_env;
+	new_env = list_to_envp(sh);
+	re_init_def_signals();
+	execve(path, args, new_env);
+	perror("Error execve");
+	free_tabchar(new_env);
 }
