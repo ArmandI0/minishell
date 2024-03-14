@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/06 21:51:24 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/13 18:47:00 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static int	is_r_exit_digit(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str != NULL)
+	{
+		while (str[i] != 0)
+		{
+			if (str[i] >= '0' && str[i] <= '9')
+				return (0);
+			i++;
+		}
+	}
+	return (1);
+}
 
 int    bt_exit(t_sh_data *sh, t_cmd *cmd)
 {
@@ -22,12 +39,19 @@ int    bt_exit(t_sh_data *sh, t_cmd *cmd)
 	else if (cmd->argc == 1)
 		r_value = 0;
 	else if (cmd->argc == 2)
-		r_value = ft_atoi(cmd->args[1]);
+	{
+		if (is_r_exit_digit(cmd->args[1]) == 0)
+			r_value = ft_atoi(cmd->args[1]);
+		else
+			r_value = 2;
+	}
 	if (r_value == 1)
 		return (r_value);
 	else
 	{
 		ft_printf_fd(1, "exit\n");
+		if (r_value == 2)
+			print_error(ER_EXIT, cmd, NULL);
 		free_sh_data(sh);
 		exit (r_value);
 	}
