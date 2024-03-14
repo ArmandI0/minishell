@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/13 18:12:59 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/14 18:53:15 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -42,6 +43,7 @@ typedef	enum mn_errors
 	ER_TOO_MANY_ARGS,
 	ER_EXPORT,
 	ER_UNSET,
+	ER_EXIT,
 }			t_errors;
 
 typedef	enum e_redir_def
@@ -124,6 +126,7 @@ typedef struct s_redir
 typedef struct s_bloc_cmd
 {
 	int					id;
+	pid_t				pid;
 	t_cmd				*cmd;
 	t_builtin			builtin;
 	t_redir				*redir;
@@ -202,6 +205,7 @@ int		one_bloc_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc);
 void	hdoc_to_file(char *hdoc, char *file_path);
 void	create_hdocs_files(t_bloc_cmd *cmds);
 void	launch_execve(t_sh_data *sh, char *path, char **args);
+int		child_management(t_sh_data *sh, int out[2], int in[2], t_bloc_cmd *bl);
 
 /* FREE FUNCTIONS */
 

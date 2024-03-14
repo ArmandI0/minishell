@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/06 21:33:55 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/13 18:34:05 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	do_chdir(t_sh_data *sh,char *path_dir, t_cmd *cd)
 		print_error(ER_CD_DIR_FILE_N_FOUND, cd, NULL);
 		free(path_dir);
 		free(oldpwd);
-		return (r);
+		return (1);
 	}
 	upd_env_var(sh, "OLDPWD", oldpwd);
 	free(path_dir);

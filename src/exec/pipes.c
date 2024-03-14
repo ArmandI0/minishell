@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/12 19:44:07 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/14 08:23:42 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ void	pipes_redir(t_sh_data *sh, int p_out[2], int p_in[2], t_bloc_cmd *bloc)
 		free_list_cmd(sh->bloc);
 		free_env_var(sh->env_var1);
 		free(sh->dir_tmp_files);
+		close(1);
+		close(2);
 		exit(1);
 	}
 }

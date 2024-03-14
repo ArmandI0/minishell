@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/13 18:16:45 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/14 18:44:51 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,6 @@ static void handler_hdoc(int signum)
     (void)signum;
     close(0);
     sign_received = 1;
-/*     printf("\n");
-    rl_on_new_line();
-    rl_replace_line("", 0);
-    rl_redisplay(); */
 }
 
 void    sigint_hdoc(void)
