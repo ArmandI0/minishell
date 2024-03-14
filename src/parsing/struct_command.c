@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-t_cmd	*init_command_struct(char *arg, t_token *t_arg, char **envp)
+t_cmd	*init_command_struct(char *arg, t_token *t_arg, t_env_var *envp)
 {
 	int		i;
 	char	*command;
