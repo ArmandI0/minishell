@@ -12,12 +12,12 @@
 
 #include "../../includes/minishell.h"
 
-static char		*set_command_path(char **envp, char *command);
-static char		**find_path(char **envp);
+static char		*set_command_path(t_env_var *envp, char *command);
+static char		**find_path(t_env_var *envp);
 static char		**join_path_command(char **all_path, char *command);
 static char		*set_command(char *command);
 
-char	*find_command_path(char **envp, char *command)
+char	*find_command_path(t_env_var *envp, char *command)
 {
 	char	*command_path;
 	char	**split_command;
@@ -38,7 +38,7 @@ char	*find_command_path(char **envp, char *command)
 	return (command_path);
 }
 
-static char	*set_command_path(char **envp, char *command)
+static char	*set_command_path(t_env_var *envp, char *command)
 {
 	char	**all_path;
 	char	*command_path;
@@ -91,22 +91,18 @@ static char	**join_path_command(char **all_path, char *command)
 	return (join_path);
 }
 
-static char	**find_path(char **envp)
+static char	**find_path(t_env_var *envp)
 {
-	int		i;
-	int		j;
-	char	**split_path;
+	t_env_var	*tmp;
 
-	i = 0;
-	j = 0;
-	split_path = NULL;
-	while (envp[i] && ft_strncmp(envp[i], "PATH", 4) != 0)
-		i++;
-	while (envp[i] && envp[i][j] && envp[i][j] != '=')
-		j++;
-	if (envp[i] != NULL)
-		split_path = ft_split(&envp[i][j + 1], ':');
-	return (split_path);
+	tmp = envp;
+	while (tmp != NULL)
+	{
+		if (ft_strncmp(tmp->name, "PATH", 5) == 0)
+			return (ft_split(tmp->value, ':'));
+		tmp = tmp->next;
+	}
+	return (NULL);
 }
 
 static char	*set_command(char *command)

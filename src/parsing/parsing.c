@@ -20,24 +20,6 @@
 
 void printList(t_list* node);
 
-t_bloc_cmd	*set_new_node(char *line, t_token *tline, char **envp)
-{
-	int			i;
-	t_bloc_cmd	*n_node;
-	t_bool		operator;
-
-	i = 0;
-	operator = FALSE;
-	n_node = ft_calloc(1, sizeof(t_bloc_cmd));
-	while (line[i] != '\0' && tline[i] != PIPE)
-	{
-		if (operator == FALSE && n_node->cmd == NULL && tline[i] == CHAR)
-			n_node->cmd = init_command_struct(&line[i], &tline[i], envp);
-		i++;
-	}	
-	return (n_node);
-}
-
 void	supp_node_list(t_list **args, t_list *node)
 {
 	t_list	*top;

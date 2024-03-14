@@ -59,7 +59,7 @@ static t_cmd	*set_new_cmd(t_bloc_cmd *bloc, t_sh_data *data, t_list *list)
 	bloc->builtin = check_builtin(list->content);
 	if (bloc->builtin == BT_NO)
 	{
-		new_cmd->path = find_command_path(data->envp, list->content);
+		new_cmd->path = find_command_path(data->env_var1, list->content);
 		if (new_cmd->path == NULL)
 				new_cmd->path = ft_strdup(list->content);
 	}
