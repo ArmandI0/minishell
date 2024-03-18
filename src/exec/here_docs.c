@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_docs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/12 19:23:30 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 14:58:28 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,11 @@ void	fork_hdocs(t_sh_data *sh, t_bloc_cmd *cmds)
 		exit (r);
 	}
 	else if (pid > 0)
+	{
+		signal(SIGINT, SIG_IGN);
 		check_r_values(pid, sh);
+		if (sh->return_value == 130)
+			ft_printf_fd(1,"\n");		
+		init_signals();
+	}
 }

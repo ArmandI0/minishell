@@ -6,11 +6,29 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/02/29 22:23:44 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 13:23:44 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static int	check_bck_n(char *str)
+{
+	int	i;
+
+	i = 1;
+	if (ft_strncmp(str, "-n", 3) == 0)
+		return (1);
+	if (str[0] != '-')
+		return (0);
+	while (str[i] != 0)
+	{
+		if (str[i] != 'n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 void    bt_echo(t_cmd *echo)
 {
@@ -19,7 +37,7 @@ void    bt_echo(t_cmd *echo)
 
     i = 1;
     n = FALSE;
-    while (echo->args[i] != NULL && (ft_strncmp(echo->args[i], "-n", 3) == 0))
+    while (echo->args[i] != NULL && check_bck_n(echo->args[i]))
     {
         n = TRUE;
         i++;

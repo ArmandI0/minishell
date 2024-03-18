@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/14 18:58:03 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 15:43:07 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	loop_pipes_exec(t_sh_data *sh_data, t_bloc_cmd	*bloc)
 
 	pid = 0;
 	r_pipe = 0;
+	signal(SIGINT, SIG_IGN);
 	while (bloc != NULL)
 	{
 		r_pipe = pipe(pipe_out);
@@ -55,7 +56,8 @@ static int	loop_pipes_exec(t_sh_data *sh_data, t_bloc_cmd	*bloc)
 		bloc = bloc->next;
 	}
 	close_pipes(pipe_out);
-	wait_all_sons(sh_data, sh_data->bloc);	
+	wait_all_sons(sh_data, sh_data->bloc);
+	init_signals();
 	return (0);
 }
 

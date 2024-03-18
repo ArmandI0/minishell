@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:09:19 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/12 19:30:36 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 15:14:11 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,16 @@ int	one_bloc_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc)
 	int	fdout;
 
 	r_value = 0;
-	save_fds(&fdin, &fdout);
- 	if (redirections(cmd_bloc) >= 4)
-		r_value = 1;
+	if (cmd_bloc->builtin == BT_EXIT)
+		r_value = exec_bt(sh_data, cmd_bloc);
 	else
-		r_value = exec_bt(sh_data, cmd_bloc);	
-	re_init_fds(fdin, fdout);
+	{
+		save_fds(&fdin, &fdout);
+		if (redirections(cmd_bloc) >= 4)
+			r_value = 1;
+		else
+			r_value = exec_bt(sh_data, cmd_bloc);	
+		re_init_fds(fdin, fdout);
+	}
 	return (r_value);
 }
