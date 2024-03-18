@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/03 21:13:36 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 20:29:06 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_var_name(char *name)
 	{
 		if (name[i] == '_')
 			i++;
-		else if (name[i] >= 'A' && name[i] <= 'Z') 
+		else if (name[i] >= 'A' && name[i] <= 'Z')
 			i++;
 		else if (name[i] >= 'a' && name[i] <= 'z')
 			i++;

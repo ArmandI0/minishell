@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/14 18:53:15 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 20:52:36 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 typedef int t_bool;
 
-extern int	sign_received;
+extern int	g_sign_received;
 
 /* typedef */
 
@@ -172,9 +172,6 @@ t_bool	check_var_char(char c);
 t_lexer	*replace_lexer(char *new_entry, t_lexer *lx);
 void	split_cmd(t_lexer *lx, t_list **args);
 
-
-
-
 /* FONCTION POUR TEST LE PARSING*/
 
 void	print_all_bloc(t_sh_data *a);
@@ -225,7 +222,6 @@ int		prompt_rl(t_sh_data *sh_data);
 
 void	init_signals(void);
 void	re_init_def_signals(void);
-void    ign_sigint(void);
 void    sigint_hdoc(void);
 
 /* UTILS FONCTIONS */

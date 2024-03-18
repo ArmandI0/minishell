@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:09:19 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/18 15:14:11 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 20:32:05 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	exec_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc)
 		r_value = bt_cd(sh_data, cmd_bloc->cmd);
 	else if (cmd_bloc->builtin == BT_EXPORT)
 		r_value = bt_export(sh_data, cmd_bloc->cmd);
- 	else if (cmd_bloc->builtin == BT_UNSET)
+	else if (cmd_bloc->builtin == BT_UNSET)
 		r_value = bt_unset(sh_data, cmd_bloc->cmd);
 	else if (cmd_bloc->builtin == BT_EXIT)
 		r_value = bt_exit(sh_data, cmd_bloc->cmd);
@@ -61,7 +61,7 @@ int	one_bloc_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc)
 		if (redirections(cmd_bloc) >= 4)
 			r_value = 1;
 		else
-			r_value = exec_bt(sh_data, cmd_bloc);	
+			r_value = exec_bt(sh_data, cmd_bloc);
 		re_init_fds(fdin, fdout);
 	}
 	return (r_value);

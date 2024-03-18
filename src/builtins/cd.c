@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/13 18:34:05 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 20:28:05 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	do_chdir(t_sh_data *sh,char *path_dir, t_cmd *cd)
+static int	do_chdir(t_sh_data *sh, char *path_dir, t_cmd *cd)
 {
 	char	*oldpwd;
 	int		r;
@@ -37,7 +37,7 @@ static int	do_chdir(t_sh_data *sh,char *path_dir, t_cmd *cd)
 	return (0);
 }
 
-int    bt_cd(t_sh_data *sh, t_cmd *cd)
+int	bt_cd(t_sh_data *sh, t_cmd *cd)
 {
 	char	*home_directory;
 	char	*path_dir;
@@ -49,7 +49,7 @@ int    bt_cd(t_sh_data *sh, t_cmd *cd)
 		if (home_directory != NULL)
 			path_dir = ft_strdup(home_directory);
 	}
-	else if (cd->argc == 2 && cd->args[1][0] ==  '~')
+	else if (cd->argc == 2 && cd->args[1][0] == '~')
 	{
 		if (home_directory != NULL)
 			path_dir = ft_strjoin(home_directory, &(cd->args[1][1]), 0);

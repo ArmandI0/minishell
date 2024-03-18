@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/18 15:43:07 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 20:41:06 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	pipes_trsf(int id, int p_out[2], int p_in[2])
 	p_in[1] = p_out[1];
 }
 
-static void	wait_all_sons(t_sh_data *sh,t_bloc_cmd *list_cmds)
+static void	wait_all_sons(t_sh_data *sh, t_bloc_cmd *list_cmds)
 {
 	t_bloc_cmd	*bloc;
 
@@ -70,18 +70,18 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 	next = sh_data->bloc;
 	fork_hdocs(sh_data, sh_data->bloc);
 	if (sh_data->return_value != 0)
-		sign_received = 1;
-	if (next->next == NULL && next->builtin != BT_NO && sign_received != 1)
+		g_sign_received = 1;
+	if (next->next == NULL && next->builtin != BT_NO && g_sign_received != 1)
 		sh_data->return_value = one_bloc_bt(sh_data, next);
-	else if (sign_received != 1)
+	else if (g_sign_received != 1)
 		loop_pipes_exec(sh_data, next);
 	del_tmp_hdocs(sh_data);
 	free_list_cmd(sh_data->bloc);
 	if (sh_data->dir_tmp_files != NULL)
 	{
-		free (sh_data->dir_tmp_files);	
+		free (sh_data->dir_tmp_files);
 		sh_data->dir_tmp_files = NULL;
 	}
-	sign_received = 0;
+	g_sign_received = 0;
 	return (2);
 }

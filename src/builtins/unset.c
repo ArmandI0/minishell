@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/05 22:17:23 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 20:31:11 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	check_names_unset(char **args)
 
 static int	del_env_var(t_sh_data *sh, t_env_var *env_var, char *name)
 {
-    t_env_var	*tmp;
+	t_env_var	*tmp;
 	int			len;
 
 	len = ft_strlen(name);
@@ -62,7 +62,7 @@ static int	del_env_var(t_sh_data *sh, t_env_var *env_var, char *name)
 int	bt_unset(t_sh_data *sh, t_cmd *unset)
 {
 	int	i;
-	
+
 	i = 1;
 	if (unset->argc == 1)
 		return (0);

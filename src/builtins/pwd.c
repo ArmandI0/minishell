@@ -6,12 +6,11 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/02 18:37:43 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 20:29:44 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 static int	print_pwd(char *pwd)
 {
@@ -33,17 +32,17 @@ char	*ft_getcwd(void)
 		if (pwd == NULL)
 			return (NULL);
 		if (getcwd(pwd, size) != NULL)
-			break;
+			break ;
 		else if (errno == ERANGE)
 			size += 500;
 		else
-			break;
+			break ;
 		free(pwd);
 	}
 	return (pwd);
 }
 
-int	bt_pwd(void) 
+int	bt_pwd(void)
 {
 	char	*pwd;
 	int		r_value;

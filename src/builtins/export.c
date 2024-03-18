@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/07 15:21:35 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/18 20:30:54 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	check_and_print(char *arg, t_cmd *cmd)
 		return (0);
 }
 
-static char *export_extract_name(char *name)
+static char	*export_extract_name(char *name)
 {
 	char	*extr_name;
 	char	*ad_equal;
@@ -37,9 +37,9 @@ static char *export_extract_name(char *name)
 	return (extr_name);
 }
 
-static char *export_extract_value(char *value)
+static char	*export_extract_value(char *value)
 {
-	char *extr_value;
+	char	*extr_value;
 
 	if (ft_strchr(value, '=') == 0)
 		extr_value = ft_strdup("");
@@ -54,7 +54,7 @@ int	edit_env_var(t_sh_data *sh, t_cmd *cmd)
 	int		r_value;
 	char	*name;
 	char	*value;
-	
+
 	r_value = 0;
 	i = 1;
 	while (cmd->args[i] != NULL && r_value == 0)
@@ -79,7 +79,7 @@ int	edit_env_var(t_sh_data *sh, t_cmd *cmd)
 int	bt_export(t_sh_data *sh, t_cmd *cmd)
 {
 	int	r_value;
-	
+
 	r_value = 0;
 	if (cmd->args[1] == NULL)
 		print_env(sh);

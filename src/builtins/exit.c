@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/13 18:47:00 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 20:31:33 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	is_r_exit_digit(char *str)
 	return (1);
 }
 
-int    bt_exit(t_sh_data *sh, t_cmd *cmd)
+int	bt_exit(t_sh_data *sh, t_cmd *cmd)
 {
 	int	r_value;
 
