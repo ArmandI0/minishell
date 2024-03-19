@@ -1,4 +1,2 @@
 ### ERREURS VALGRIND
-- ">foo" conditional jump
-- "> "$> /bin/ls". " leak parsing;
--
+-  "$> echo It works" // leak

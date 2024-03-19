@@ -15,17 +15,21 @@
 void	launch_execve(t_sh_data *sh, char *path, char **args)
 {
 	char		**new_env;
-	struct stat	st;
+	struct stat	*st;
 
+	st = ft_calloc(1, sizeof(struct stat));
+	if (st == NULL)
+		return ;
 	new_env = list_to_envp(sh);
 	re_init_def_signals();
-	stat(path, &st);
-	if (S_ISDIR(st.st_mode))
+	stat(path, st);
+	if (S_ISDIR(st->st_mode))
 		errno = EISDIR;
 	else
 		execve(path, args, new_env);
 	perror("Error execve");
 	free_tabchar(new_env);
+	free(st);
 }
 
 int	child_management(t_sh_data *sh_data, int p_out[2],
