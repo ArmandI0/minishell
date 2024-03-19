@@ -12,14 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-/*FOR TESTING*/
-// cat file2 file3
-// cat < file2 file3
-// cat file3 < file2
-// file2 cat < file3
-
-void printList(t_list* node);
-
 void	supp_node_list(t_list **args, t_list *node)
 {
 	t_list	*top;
@@ -38,7 +30,7 @@ void	supp_node_list(t_list **args, t_list *node)
 		if (bottom != NULL)
 			bottom->prev = top;
 		free_node(node);
-	}	
+	}
 }
 
 void	delete_quote(t_list **args)
@@ -48,7 +40,8 @@ void	delete_quote(t_list **args)
 	tmp = *args;
 	while (tmp != NULL)
 	{
-		if (ft_strncmp(tmp->content, "\"", 2) == 0  || ft_strncmp(tmp->content, "\'", 2) == 0)
+		if (ft_strncmp(tmp->content, "\"", 2) == 0
+			|| ft_strncmp(tmp->content, "\'", 2) == 0)
 		{
 			supp_node_list(args, tmp);
 			tmp = *args;
@@ -58,29 +51,22 @@ void	delete_quote(t_list **args)
 	}
 }
 
-/*#################test : <<here_doc infile cat < file1 <file2 | cat >> here | grep -a "file 1   " */
-
 t_bool	parsing(char *line, t_sh_data *data)
 {
 	t_lexer		*lx;
-	t_list		**a = NULL;
-	
+	t_list		**a;
+
 	lx = lexing(line);
 	if (lx == NULL)
-		return 0;
-	//print_lexer(lx);
-	a = ft_calloc(1, sizeof(t_list *));	
+		return (0);
+	a = ft_calloc(1, sizeof(t_list *));
 	if (a == NULL)
-		return 0;
+		return (0);
 	lx = replace_variable(data, lx);
-	//print_lexer(lx);
 	split_cmd(lx, a);
-	//printList(*a);
 	suppr_quotes(a);
-	//printList(*a);
 	redirection_parsing(a, data);
 	command_parsing(a, data);
-	//print_all_bloc(data);
 	ft_lstclear(a);
 	free(a);
 	free_lexer(lx);

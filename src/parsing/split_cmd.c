@@ -12,8 +12,8 @@
 
 #include "../../includes/minishell.h"
 
-static	void remove_dollar_and_quote(t_lexer *lx);
-static int add_new_list(t_lexer *lx, t_list **args, int i, char *start);
+static void	remove_dollar_and_quote(t_lexer *lx);
+static int	add_new_list(t_lexer *lx, t_list **args, int i, char *start);
 
 void	split_cmd(t_lexer *lx, t_list **args)
 {
@@ -29,7 +29,8 @@ void	split_cmd(t_lexer *lx, t_list **args)
 			i++;
 	}
 }
-static int add_new_list(t_lexer *lx, t_list **args, int i, char *start)
+
+static int	add_new_list(t_lexer *lx, t_list **args, int i, char *start)
 {
 	t_list	*new_arg;
 	t_token	tmp;
@@ -59,7 +60,8 @@ static void	remove_dollar_and_quote(t_lexer *lx)
 	i = 0;
 	while (lx->entry[i])
 	{
-		if (lx->lexing[i] == DOUBLE_QUOTE || lx->lexing[i] == DOLLAR || lx->lexing[i] == SINGLE_QUOTE)
+		if (lx->lexing[i] == DOUBLE_QUOTE
+			|| lx->lexing[i] == DOLLAR || lx->lexing[i] == SINGLE_QUOTE)
 			lx->lexing[i] = CHAR;
 		i++;
 	}

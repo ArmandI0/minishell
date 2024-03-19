@@ -43,7 +43,7 @@ t_bool	check_path_acces(char *path)
 
 char	*strdup_size(const char *src, size_t size)
 {
-	size_t		i;
+	size_t	i;
 	char	*dest;
 
 	dest = malloc(sizeof(char) * (size + 1));
@@ -63,7 +63,7 @@ t_bool	check_var_char(char c)
 {
 	if (c == '_')
 		return (TRUE);
-	else if (c >= 'A' && c <= 'Z') 
+	else if (c >= 'A' && c <= 'Z')
 		return (TRUE);
 	else if (c >= 'a' && c <= 'z')
 		return (TRUE);

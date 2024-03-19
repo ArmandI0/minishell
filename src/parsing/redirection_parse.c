@@ -13,8 +13,9 @@
 #include "../../includes/minishell.h"
 
 static t_bloc_cmd	*add_new_bloc(t_sh_data *data);
-static t_list	*add_new_redir(t_bloc_cmd *lst, t_redir_def type, t_list *node, t_list **head);
-static t_list 	*suppp_from_list(t_list *node, t_list **head);
+static t_list		*add_new_redir(t_bloc_cmd *lst, t_redir_def type,
+						t_list *node, t_list **head);
+static t_list		*suppp_from_list(t_list *node, t_list **head);
 
 void	redirection_parsing(t_list **args, t_sh_data *data)
 {
@@ -41,14 +42,15 @@ void	redirection_parsing(t_list **args, t_sh_data *data)
 				tmp = tmp->next;
 		}
 		else
-			break;
+			break ;
 	}
 }
 
-static t_list	*add_new_redir(t_bloc_cmd *lst, t_redir_def type, t_list *node, t_list **head)
+static t_list	*add_new_redir(t_bloc_cmd *lst, t_redir_def type,
+					t_list *node, t_list **head)
 {
 	t_redir	*new;
-	t_redir *tmp;
+	t_redir	*tmp;
 
 	tmp = lst->redir;
 	new = ft_calloc(1, sizeof(t_redir));
@@ -90,7 +92,7 @@ static t_bloc_cmd	*add_new_bloc(t_sh_data *data)
 	return (new);
 }
 
-static t_list 	*suppp_from_list(t_list *node, t_list **head)
+static t_list	*suppp_from_list(t_list *node, t_list **head)
 {
 	t_list	*tmp;
 	t_list	*new_head;

@@ -33,7 +33,7 @@ t_bool	lexer_checking(t_lexer *lx)
 	if (quotes_checking(lx) == FALSE)
 	{
 		ft_printf_fd(2, "quotes syntax error \n");
-		free_lexer(lx);		
+		free_lexer(lx);
 		return (FALSE);
 	}
 	return (TRUE);
@@ -74,7 +74,7 @@ static t_bool	quotes_checking(t_lexer *lx)
 					quote = TRUE;
 				if (lx->lexing[i] == a)
 					break ;
-			}					
+			}
 		}
 		if (lx->entry[i] != '\0')
 			i++;
@@ -93,9 +93,11 @@ static t_bool	check_redir_operator(t_lexer *lx, int i)
 			return (FALSE);
 		j++;
 	}
-	while (lx->entry[i + j] && (lx->lexing[i + j] != REDIRECTION_OPERATOR && lx->lexing[i + j] != PIPE))
+	while (lx->entry[i + j] && (lx->lexing[i + j] != REDIRECTION_OPERATOR
+			&& lx->lexing[i + j] != PIPE))
 	{
-		if (lx->lexing[i + j] == CHAR || lx->lexing[i + j] == SINGLE_QUOTE || lx->lexing[i + j] == DOUBLE_QUOTE)
+		if (lx->lexing[i + j] == CHAR || lx->lexing[i + j] == SINGLE_QUOTE
+			|| lx->lexing[i + j] == DOUBLE_QUOTE)
 			return (TRUE);
 		j++;
 	}
