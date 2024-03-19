@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-static char	*loop_hdoc(char * limiter, t_sh_data *data)
+static char	*loop_hdoc(char *limiter, t_sh_data *data)
 {
 	char	*line;
 	char	*here_doc;

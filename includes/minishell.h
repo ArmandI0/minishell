@@ -25,13 +25,12 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef int t_bool;
-
+typedef int	t_bool;
 extern int	g_sign_received;
 
 /* typedef */
 
-typedef	enum mn_errors
+typedef enum mn_errors
 {
 	ER_EXECVE,
 	ER_CMD_N_FOUND,
@@ -46,7 +45,7 @@ typedef	enum mn_errors
 	ER_EXIT,
 }			t_errors;
 
-typedef	enum e_redir_def
+typedef enum e_redir_def
 {
 	HEREDOC,
 	INPUT_REDIR,
@@ -54,7 +53,7 @@ typedef	enum e_redir_def
 	APPEND,
 }			t_redir_def;
 
-typedef	enum token
+typedef enum token
 {
 	T_NULL,
 	CHAR,
@@ -67,7 +66,7 @@ typedef	enum token
 	SPLIT,
 }			t_token;
 
-typedef	enum builtin
+typedef enum builtin
 {
 	BT_NO,
 	BT_ECHO,
@@ -83,7 +82,7 @@ typedef	enum builtin
 
 typedef struct s_lexer
 {
-	char *entry;
+	char	*entry;
 	t_token	*lexing;
 }				t_lexer;
 
@@ -96,7 +95,6 @@ typedef struct s_env_var
 	int					exported;
 	struct s_env_var	*next;
 }			t_env_var;
-
 
 /* s_command contains all options and arguments for exec */
 typedef struct s_command
@@ -120,7 +118,6 @@ typedef struct s_redir
 	struct s_redir	*next;
 }			t_redir;
 
-/* s_cmd_data contains all data required for redirections and execution of one cmd */
 /* builtin : 0 = oui ; 1 = non - */
 /* bien initialiser chaque pointeur */
 typedef struct s_bloc_cmd
@@ -138,7 +135,7 @@ typedef struct s_bloc_cmd
 typedef struct s_shell_data
 {
 	int			return_value;
-	int 		ac;
+	int			ac;
 	char		**av;
 	char		**envp;
 	t_bloc_cmd	*bloc;
@@ -151,8 +148,7 @@ typedef struct s_shell_data
 
 char	*find_command_path(t_env_var *envp, char *command);
 t_lexer	*lexing(char *line);
-void 	add_token(t_lexer *lx);
-
+void	add_token(t_lexer *lx);
 t_cmd	*init_command_struct(char *arg, t_token *t_arg, t_env_var *envp);
 void	*free_lexer(t_lexer *lx);
 t_bool	check_path_acces(char *path);
@@ -163,7 +159,6 @@ t_bool	parsing(char *line, t_sh_data *data);
 void	free_node(t_list *node);
 void	redirection_parsing(t_list **args, t_sh_data *data);
 void	command_parsing(t_list **args, t_sh_data *data);
-void	replace_var(t_list **args, t_sh_data *data);
 t_bool	lexer_checking(t_lexer *lx);
 t_lexer	*replace_variable(t_sh_data *data, t_lexer *lx);
 void	suppr_quotes(t_list **args);
@@ -173,19 +168,13 @@ t_lexer	*replace_lexer(char *new_entry, t_lexer *lx);
 void	split_cmd(t_lexer *lx, t_list **args);
 char	*expand_heredoc(char *line, t_sh_data *data);
 
-/* FONCTION POUR TEST LE PARSING*/
-
-void	print_all_bloc(t_sh_data *a);
-void	printList(t_list* node);
-void	print_lexer(t_lexer *lx);
-
 /* BUILTINS FUNCTIONS */
 
 void	bt_echo(t_cmd *echo_cmd);
 void	bt_env(t_sh_data *sh_data);
 int		bt_pwd(void);
 char	*ft_getcwd(void);
-int	    bt_cd(t_sh_data *sh, t_cmd *cd);
+int		bt_cd(t_sh_data *sh, t_cmd *cd);
 int		exec_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc);
 int		bt_export(t_sh_data *sh, t_cmd *cmd);
 int		check_var_name(char *name);
@@ -210,7 +199,7 @@ int		child_management(t_sh_data *sh, int out[2], int in[2], t_bloc_cmd *bl);
 void	free_tabchar(char **tabchar);
 void	free_cmd(t_cmd *cmd);
 void	free_redir(t_redir *redir);
-void 	free_env_var(t_env_var *var1);
+void	free_env_var(t_env_var *var1);
 void	free_list_cmd(t_bloc_cmd *cmd_data);
 void	free_sh_data(t_sh_data *sh);
 void	free_one_env_var(t_env_var *var);
@@ -223,9 +212,10 @@ int		prompt_rl(t_sh_data *sh_data);
 
 void	init_signals(void);
 void	re_init_def_signals(void);
-void    sigint_hdoc(void);
+void	sigint_hdoc(void);
 
 /* UTILS FONCTIONS */
+
 void	print_error(t_errors error, t_cmd *cmd, char *str);
 void	del_tmp_hdocs(t_sh_data *sh);
 int		add_env_var(t_sh_data *sh, char *name, char *value);
@@ -233,7 +223,7 @@ void	envp_to_list(t_sh_data *sh_data);
 char	**list_to_envp(t_sh_data *sh_data);
 void	print_env(t_sh_data *sh_data);
 void	print_tabchar(char **tabchar);
-int   	upd_env_var(t_sh_data *sh, char *name_var, char *new_value);
+int		upd_env_var(t_sh_data *sh, char *name_var, char *new_value);
 void	check_r_values(int pid, t_sh_data *sh);
 
 #endif

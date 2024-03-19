@@ -17,7 +17,6 @@ static void	replace_quote_by_split(t_lexer *lx);
 static char	*suppression_fct(char *line);
 static char	*split_and_join(t_lexer *lx);
 
-
 void	suppr_quotes(t_list **args)
 {
 	t_list	*tmp;
@@ -73,7 +72,7 @@ static char	*split_and_join(t_lexer *lx)
 
 static void	replace_quote_by_split(t_lexer *lx)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (lx != NULL)
@@ -86,4 +85,3 @@ static void	replace_quote_by_split(t_lexer *lx)
 		}
 	}
 }
-

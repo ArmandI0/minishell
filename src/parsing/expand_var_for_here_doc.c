@@ -40,21 +40,21 @@ static void	add_token_heredoc(t_lexer *lx)
 
 char	*expand_heredoc(char *line, t_sh_data *data)
 {
-    t_lexer *lx;
+	t_lexer	*lx;
 	char	*newline;
 
-    lx = ft_calloc(1 , sizeof(t_lexer));
-    if (lx == NULL)
-        return (NULL);
-    lx->lexing = malloc(sizeof(t_token) * (ft_strlen(line) + 1));
-	if(lx->lexing == NULL)
+	lx = ft_calloc(1, sizeof(t_lexer));
+	if (lx == NULL)
+		return (NULL);
+	lx->lexing = malloc(sizeof(t_token) * (ft_strlen(line) + 1));
+	if (lx->lexing == NULL)
 	{
 		free_lexer(lx);
 		return (NULL);
 	}
-    lx->entry = line;
-    add_token_heredoc(lx);
-    lx = replace_variable(data, lx);
+	lx->entry = line;
+	add_token_heredoc(lx);
+	lx = replace_variable(data, lx);
 	free(lx->lexing);
 	newline = lx->entry;
 	free(lx);

@@ -57,7 +57,7 @@ static char	*ft_add_word(char const *src, t_token *tab, t_token sep, char c)
 	return (str);
 }
 
-static void	ft_free_all(char **tab, int size)
+static void	*ft_free_all(char **tab, int size)
 {
 	while (size != 0)
 	{
@@ -66,6 +66,7 @@ static void	ft_free_all(char **tab, int size)
 	}
 	free(tab[size]);
 	free(tab);
+	return (NULL);
 }
 
 char	**split_lexer(t_lexer *lx, t_token sep, char c)
@@ -83,17 +84,15 @@ char	**split_lexer(t_lexer *lx, t_token sep, char c)
 		return (NULL);
 	while (lx->entry[i])
 	{
-		if (lx->entry[i] != c && lx->lexing[i] != sep && (i == 0 || (lx->entry[i - 1] == c && lx->lexing[i - 1] == sep)))
+		if (lx->entry[i] != c && lx->lexing[i] != sep
+			&& (i == 0 || (lx->entry[i - 1] == c && lx->lexing[i - 1] == sep)))
 		{
 			tab[k] = ft_add_word(&lx->entry[i], &lx->lexing[i], sep, c);
 			if (tab[k] == NULL)
-				ft_free_all(tab, k);
-			if (tab[k] == NULL)
-				return (NULL);
+				return (ft_free_all(tab, k));
 			k++;
 		}
 		i++;
 	}
 	return (tab);
 }
-

@@ -54,7 +54,6 @@ SRCS			= 	\
 					utils/new_envp.c \
 					utils/r_values.c \
 					parsing/redirection_parse.c \
-					parsing/TEST_print_struct.c \
 					parsing/parsing_command.c \
 					parsing/lexer_checking.c \
 					parsing/replace_variable.c \

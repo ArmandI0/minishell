@@ -12,11 +12,11 @@
 
 #include "../../includes/minishell.h"
 
-static char	*find_and_change_var(t_lexer *lx, t_sh_data *data, char *newline, int i);
+static char	*find_and_change_var(t_lexer *lx,
+				t_sh_data *data, char *newline, int i);
 static char	*find_var(t_sh_data *data, char *var);
 static char	*return_value(t_sh_data *data, char *var);
-static int		var_size(char *var);
-
+static int	var_size(char *var);
 
 t_lexer	*replace_variable(t_sh_data *data, t_lexer *lx)
 {
@@ -50,7 +50,7 @@ static char	*return_value(t_sh_data *data, char *var)
 		tmp = ft_strdup(var);
 		newvar = ft_strjoin(ft_itoa(data->return_value), tmp, FALSE);
 		return (newvar);
-	}		
+	}
 }
 
 static char	*find_var(t_sh_data *data, char *var)
@@ -63,13 +63,13 @@ static char	*find_var(t_sh_data *data, char *var)
 	if (var != NULL && var[0] != '\0' && var[0] == '?')
 		value = return_value(data, &var[1]);
 	else
-	{	
+	{
 		while (tmp != NULL)
-		{	
+		{
 			if (ft_strncmp(tmp->name, var, ft_strlen(var) + 1) == 0)
 			{
 				value = ft_strdup(tmp->value);
-				break;
+				break ;
 			}
 			tmp = tmp->next;
 		}
@@ -79,9 +79,9 @@ static char	*find_var(t_sh_data *data, char *var)
 	return (value);
 }
 
-static int		var_size(char *var)
+static int	var_size(char *var)
 {
-	int size;
+	int	size;
 
 	size = 0;
 	if (var[0] == '?')
@@ -91,8 +91,8 @@ static int		var_size(char *var)
 	return (size);
 }
 
-
-static char	*find_and_change_var(t_lexer *lx, t_sh_data *data, char *newline, int i)
+static char	*find_and_change_var(t_lexer *lx,
+				t_sh_data *data, char *newline, int i)
 {
 	int		size;
 	char	*var;

@@ -96,4 +96,3 @@ char	**split_token(t_lexer *lx, t_token sep)
 	}
 	return (tab);
 }
-
