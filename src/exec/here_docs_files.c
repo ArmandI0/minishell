@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_docs_files.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/13 17:56:58 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 20:37:03 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	del_tmp_hdocs(t_sh_data *sh)
 		{
 			if (next_redir->type == HEREDOC && next_redir->file_path != NULL
 				&& ft_strncmp("tmp_hdoc_", next_redir->file_path, 9) == 0)
-				{
-					fpath = ft_strdup(next_redir->file_path);
-					fpath = ft_fstrjoin(ft_strdup("/"), fpath);
-					fpath = ft_fstrjoin(ft_strdup(sh->dir_tmp_files), fpath);
-					unlink(fpath);
-					free(fpath);
-				}
+			{
+				fpath = ft_strdup(next_redir->file_path);
+				fpath = ft_fstrjoin(ft_strdup("/"), fpath);
+				fpath = ft_fstrjoin(ft_strdup(sh->dir_tmp_files), fpath);
+				unlink(fpath);
+				free(fpath);
+			}
 			next_redir = next_redir->next;
 		}
 		next_cmd = next_cmd->next;
@@ -111,4 +111,3 @@ void	hdoc_to_file(char *hdoc, char *file_path)
 	close (output);
 	free(hdoc);
 }
-

@@ -1,13 +1,12 @@
 ### ERREURS :
-- Ctrl -C dans le Heredoc ne fonctionne pas
-- Probleme avec les codes retour des signaux
-- Find_command_path cherche dans le vrai envp (du coup les commande fonctionne meme avec unset PATH)
-- entre = $? seul ne fonctionne pas (retourne une erreur)
-- si la commande commence par un | bash retourne une erreur
+- Ctrl -C dans le Heredoc ne fonctionne pas ->FIXED
+- Probleme avec les codes retour des signaux -> FIXED
+- Find_command_path cherche dans le vrai envp (du coup les commande fonctionne meme avec unset PATH) -> Fixed
+- entre = $? seul ne fonctionne pas (retourne une erreur) -> NORMAL, c est juste qu on affiche pas la mm erreur que bash
+- si la commande commence par un | bash retourne une erreur -> Fixed
 
 ### LEAK :
-- De fd open sur exit
-
+- De fd open sur exit -> FIXED
 
 ### Differences avec bash 
 - lors de ctrl + \ dans un heredoc, ne quitte pas (ok) mais affiche "^\"

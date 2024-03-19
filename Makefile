@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+         #
+#    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/13 18:07:14 by nledent          ###   ########.fr        #
+#    Updated: 2024/03/18 20:38:28 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,6 @@ SRCS			= 	\
 					prompt_terminal/signals.c \
 					exec/exec.c \
 					exec/execve.c \
-					exec/exit_functions.c \
 					exec/here_docs.c \
 					exec/here_docs_files.c \
 					exec/pipes.c \

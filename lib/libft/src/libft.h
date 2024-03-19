@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 12:16:10 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/09 13:23:14 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/18 20:21:21 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef struct s_list
 {
 	struct s_list	*prev;
 	struct s_list	*next;
-	char	*content;
-	t_bool	join;
+	char			*content;
+	t_bool			join;
 }			t_list;
 
 int		ft_isalpha(int c);
@@ -74,6 +74,5 @@ char	*get_next_line(int fd);
 void	free_split(char **split);
 char	*ft_fstrjoin(char const *s1, char const *s2);
 int		ft_printf_fd(int fd, const char *str, ...);
-
 
 #endif

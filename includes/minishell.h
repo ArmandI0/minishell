@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/13 18:12:59 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 20:52:36 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -26,7 +27,7 @@
 
 typedef int t_bool;
 
-extern int	sign_received;
+extern int	g_sign_received;
 
 /* typedef */
 
@@ -42,6 +43,7 @@ typedef	enum mn_errors
 	ER_TOO_MANY_ARGS,
 	ER_EXPORT,
 	ER_UNSET,
+	ER_EXIT,
 }			t_errors;
 
 typedef	enum e_redir_def
@@ -124,6 +126,7 @@ typedef struct s_redir
 typedef struct s_bloc_cmd
 {
 	int					id;
+	pid_t				pid;
 	t_cmd				*cmd;
 	t_builtin			builtin;
 	t_redir				*redir;
@@ -170,9 +173,6 @@ t_lexer	*replace_lexer(char *new_entry, t_lexer *lx);
 void	split_cmd(t_lexer *lx, t_list **args);
 char	*expand_heredoc(char *line, t_sh_data *data);
 
-
-
-
 /* FONCTION POUR TEST LE PARSING*/
 
 void	print_all_bloc(t_sh_data *a);
@@ -203,6 +203,7 @@ int		one_bloc_bt(t_sh_data *sh_data, t_bloc_cmd *cmd_bloc);
 void	hdoc_to_file(char *hdoc, char *file_path);
 void	create_hdocs_files(t_bloc_cmd *cmds);
 void	launch_execve(t_sh_data *sh, char *path, char **args);
+int		child_management(t_sh_data *sh, int out[2], int in[2], t_bloc_cmd *bl);
 
 /* FREE FUNCTIONS */
 
@@ -222,7 +223,6 @@ int		prompt_rl(t_sh_data *sh_data);
 
 void	init_signals(void);
 void	re_init_def_signals(void);
-void    ign_sigint(void);
 void    sigint_hdoc(void);
 
 /* UTILS FONCTIONS */

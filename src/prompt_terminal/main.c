@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/12 11:34:24 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 20:53:38 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int	check_args(int argc)
 {
 	if (argc == 1)
-		return (0); 
+		return (0);
 	else
-		return (1); 
+		return (1);
 }
 
 static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
@@ -32,7 +32,7 @@ static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
 	envp_to_list(sh_data);
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_sh_data	sh_data;
 	int			r_value;

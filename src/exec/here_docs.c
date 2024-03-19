@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_docs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/12 19:23:30 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/18 20:41:06 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ static char	*loop_hdoc(char * limiter, t_sh_data *data)
 
 	here_doc = ft_strdup("");
 	line = ft_strdup("");
-	while (sign_received != 1 && ft_strncmp(line, limiter, ft_strlen(limiter)) != 0)
+	while (g_sign_received != 1
+		&& ft_strncmp(line, limiter, ft_strlen(limiter)) != 0)
 	{
 		if (line[0] != 0)
 			ft_putstr_fd(">", STDOUT_FILENO);
 		here_doc = ft_fstrjoin(here_doc, line);
 		line = get_next_line(0);
-		if (line == NULL && sign_received != 1)
+		if (line == NULL && g_sign_received != 1)
 		{
 			line = ft_strdup(limiter);
 			print_error(ER_HDOC_EOF, NULL, NULL);
@@ -33,7 +34,7 @@ static char	*loop_hdoc(char * limiter, t_sh_data *data)
 		line = expand_heredoc(line, data);
 	}
 	if (line != NULL)
-		free(line);	
+		free(line);
 	return (here_doc);
 }
 
@@ -44,7 +45,7 @@ static char	*ft_here_doc(char *limiter, t_sh_data *data)
 	char	*lim_backn;
 
 	here_doc = NULL;
-	if (sign_received != 1)
+	if (g_sign_received != 1)
 	{
 		lim_backn = ft_strjoin(limiter, "\n", 0);
 		ft_putstr_fd(">", STDOUT_FILENO);
@@ -82,7 +83,7 @@ void	fork_hdocs(t_sh_data *sh, t_bloc_cmd *cmds)
 	pid_t	pid;
 	int		r;
 
-	r = 0;	
+	r = 0;
 	sh->dir_tmp_files = ft_getcwd();
 	create_hdocs_files(cmds);
 	pid = fork();
@@ -91,10 +92,16 @@ void	fork_hdocs(t_sh_data *sh, t_bloc_cmd *cmds)
 		sigint_hdoc();
 		launch_hdocs(cmds, sh);
 		free_sh_data(sh);
-		if (sign_received == 1)
+		if (g_sign_received == 1)
 			r = 130;
 		exit (r);
 	}
 	else if (pid > 0)
+	{
+		signal(SIGINT, SIG_IGN);
 		check_r_values(pid, sh);
+		if (sh->return_value == 130)
+			ft_printf_fd(1, "\n");
+		init_signals();
+	}
 }
