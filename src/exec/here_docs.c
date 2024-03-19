@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-static char	*loop_hdoc(char * limiter)
+static char	*loop_hdoc(char * limiter, t_sh_data *data)
 {
 	char	*line;
 	char	*here_doc;
@@ -30,6 +30,7 @@ static char	*loop_hdoc(char * limiter)
 			line = ft_strdup(limiter);
 			print_error(ER_HDOC_EOF, NULL, NULL);
 		}
+		line = expand_heredoc(line, data);
 	}
 	if (line != NULL)
 		free(line);	
@@ -37,7 +38,7 @@ static char	*loop_hdoc(char * limiter)
 }
 
 /* NB : possibility of implementing variables in here docs */
-static char	*ft_here_doc(char *limiter)
+static char	*ft_here_doc(char *limiter, t_sh_data *data)
 {
 	char	*here_doc;
 	char	*lim_backn;
@@ -47,13 +48,13 @@ static char	*ft_here_doc(char *limiter)
 	{
 		lim_backn = ft_strjoin(limiter, "\n", 0);
 		ft_putstr_fd(">", STDOUT_FILENO);
-		here_doc = loop_hdoc(lim_backn);
+		here_doc = loop_hdoc(lim_backn, data);
 		free(lim_backn);
 	}
 	return (here_doc);
 }
 
-static void	launch_hdocs(t_bloc_cmd *cmds)
+static void	launch_hdocs(t_bloc_cmd *cmds, t_sh_data *data)
 {
 	char		*hdoc;
 	t_bloc_cmd	*next_cmd;
@@ -67,7 +68,7 @@ static void	launch_hdocs(t_bloc_cmd *cmds)
 		{
 			if (next_redir->type == HEREDOC)
 			{
-				hdoc = ft_here_doc(next_redir->lim_hdoc);
+				hdoc = ft_here_doc(next_redir->lim_hdoc, data);
 				hdoc_to_file(hdoc, next_redir->file_path);
 			}
 			next_redir = next_redir->next;
@@ -88,7 +89,7 @@ void	fork_hdocs(t_sh_data *sh, t_bloc_cmd *cmds)
 	if (pid == 0)
 	{
 		sigint_hdoc();
-		launch_hdocs(cmds);
+		launch_hdocs(cmds, sh);
 		free_sh_data(sh);
 		if (sign_received == 1)
 			r = 130;
