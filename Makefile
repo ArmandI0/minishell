@@ -61,6 +61,7 @@ SRCS			= 	\
 					parsing/suppr_quotes.c \
 					parsing/split_token.c \
 					parsing/split_cmd.c \
+					parsing/expand_var_for_here_doc.c \
 
 SRC				= $(addprefix src/, $(SRCS))
 OBJS			= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

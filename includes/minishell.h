@@ -171,6 +171,7 @@ char	**split_token(t_lexer *lx, t_token sep);
 t_bool	check_var_char(char c);
 t_lexer	*replace_lexer(char *new_entry, t_lexer *lx);
 void	split_cmd(t_lexer *lx, t_list **args);
+char	*expand_heredoc(char *line, t_sh_data *data);
 
 /* FONCTION POUR TEST LE PARSING*/
 
