@@ -20,21 +20,16 @@ static char		*set_command(char *command);
 char	*find_command_path(t_env_var *envp, char *command)
 {
 	char	*command_path;
-	char	**split_command;
 
 	if (*command == '\0')
 		return (NULL);
 	command_path = NULL;
-	split_command = ft_split(command, ' ');
-	if (split_command == NULL)
-		return (NULL);
-	if (split_command[0] != NULL && check_path_acces(split_command[0]) == TRUE)
+	if (command != NULL && check_path_acces(command) == TRUE)
 	{
-		command_path = ft_strdup(split_command[0]);
+		command_path = ft_strdup(command);
 		return (command_path);
 	}
-	command_path = set_command_path(envp, split_command[0]);
-	free_split(split_command);
+	command_path = set_command_path(envp, command);
 	return (command_path);
 }
 
