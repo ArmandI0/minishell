@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/18 20:52:46 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/20 12:27:25 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	g_sign_received = 0;
 static void	handler_sigint(int signum)
 {
 	(void)signum;
-	printf("\n");
+	ft_printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();

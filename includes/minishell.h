@@ -6,13 +6,12 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/20 12:19:21 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/20 12:29:55 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-# include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
 # include <sys/stat.h>
