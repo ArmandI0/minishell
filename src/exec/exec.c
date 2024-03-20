@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/18 20:41:06 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/20 16:59:59 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,5 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 		sh_data->dir_tmp_files = NULL;
 	}
 	g_sign_received = 0;
-	return (2);
+	return (sh_data->return_value);
 }

@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/18 20:30:54 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/20 17:05:15 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	bt_export(t_sh_data *sh, t_cmd *cmd)
 
 	r_value = 0;
 	if (cmd->args[1] == NULL)
-		print_env(sh);
+		print_env_export(sh);
 	else
 		r_value = edit_env_var(sh, cmd);
 	return (r_value);
