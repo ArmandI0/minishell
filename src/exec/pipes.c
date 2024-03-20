@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/14 08:23:42 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/20 12:15:13 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ case 3 : only input redirection : 		return 2
 case 4 : output & input redirection : 	return 1 + 2 = 3
 case 5 : error redirections :		 	return 4 | 5 | 6
 */
+
 int	redirections(t_bloc_cmd *bloc_data)
 {
 	int		r_redir_in;
@@ -99,7 +100,7 @@ void	pipes_redir(t_sh_data *sh, int p_out[2], int p_in[2], t_bloc_cmd *bloc)
 		dup2(p_out[1], STDOUT_FILENO);
 	if (redirections(bloc) >= 4)
 	{
-		if (bloc->id == 0)
+		if (bloc->id != 0)
 			close_pipes(p_in);
 		close_pipes(p_out);
 		free_list_cmd(sh->bloc);

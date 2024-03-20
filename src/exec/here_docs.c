@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_docs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/18 20:41:06 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/20 12:14:25 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ static char	*loop_hdoc(char *limiter, t_sh_data *data)
 			line = ft_strdup(limiter);
 			print_error(ER_HDOC_EOF, NULL, NULL);
 		}
-		line = expand_heredoc(line, data);
+		if (line != NULL)
+			line = expand_heredoc(line, data);
 	}
 	if (line != NULL)
 		free(line);
 	return (here_doc);
 }
 
-/* NB : possibility of implementing variables in here docs */
 static char	*ft_here_doc(char *limiter, t_sh_data *data)
 {
 	char	*here_doc;

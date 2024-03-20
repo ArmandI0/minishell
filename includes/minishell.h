@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/18 20:52:36 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/20 12:19:21 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 
 typedef int	t_bool;
 extern int	g_sign_received;
-
-/* typedef */
 
 typedef enum mn_errors
 {
@@ -78,16 +76,12 @@ typedef enum builtin
 	BT_EXIT,
 }			t_builtin;
 
-/* STRUCTURE POUR LE LEXER */
-
 typedef struct s_lexer
 {
 	char	*entry;
 	t_token	*lexing;
 }				t_lexer;
 
-/* s_env_var liste pour stocker variables d'environnement */
-/* exported : 0 = oui ; 1 = non */
 typedef struct s_env_var
 {
 	char				*name;
@@ -97,6 +91,7 @@ typedef struct s_env_var
 }			t_env_var;
 
 /* s_command contains all options and arguments for exec */
+
 typedef struct s_command
 {
 	char	*name;
@@ -106,9 +101,7 @@ typedef struct s_command
 }			t_cmd;
 
 /* s_redir contains all redirections for one command in the right order */
-/* in_out : 0 = in ; 1 = out - */
-/* app_mod_: 0 = oui ; 1 = non */
-/* bien initialiser chaque pointeur */
+
 typedef struct s_redir
 {
 	char			*file_path;
@@ -118,8 +111,6 @@ typedef struct s_redir
 	struct s_redir	*next;
 }			t_redir;
 
-/* builtin : 0 = oui ; 1 = non - */
-/* bien initialiser chaque pointeur */
 typedef struct s_bloc_cmd
 {
 	int					id;
@@ -132,6 +123,7 @@ typedef struct s_bloc_cmd
 }			t_bloc_cmd;
 
 /* s_shell_data contains global data for the actual minishell processus */
+
 typedef struct s_shell_data
 {
 	int			return_value;
