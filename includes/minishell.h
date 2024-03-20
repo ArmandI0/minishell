@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/20 12:29:55 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/20 17:08:57 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,5 +216,6 @@ void	print_env(t_sh_data *sh_data);
 void	print_tabchar(char **tabchar);
 int		upd_env_var(t_sh_data *sh, char *name_var, char *new_value);
 void	check_r_values(int pid, t_sh_data *sh);
+void	print_env_export(t_sh_data *sh_data);
 
 #endif
