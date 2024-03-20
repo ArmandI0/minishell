@@ -6,7 +6,7 @@
 #    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 11:13:31 by aranger           #+#    #+#              #
-#    Updated: 2024/02/29 10:58:09 by aranger          ###   ########.fr        #
+#    Updated: 2024/03/20 17:31:28 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRCS		= \
 			ft_strrchr.c \
 			ft_strchr.c \
 			ft_strncmp.c \
+			ft_strcmp.c \
 			ft_strtrim.c \
 			ft_strjoin.c \
 			ft_strnstr.c \
