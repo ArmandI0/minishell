@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 11:56:27 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/11 17:09:05 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/20 11:27:02 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,24 @@ t_bool	lexer_checking(t_lexer *lx)
 static t_bool	pipe_checking(t_lexer *lx)
 {
 	int	i;
+	int	a;
 
 	i = 0;
+	a = 0;
 	while (lx->entry[i])
 	{
-		if (lx->lexing[i] == PIPE && lx->lexing[i + 1] == PIPE)
-			return (FALSE);
+		if (lx->lexing[i] == PIPE)
+		{
+			if (a == 1)
+				return (FALSE);
+			a = 1;
+		}
+		if (lx->lexing[i] != SPACES && lx->lexing[i] != PIPE)
+			a = 0;
 		i++;
 	}
+	if (a == 1)
+		return (FALSE);
 	return (TRUE);
 }
 
