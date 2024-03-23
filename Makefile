@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
+#    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/18 20:38:28 by nledent          ###   ########.fr        #
+#    Updated: 2024/03/23 12:41:33 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRCS			= 	\
 					utils/free_all.c \
 					utils/errors.c \
 					utils/print_functions.c \
+					utils/print_export.c \
 					utils/free_functions.c \
 					utils/new_envp.c \
 					utils/r_values.c \
