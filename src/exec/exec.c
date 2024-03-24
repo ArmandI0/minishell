@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/20 16:59:59 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/24 21:01:56 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,6 @@ int	exec_cmds_loop(t_sh_data *sh_data)
 		loop_pipes_exec(sh_data, next);
 	del_tmp_hdocs(sh_data);
 	free_list_cmd(sh_data->bloc);
-	if (sh_data->dir_tmp_files != NULL)
-	{
-		free (sh_data->dir_tmp_files);
-		sh_data->dir_tmp_files = NULL;
-	}
 	g_sign_received = 0;
 	return (sh_data->return_value);
 }

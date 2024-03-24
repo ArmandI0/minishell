@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_docs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/23 14:08:15 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/24 21:43:39 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,25 @@ static char	*loop_hdoc(char *limiter, t_sh_data *data)
 {
 	char	*line;
 	char	*here_doc;
+	int		len_lim;
 
+	len_lim = ft_strlen(limiter);
 	here_doc = ft_strdup("");
 	line = ft_strdup("");
-	while (g_sign_received != 1
-		&& ft_strncmp(line, limiter, ft_strlen(limiter)) != 0)
+	while (g_sign_received != 1 && ft_strncmp(line, limiter, len_lim) != 0)
 	{
-		if (line[0] != 0)
-			ft_putstr_fd(">", STDOUT_FILENO);
 		here_doc = ft_fstrjoin(here_doc, line);
-		line = get_next_line(0);
+		line = readline(">");
 		if (line == NULL && g_sign_received != 1)
 		{
 			line = ft_strdup(limiter);
 			print_error(ER_HDOC_EOF, NULL, NULL);
 		}
 		if (line != NULL)
+		{
 			line = expand_heredoc(line, data);
+			line = ft_fstrjoin(line, ft_strdup("\n"));
+		}
 	}
 	if (line != NULL)
 		free(line);
@@ -48,7 +50,6 @@ static char	*ft_here_doc(char *limiter, t_sh_data *data)
 	if (g_sign_received != 1)
 	{
 		lim_backn = ft_strjoin(limiter, "\n", 0);
-		ft_putstr_fd(">", STDOUT_FILENO);
 		here_doc = loop_hdoc(lim_backn, data);
 		free(lim_backn);
 	}
@@ -84,7 +85,6 @@ void	fork_hdocs(t_sh_data *sh, t_bloc_cmd *cmds)
 	int		r;
 
 	r = 0;
-	sh->dir_tmp_files = ft_getcwd();
 	create_hdocs_files(cmds);
 	pid = fork();
 	if (pid == 0)

@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/20 17:08:57 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/24 21:01:11 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ typedef struct s_shell_data
 	char		**av;
 	char		**envp;
 	t_bloc_cmd	*bloc;
-	char		*dir_tmp_files;
 	t_env_var	*env_var1;
 	int			n_env_var;
 }			t_sh_data;

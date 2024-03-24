@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_docs_files.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/23 13:57:02 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/24 21:00:30 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@ void	del_tmp_hdocs(t_sh_data *sh)
 		while (next_redir != NULL)
 		{
 			if (next_redir->type == HEREDOC && next_redir->file_path != NULL
-				&& ft_strncmp("tmp_hdoc_", next_redir->file_path, 9) == 0)
+				&& ft_strncmp("/tmp/tmp_hdoc_", next_redir->file_path, 14) == 0)
 			{
 				fpath = ft_strdup(next_redir->file_path);
-				fpath = ft_fstrjoin(ft_strdup("/"), fpath);
-				fpath = ft_fstrjoin(ft_strdup(sh->dir_tmp_files), fpath);
 				unlink(fpath);
 				free(fpath);
 			}
@@ -63,7 +61,7 @@ static char	*search_av_filename(void)
 	char	*filename;
 	int		len;
 
-	filename = ft_strdup("tmp_hdoc_A");
+	filename = ft_strdup("/tmp/tmp_hdoc_A");
 	len = ft_strlen(filename);
 	while (access(filename, F_OK) == 0)
 	{
