@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/12 19:36:08 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/24 21:02:31 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	free_sh_data(t_sh_data *sh)
 		free_list_cmd(sh->bloc);
 	if (sh->env_var1 != NULL)
 		free_env_var(sh->env_var1);
-	if (sh->dir_tmp_files != NULL)
-		free (sh->dir_tmp_files);
 }
 
 void	free_one_env_var(t_env_var *var)

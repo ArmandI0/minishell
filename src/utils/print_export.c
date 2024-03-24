@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   print_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 12:25:20 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/23 13:07:36 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/24 21:43:02 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static t_env_var *duplicate_env(t_env_var *list)
+static t_env_var	*duplicate_env(t_env_var *list)
 {
-	t_env_var *tmp;
-	t_env_var *start;
+	t_env_var	*tmp;
+	t_env_var	*start;
 
 	start = NULL;
 	if (list != NULL)
@@ -39,11 +39,11 @@ static t_env_var *duplicate_env(t_env_var *list)
 	return (start);
 }
 
-static void switch_list(t_env_var *var1, t_env_var *var2)
+static void	switch_list(t_env_var *var1, t_env_var *var2)
 {
-	char *name;
-	char *value;
-	int exported;
+	char	*name;
+	char	*value;
+	int		exported;
 
 	name = var1->name;
 	value = var1->value;
@@ -56,13 +56,11 @@ static void switch_list(t_env_var *var1, t_env_var *var2)
 	var2->exported = exported;
 }
 
-static t_env_var *sort_list(t_env_var *list)
+static t_env_var	*sort_list(t_env_var *list)
 {
-	t_env_var *head;
-	t_env_var *tmp;
-	int *a;
+	t_env_var	*head;
+	t_env_var	*tmp;
 
-	a = 0;
 	tmp = list;
 	head = list;
 	while (head)
@@ -79,10 +77,10 @@ static t_env_var *sort_list(t_env_var *list)
 	return (list);
 }
 
-void print_env_export(t_sh_data *sh_data)
+void	print_env_export(t_sh_data *sh_data)
 {
-	t_env_var *head;
-	t_env_var *tmp;
+	t_env_var	*head;
+	t_env_var	*tmp;
 
 	tmp = duplicate_env(sh_data->env_var1);
 	sort_list(tmp);
