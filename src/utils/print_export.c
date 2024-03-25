@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 12:25:20 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/24 21:43:02 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/25 20:34:25 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,11 @@ void	print_env_export(t_sh_data *sh_data)
 	head = tmp;
 	while (tmp)
 	{
-		ft_printf_fd(1, "declare -x ");
-		ft_printf_fd(1, "%s=%s\n", tmp->name, tmp->value);
+		ft_printf_fd(1, "declare -x %s", tmp->name);
+		if (tmp->value != NULL)
+			ft_printf_fd(1, "=\"%s\"\n", tmp->value);
+		else
+			ft_printf_fd(1, "\n");
 		tmp = tmp->next;
 	}
 	while (head)

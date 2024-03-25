@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/20 17:05:15 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/25 14:20:15 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*export_extract_value(char *value)
 	char	*extr_value;
 
 	if (ft_strchr(value, '=') == 0)
-		extr_value = ft_strdup("");
+		extr_value = NULL;
 	else
 		extr_value = ft_strdup((ft_strchr(value, '=') + 1));
 	return (extr_value);

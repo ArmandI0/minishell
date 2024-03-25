@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/18 20:55:10 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/25 14:22:14 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int	add_env_var(t_sh_data *sh, char *name, char *value)
 		next->next = new_var;
 	}
 	new_var->name = ft_strdup(name);
-	new_var->value = ft_strdup(value);
+	if (value != NULL)
+		new_var->value = ft_strdup(value);
 	(sh->n_env_var)++;
 	return (0);
 }
