@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@42angouleme.fr>           +#+  +:+       +#+        */
+/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/14 18:52:11 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/25 20:54:10 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static void	print_error_execve(char *cmd, char *path)
+{
+	if (errno == ENOENT)
+		ft_printf_fd(2, "minishell: %s : command not found\n", cmd);
+	else if (errno == EISDIR)
+		ft_printf_fd(2, "minishell: %s : is a directory\n", path);
+	else if (errno == EACCES)
+		ft_printf_fd(2, "minishell: %s : Permssion denied\n", path);
+	else if (errno == EFAULT)
+		ft_printf_fd(2, "minishell: %s : Bad address\n", path);
+	else if (errno == ENAMETOOLONG)
+		ft_printf_fd(2, "minishell: %s : File name too long\n", cmd);
+	else if (errno == EPERM)
+		ft_printf_fd(2, "minishell: %s : Operation not permitted\n", path);
+	else if (errno == E2BIG)
+		ft_printf_fd(2, "minishell: Arg list too long\n");
+	else if (errno == ENOEXEC)
+		ft_printf_fd(2, "minishell: Exec format error\n");
+	else if (errno == ELIBEXEC)
+		ft_printf_fd(2, "minishell: Cannot execute binary file\n");
+}
 
 void	launch_execve(t_sh_data *sh, char *path, char **args)
 {
@@ -27,7 +49,7 @@ void	launch_execve(t_sh_data *sh, char *path, char **args)
 		errno = EISDIR;
 	else
 		execve(path, args, new_env);
-	perror("Error execve");
+	print_error_execve(args[0], path);
 	free_tabchar(new_env);
 	free(st);
 }
