@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/25 21:41:36 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/26 12:02:06 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ int	prompt_rl(t_sh_data *sh_data)
 	if (line != NULL)
 		free(line);
 	if (g_sign_received == 1)
-		return (130);
+		sh_data->return_value = 130;
 	return (0);
 }

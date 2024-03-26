@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/18 20:53:38 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/26 12:01:03 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	main(int argc, char **argv, char **envp)
 	{
 		init_shell_data(argc, argv, envp, &sh_data);
 		init_signals();
-		r_value = prompt_rl(&sh_data);
+		prompt_rl(&sh_data);
+		r_value = sh_data.return_value;
 		free_env_var(sh_data.env_var1);
 		ft_printf_fd(1, "exit\n");
 	}
