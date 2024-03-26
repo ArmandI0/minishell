@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/25 20:54:10 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/26 11:53:18 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static void	print_error_execve(char *cmd, char *path)
 {
-	if (errno == ENOENT)
-		ft_printf_fd(2, "minishell: %s : command not found\n", cmd);
+	if (errno == ENOENT && access(path, F_OK) == -1)
+		ft_printf_fd(2, "minishell: %s : No such file or directory\n", cmd);
+	else if (errno == ENOENT)
+		ft_printf_fd(2, "minishell: %s : command not found\n", path);
 	else if (errno == EISDIR)
 		ft_printf_fd(2, "minishell: %s : is a directory\n", path);
 	else if (errno == EACCES)
@@ -32,6 +34,34 @@ static void	print_error_execve(char *cmd, char *path)
 		ft_printf_fd(2, "minishell: Exec format error\n");
 	else if (errno == ELIBEXEC)
 		ft_printf_fd(2, "minishell: Cannot execute binary file\n");
+	else if (errno == ENOTDIR)
+		ft_printf_fd(2, "minishell: %s : Not a directory\n", path);
+}
+
+static int	upd_errno(struct stat *st, char *path)
+{
+	char	*cpy_path;
+	int		r_value;
+
+	r_value = 0;
+	cpy_path = ft_strdup(path);
+	if (cpy_path[ft_strlen(cpy_path) - 1] == '/')
+		cpy_path[ft_strlen(cpy_path) - 1] = 0;
+	if (path[ft_strlen(path) - 1] == '/'
+		&& !(S_ISDIR(st->st_mode)) && access(cpy_path, F_OK) != -1)
+		errno = ENOTDIR;
+	else if (access(path, F_OK) == -1)
+		errno = ENOENT;
+	else if (S_ISDIR(st->st_mode))
+		errno = EISDIR;
+	else if (access(path, X_OK) == -1)
+		errno = EACCES;
+	else if (ft_strchr(path, '/') == NULL)
+		errno = ENOENT;
+	else
+		r_value = 1;
+	free(cpy_path);
+	return (r_value);
 }
 
 void	launch_execve(t_sh_data *sh, char *path, char **args)
@@ -45,11 +75,10 @@ void	launch_execve(t_sh_data *sh, char *path, char **args)
 	new_env = list_to_envp(sh);
 	re_init_def_signals();
 	stat(path, st);
-	if (S_ISDIR(st->st_mode))
-		errno = EISDIR;
-	else
+	if (upd_errno(st, path) == 1)
 		execve(path, args, new_env);
-	print_error_execve(args[0], path);
+	else
+		print_error_execve(args[0], path);
 	free_tabchar(new_env);
 	free(st);
 }
@@ -72,7 +101,7 @@ int	child_management(t_sh_data *sh_data, int p_out[2],
 			launch_execve(sh_data, bloc_data->cmd->path, bloc_data->cmd->args);
 		else if (bloc_data->cmd->name != NULL && bloc_data->cmd->name[0] == 0)
 			print_error(ER_CMD_N_FOUND, bloc_data->cmd, NULL);
-		if (errno == EACCES || errno == EISDIR)
+		if (errno == EACCES || errno == EISDIR || errno == ENOTDIR)
 			r_value = 126;
 	}
 	else
