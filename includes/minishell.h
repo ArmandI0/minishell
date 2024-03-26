@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:20:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/24 21:01:11 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/26 16:22:54 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,9 +126,6 @@ typedef struct s_bloc_cmd
 typedef struct s_shell_data
 {
 	int			return_value;
-	int			ac;
-	char		**av;
-	char		**envp;
 	t_bloc_cmd	*bloc;
 	t_env_var	*env_var1;
 	int			n_env_var;
@@ -203,13 +200,17 @@ int		prompt_rl(t_sh_data *sh_data);
 void	init_signals(void);
 void	re_init_def_signals(void);
 void	sigint_hdoc(void);
+void	sig_during_process(void);
+void	handler_sigquit_during_process(int signum);
+void	handler_sigint_main(int signum);
+void	handler_hdoc(int signum);
 
 /* UTILS FONCTIONS */
 
 void	print_error(t_errors error, t_cmd *cmd, char *str);
 void	del_tmp_hdocs(t_sh_data *sh);
 int		add_env_var(t_sh_data *sh, char *name, char *value);
-void	envp_to_list(t_sh_data *sh_data);
+void	envp_to_list(t_sh_data *sh_data, char **env);
 char	**list_to_envp(t_sh_data *sh_data);
 void	print_env(t_sh_data *sh_data);
 void	print_tabchar(char **tabchar);

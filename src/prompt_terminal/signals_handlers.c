@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   signals_handlers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/26 16:23:27 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/26 16:23:24 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	sig_during_process(void)
+int	g_sign_received = 0;
+
+void	handler_sigquit_during_process(int signum)
 {
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, handler_sigquit_during_process);
+	if (signum == SIGQUIT)
+		ft_printf_fd(2, "Quit (core dumped)");
 }
 
-void	sigint_hdoc(void)
+void	handler_sigint_main(int signum)
 {
-	signal(SIGINT, handler_hdoc);
+	(void)signum;
+	ft_printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	g_sign_received = 1;
 }
 
-void	init_signals(void)
+void	handler_hdoc(int signum)
 {
-	signal(SIGINT, handler_sigint_main);
-	signal(SIGQUIT, SIG_IGN);
-}
-
-void	re_init_def_signals(void)
-{
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGINT, SIG_DFL);
+	(void)signum;
+	close(0);
+	g_sign_received = 1;
 }

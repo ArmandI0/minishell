@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/26 12:01:03 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/26 16:11:15 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,13 @@ static int	check_args(int argc)
 		return (1);
 }
 
-static void	init_shell_data(int ac, char **av, char **envp, t_sh_data *sh_data)
+static void	init_shell_data(char **envp, t_sh_data *sh_data)
 {
-	sh_data->ac = ac;
-	sh_data->av = av;
-	sh_data->envp = envp;
 	sh_data->env_var1 = NULL;
 	sh_data->n_env_var = 0;
 	sh_data->bloc = NULL;
 	sh_data->return_value = 0;
-	envp_to_list(sh_data);
+	envp_to_list(sh_data, envp);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -37,10 +34,11 @@ int	main(int argc, char **argv, char **envp)
 	t_sh_data	sh_data;
 	int			r_value;
 
+	(void)argv;
 	r_value = 1;
 	if (check_args(argc) == 0)
 	{
-		init_shell_data(argc, argv, envp, &sh_data);
+		init_shell_data(envp, &sh_data);
 		init_signals();
 		prompt_rl(&sh_data);
 		r_value = sh_data.return_value;

@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/25 21:29:57 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/26 16:19:11 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	loop_pipes_exec(t_sh_data *sh_data, t_bloc_cmd	*bloc)
 
 	pid = 0;
 	r_pipe = 0;
-	signal(SIGINT, SIG_IGN);
+	sig_during_process();
 	while (bloc != NULL)
 	{
 		r_pipe = pipe(pipe_out);

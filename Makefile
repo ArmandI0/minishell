@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
+#    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/23 12:41:33 by aranger          ###   ########.fr        #
+#    Updated: 2024/03/26 16:24:10 by nledent          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS			= 	\
 					prompt_terminal/main.c \
 					prompt_terminal/prompt.c \
 					prompt_terminal/signals.c \
+					prompt_terminal/signals_handlers.c \
 					exec/exec.c \
 					exec/execve.c \
 					exec/here_docs.c \

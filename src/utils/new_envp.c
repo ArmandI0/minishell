@@ -6,7 +6,7 @@
 /*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/25 14:22:14 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/26 16:05:51 by nledent          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,13 @@ int	add_env_var(t_sh_data *sh, char *name, char *value)
 	return (0);
 }
 
-void	envp_to_list(t_sh_data *sh_data)
+void	envp_to_list(t_sh_data *sh_data, char **env)
 {
-	char	**env;
 	char	*name;
 	char	*value;
 	int		i;
 
 	i = 0;
-	env = sh_data->envp;
 	while (env[i] != NULL)
 	{
 		name = ft_strdup(env[i]);
