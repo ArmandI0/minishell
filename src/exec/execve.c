@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:35:03 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/26 11:53:18 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/26 12:35:22 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	print_error_execve(char *cmd, char *path)
 {
-	if (errno == ENOENT && access(path, F_OK) == -1)
-		ft_printf_fd(2, "minishell: %s : No such file or directory\n", cmd);
-	else if (errno == ENOENT)
+	if (errno == ENOENT && ft_strchr(path, '/') == 0)
 		ft_printf_fd(2, "minishell: %s : command not found\n", path);
+	else if (errno == ENOENT && access(path, F_OK) == -1)
+		ft_printf_fd(2, "minishell: %s : No such file or directory\n", cmd);
 	else if (errno == EISDIR)
-		ft_printf_fd(2, "minishell: %s : is a directory\n", path);
+		ft_printf_fd(2, "minishell: %s : Is a directory\n", path);
 	else if (errno == EACCES)
-		ft_printf_fd(2, "minishell: %s : Permssion denied\n", path);
+		ft_printf_fd(2, "minishell: %s : Permission denied\n", path);
 	else if (errno == EFAULT)
 		ft_printf_fd(2, "minishell: %s : Bad address\n", path);
 	else if (errno == ENAMETOOLONG)
@@ -47,7 +47,9 @@ static int	upd_errno(struct stat *st, char *path)
 	cpy_path = ft_strdup(path);
 	if (cpy_path[ft_strlen(cpy_path) - 1] == '/')
 		cpy_path[ft_strlen(cpy_path) - 1] = 0;
-	if (path[ft_strlen(path) - 1] == '/'
+	if (ft_strchr(path, '/') == NULL)
+		errno = ENOENT;
+	else if (path[ft_strlen(path) - 1] == '/'
 		&& !(S_ISDIR(st->st_mode)) && access(cpy_path, F_OK) != -1)
 		errno = ENOTDIR;
 	else if (access(path, F_OK) == -1)
@@ -56,8 +58,6 @@ static int	upd_errno(struct stat *st, char *path)
 		errno = EISDIR;
 	else if (access(path, X_OK) == -1)
 		errno = EACCES;
-	else if (ft_strchr(path, '/') == NULL)
-		errno = ENOENT;
 	else
 		r_value = 1;
 	free(cpy_path);
