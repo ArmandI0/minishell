@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/23 12:25:20 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/25 20:34:25 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/26 08:55:18 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static t_env_var	*sort_list(t_env_var *list)
 	head = list;
 	while (head)
 	{
-		while (tmp && tmp->next != NULL)
+		while (tmp != NULL)
 		{
 			if (ft_strcmp(head->name, tmp->name) > 0)
 				switch_list(head, tmp);
