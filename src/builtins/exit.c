@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/26 09:44:59 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/26 18:00:29 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,25 +92,25 @@ static int	check_arg(char *arg)
 int	bt_exit(t_sh_data *sh, t_cmd *cmd)
 {
 	int	r_value;
-
+	t_bool	a;
+	
 	r_value = 1;
-	if (cmd->argc > 1 && check_arg(cmd->args[1]) == 0)
-		r_value = 2;
-	else if (cmd->argc > 2 && check_arg(cmd->args[1]))
+	a = FALSE;
+	if (cmd->argc > 2 && check_arg(cmd->args[1]))
 		print_error(ER_TOO_MANY_ARGS, cmd, NULL);
 	else if (cmd->argc == 1)
 		r_value = 0;
-	else if (cmd->argc == 2)
+	else if (check_arg(cmd->args[1]) && cmd->argc == 2)
 	{
-		if (check_arg(cmd->args[1]))
-			r_value = ft_atoi(cmd->args[1]);
-		else
-			r_value = 2;
+		r_value = ft_atoi(cmd->args[1]);
+		a = TRUE;
 	}
+	else
+		r_value = 2;
 	ft_printf_fd(1, "exit\n");
-	if (r_value == 1)
+	if (r_value == 1 && a == FALSE)
 		return (r_value);
-	if (r_value == 2)
+	if (r_value == 2 && a == FALSE)
 		print_error(ER_EXIT, cmd, NULL);
 	free_sh_data(sh);
 	exit (r_value);
