@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/29 22:51:35 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/29 23:05:19 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,20 @@ static int	check_arg(char *arg)
 
 	tmp = ft_strtrim_space(arg);
 	trim_arg = trim_zero(tmp);
-	free(tmp);
+	if (tmp != NULL)
+		free(tmp);
 	nb = ft_atoi(arg);
 	tmp = ft_itoa(nb);
 	size = ft_strlen(arg);
 	if (ft_strncmp(trim_arg, tmp, size) == 0)
-		return (1);
+		size = 1;
 	else
-		return (0);
+		size = 0;
+	if (trim_arg != NULL)
+		free(trim_arg);
+	if (tmp != NULL)
+		free(tmp);
+	return (size);
 }
 
 int	bt_exit(t_sh_data *sh, t_cmd *cmd)
