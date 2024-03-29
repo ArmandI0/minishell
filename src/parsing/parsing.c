@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/11 17:09:05 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/29 22:31:17 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	delete_quote(t_list **args)
 	}
 }
 
-void print_all_bloc(t_sh_data *a);
-
 t_bool	parsing(char *line, t_sh_data *data)
 {
 	t_lexer		*lx;
@@ -70,7 +68,6 @@ t_bool	parsing(char *line, t_sh_data *data)
 	redirection_parsing(a, data);
 	command_parsing(a, data);
 	ft_lstclear(a);
-	print_all_bloc(data); //
 	free(a);
 	free_lexer(lx);
 	return (1);

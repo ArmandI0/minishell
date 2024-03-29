@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 17:24:54 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/11 14:56:33 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/29 20:03:04 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ void	command_parsing(t_list **args, t_sh_data *data)
 	i = 0;
 	while (tmp != NULL && bloc != NULL)
 	{
-		if (bloc != NULL && tmp->content
-			&& (ft_strncmp(tmp->content, "|", 2) == 0 || i == 0))
+		if (ft_strncmp(tmp->content, "|", 2) == 0)
 		{
-			if (ft_strncmp(tmp->content, "|", 2) == 0)
-			{
-				bloc = bloc->next;
-				tmp = tmp->next;
-			}
-			bloc->cmd = set_new_cmd(bloc, data, tmp);
-			bloc->id = i;
-			i++;
-		}
-		if (tmp != NULL)
+			bloc = bloc->next;
 			tmp = tmp->next;
+		}
+		else
+		{
+			bloc->cmd = set_new_cmd(bloc, data, tmp);
+			while (tmp != NULL && ft_strncmp(tmp->content, "|", 2) != 0)
+				tmp = tmp->next;
+		}	
+		// i++;
+		// if (tmp != NULL)
+		// 	tmp = tmp->next;
 	}
 }
 

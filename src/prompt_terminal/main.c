@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nledent <nledent@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:19:19 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/26 16:11:15 by nledent          ###   ########.fr       */
+/*   Updated: 2024/03/29 20:40:15 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,16 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argv;
 	r_value = 1;
+	if (argc == 3 && ft_strcmp(argv[1], "-c") == 0 && argv[2])
+	{
+		init_shell_data(envp, &sh_data);
+		if (parsing(argv[2], &sh_data) == TRUE)
+			exec_cmds_loop(&sh_data);
+		r_value = sh_data.return_value;
+		free_env_var(sh_data.env_var1);
+		ft_printf_fd(1, "exit\n");
+		return (r_value);
+	}
 	if (check_args(argc) == 0)
 	{
 		init_shell_data(envp, &sh_data);

@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/11 15:24:30 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/29 19:42:35 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	redirection_parsing(t_list **args, t_sh_data *data)
 	int			i;
 
 	tmp = *args;
-	i = 0;
-	new_bloc = add_new_bloc(data, i);
+	new_bloc = add_new_bloc(data, 0);
+	i = 1;
 	while (tmp != NULL)
 	{
 		if (ft_strncmp(tmp->content, "|", 2) == 0)
