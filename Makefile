@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nledent <nledent@student.42.fr>            +#+  +:+       +#+         #
+#    By: aranger <aranger@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/12 12:15:59 by aranger           #+#    #+#              #
-#    Updated: 2024/03/26 16:24:10 by nledent          ###   ########.fr        #
+#    Updated: 2024/03/29 22:43:13 by aranger          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,6 @@ SRCS			= 	\
 					parsing/split_token.c \
 					parsing/split_cmd.c \
 					parsing/expand_var_for_here_doc.c \
-					parsing/TEST.c \
 
 SRC				= $(addprefix src/, $(SRCS))
 OBJS			= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

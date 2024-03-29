@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 17:45:23 by nledent           #+#    #+#             */
-/*   Updated: 2024/03/26 18:00:29 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/29 22:51:35 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ static int	check_arg(char *arg)
 
 int	bt_exit(t_sh_data *sh, t_cmd *cmd)
 {
-	int	r_value;
+	int		r_value;
 	t_bool	a;
-	
+
 	r_value = 1;
 	a = FALSE;
 	if (cmd->argc > 2 && check_arg(cmd->args[1]))

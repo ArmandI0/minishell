@@ -6,7 +6,7 @@
 /*   By: aranger <aranger@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:57:46 by aranger           #+#    #+#             */
-/*   Updated: 2024/03/29 19:42:35 by aranger          ###   ########.fr       */
+/*   Updated: 2024/03/29 22:50:20 by aranger          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static t_bloc_cmd	*add_new_bloc(t_sh_data *data, int id);
 static t_list		*add_new_redir(t_bloc_cmd *lst, t_redir_def type,
 						t_list *node, t_list **head);
 static t_list		*suppp_from_list(t_list *node, t_list **head);
-static t_list	*find_redir(t_list *tmp, t_bloc_cmd *new_bloc, t_list **args);
+static t_list		*find_redir(t_list *tmp, t_bloc_cmd *new_bloc,
+						t_list **args);
 
 void	redirection_parsing(t_list **args, t_sh_data *data)
 {
@@ -45,7 +46,7 @@ void	redirection_parsing(t_list **args, t_sh_data *data)
 
 static t_list	*find_redir(t_list *tmp, t_bloc_cmd *new_bloc, t_list **args)
 {
- 	if (ft_strncmp(tmp->content, "<<", 3) == 0)
+	if (ft_strncmp(tmp->content, "<<", 3) == 0)
 		tmp = add_new_redir(new_bloc, HEREDOC, tmp, args);
 	else if (ft_strncmp(tmp->content, ">>", 3) == 0)
 		tmp = add_new_redir(new_bloc, APPEND, tmp, args);
