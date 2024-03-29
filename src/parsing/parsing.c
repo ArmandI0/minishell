@@ -51,6 +51,8 @@ void	delete_quote(t_list **args)
 	}
 }
 
+void print_all_bloc(t_sh_data *a);
+
 t_bool	parsing(char *line, t_sh_data *data)
 {
 	t_lexer		*lx;
@@ -68,6 +70,7 @@ t_bool	parsing(char *line, t_sh_data *data)
 	redirection_parsing(a, data);
 	command_parsing(a, data);
 	ft_lstclear(a);
+	print_all_bloc(data); //
 	free(a);
 	free_lexer(lx);
 	return (1);

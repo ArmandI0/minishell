@@ -12,38 +12,50 @@
 
 #include "../../includes/minishell.h"
 
-static t_bloc_cmd	*add_new_bloc(t_sh_data *data);
+static t_bloc_cmd	*add_new_bloc(t_sh_data *data, int id);
 static t_list		*add_new_redir(t_bloc_cmd *lst, t_redir_def type,
 						t_list *node, t_list **head);
 static t_list		*suppp_from_list(t_list *node, t_list **head);
+static t_list	*find_redir(t_list *tmp, t_bloc_cmd *new_bloc, t_list **args);
 
 void	redirection_parsing(t_list **args, t_sh_data *data)
 {
 	t_list		*tmp;
 	t_bloc_cmd	*new_bloc;
+	int			i;
 
 	tmp = *args;
-	new_bloc = add_new_bloc(data);
+	i = 0;
+	new_bloc = add_new_bloc(data, i);
 	while (tmp != NULL)
 	{
 		if (ft_strncmp(tmp->content, "|", 2) == 0)
-			new_bloc = add_new_bloc(data);
+		{
+			new_bloc = add_new_bloc(data, i);
+			i++;
+		}
 		if (tmp->next != NULL)
 		{
-			if (ft_strncmp(tmp->content, "<<", 3) == 0)
-				tmp = add_new_redir(new_bloc, HEREDOC, tmp, args);
-			else if (ft_strncmp(tmp->content, ">>", 3) == 0)
-				tmp = add_new_redir(new_bloc, APPEND, tmp, args);
-			else if (ft_strncmp(tmp->content, "<", 2) == 0)
-				tmp = add_new_redir(new_bloc, INPUT_REDIR, tmp, args);
-			else if (ft_strncmp(tmp->content, ">", 2) == 0)
-				tmp = add_new_redir(new_bloc, OUTPUT_REDIR, tmp, args);
-			else
-				tmp = tmp->next;
+			tmp = find_redir(tmp, new_bloc, args);
 		}
 		else
 			break ;
 	}
+}
+
+static t_list	*find_redir(t_list *tmp, t_bloc_cmd *new_bloc, t_list **args)
+{
+ 	if (ft_strncmp(tmp->content, "<<", 3) == 0)
+		tmp = add_new_redir(new_bloc, HEREDOC, tmp, args);
+	else if (ft_strncmp(tmp->content, ">>", 3) == 0)
+		tmp = add_new_redir(new_bloc, APPEND, tmp, args);
+	else if (ft_strncmp(tmp->content, "<", 2) == 0)
+		tmp = add_new_redir(new_bloc, INPUT_REDIR, tmp, args);
+	else if (ft_strncmp(tmp->content, ">", 2) == 0)
+		tmp = add_new_redir(new_bloc, OUTPUT_REDIR, tmp, args);
+	else
+		tmp = tmp->next;
+	return (tmp);
 }
 
 static t_list	*add_new_redir(t_bloc_cmd *lst, t_redir_def type,
@@ -72,7 +84,7 @@ static t_list	*add_new_redir(t_bloc_cmd *lst, t_redir_def type,
 	return (suppp_from_list(node, head));
 }
 
-static t_bloc_cmd	*add_new_bloc(t_sh_data *data)
+static t_bloc_cmd	*add_new_bloc(t_sh_data *data, int id)
 {
 	t_bloc_cmd	*new;
 	t_bloc_cmd	*tmp;
@@ -89,6 +101,8 @@ static t_bloc_cmd	*add_new_bloc(t_sh_data *data)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
+	if (new != NULL)
+		new->id = id;
 	return (new);
 }
 
